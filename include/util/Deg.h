@@ -22,21 +22,19 @@
  * SOFTWARE.
  */
 
-#ifndef RAND_H
-#define RAND_H
+#ifndef DEG_H
+#define DEG_H
 
 #include <stdint.h>
+#include <algorithm>
 
-class Rand {
-	
+class Deg {
+
 	public:
-	static int rand(uint32_t y, uint8_t i, uint32_t m);
+	static int deg(unsigned int v, int W);
 
 	private:
-	static const int V0[];
-	static const int V1[];
-	static const int V2[];
-	static const int V3[];
+	static const int table1[];
 };
 
 #endif

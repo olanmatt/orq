@@ -22,21 +22,23 @@
  * SOFTWARE.
  */
 
-#ifndef RAND_H
-#define RAND_H
+#ifndef SYSTEMATICINDICES_H
+#define SYSTEMATICINDICES_H
 
-#include <stdint.h>
-
-class Rand {
+class SystematicIndices {
 	
 	public:
-	static int rand(uint32_t y, uint8_t i, uint32_t m);
+	static int getKIndex(unsigned int K_value);
+	static int K(int K_index);
+	static int J(int K_index);
+	static int S(int K_index);
+	static int H(int K_index);
+	static int W(int K_index);
+	static int ceil(unsigned int K_value);
+	static int floor(unsigned int K_value);
 
 	private:
-	static const int V0[];
-	static const int V1[];
-	static const int V2[];
-	static const int V3[];
+	static const int table2[][5];
 };
 
 #endif

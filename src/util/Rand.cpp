@@ -246,7 +246,7 @@ const int Rand::V3[] = {
 };
 
 // 5.3.5.1 Random Number Generator
-int Rand::rand (unsigned int y, uint8_t i, unsigned int m) {
+int Rand::rand (uint32_t y, uint8_t i, uint32_t m) {
 
 	int x0, x1, x2, x3;
 

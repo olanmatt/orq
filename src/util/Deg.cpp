@@ -22,21 +22,53 @@
  * SOFTWARE.
  */
 
-#ifndef RAND_H
-#define RAND_H
+#include <util/Deg.h>
 
-#include <stdint.h>
-
-class Rand {
-	
-	public:
-	static int rand(uint32_t y, uint8_t i, uint32_t m);
-
-	private:
-	static const int V0[];
-	static const int V1[];
-	static const int V2[];
-	static const int V3[];
+// 5.3.5.2 Degree Generator
+const int Deg::table1[] = {
+	0,
+	5243,
+	529531,
+	704294,
+	791675,
+	844104,
+	879057,
+	904023,
+	922747,
+	937311,
+	948962,
+	958494,
+	966438,
+	973160,
+	978921,
+	983914,
+	988283,
+	992138,
+	995565,
+	998631,
+	1001391,
+	1003887,
+	1006157,
+	1008229,
+	1010129,
+	1011876,
+	1013490,
+	1014983,
+	1016370,
+	1017662,
+	1048576
 };
 
-#endif
+int Deg::deg(unsigned int v, int W) {
+
+	int i;
+	for (i = 0; i < 31; i++) {
+		if (v < table1[i]) break;
+	}
+
+	if (i == 31) return -1; // inconsistent table state
+	return (std::min(i, W - 2));
+}
+
+
+
