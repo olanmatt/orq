@@ -26,6 +26,7 @@
 #define OCTETOPS_H
 
 #include <stdint.h>
+#include <array>
 
 typedef unsigned char byte_t;
 
@@ -39,6 +40,10 @@ class OctetOps {
 	static byte_t product(byte_t u, byte_t v);
 	static byte_t division(byte_t u, byte_t v);
 	static byte_t alphaPower(int i);
+	static void betaProduct(byte_t beta, byte_t U[]);
+	static void betaDivision(byte_t U[], byte_t beta);
+	static void betaProduct(byte_t beta, byte_t U[], int pos, int length);
+	static void betaDivision(byte_t U[], byte_t beta, int pos, int length);
 
 	private:
 	static const int OCT_EXP[];

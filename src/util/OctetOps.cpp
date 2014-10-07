@@ -108,11 +108,39 @@ byte_t OctetOps::product(byte_t u, byte_t v) {
 }
 
 byte_t OctetOps::division(byte_t u, byte_t v) {
-	// TODO check that v > 0
 	if (u == 0) return 0;
 	return (byte_t)getExp((getLog(u) - getLog(v)) + 255);
 }
 
 byte_t OctetOps::alphaPower(int i) {
 	return getExp(i);
+}
+
+// 5.7.5 Operations on Symbols
+void OctetOps::betaProduct(byte_t beta, byte_t *U) {
+	// TODO check that U != null and length of U > 0
+	if (beta == 1) return;
+	for (int i = 0; i < sizeof(U)/sizeof(U[0]); i++)
+		U[i] = product(beta, U[i]);
+}
+
+void OctetOps::betaDivision(byte_t *U, byte_t beta) {
+	// TODO check that U != null and length of U > 0
+	if (beta == 1) return;
+	for (int i = 0; i < sizeof(U)/sizeof(U[0]); i++)
+		U[i] = division(U[i], beta);
+}
+
+void OctetOps::betaProduct(byte_t beta, byte_t U[], int pos, int length) {
+	// TODO check that U != null and length of U > 0
+	if (beta == 1) return;
+	for (int i = 0; i < length; i++)
+		U[i + pos] = product(beta, U[i + pos]);
+}
+
+void OctetOps::betaDivision(byte_t U[], byte_t beta, int pos, int length) {
+	// TODO check that U != null and length of U > 0
+	if (beta == 1) return;
+	for (int i = 0; i < length; i++)
+		U[i + pos] = division(U[i + pos], beta);
 }
