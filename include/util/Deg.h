@@ -34,7 +34,7 @@ class Deg {
 	static int deg(unsigned int v, int W);
 
 	private:
-	static const int table1[];
+	static const unsigned int table1[];
 };
 
 #endif

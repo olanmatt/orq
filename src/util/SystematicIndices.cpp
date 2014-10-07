@@ -25,7 +25,7 @@
 #include <util/SystematicIndices.h>
 
 // 5.6 Systematic Indicies and Other Parameters
-const int SystematicIndices::table2[][5] = {
+const unsigned int SystematicIndices::table2[][5] = {
 	{10, 254, 7, 10, 17},
 	{12, 630, 7, 10, 19},
 	{18, 682, 11, 10, 29},
@@ -505,50 +505,50 @@ const int SystematicIndices::table2[][5] = {
 	{56403, 471, 907, 16, 56951}
 };
 
-int SystematicIndices::getKIndex(unsigned int K_value) {
+unsigned int SystematicIndices::getKIndex(unsigned int K_prime) {
 	// TODO check that k <= 56403
 	for (int i = 0; i < 477; i++) {
-		if (K(i) >= K_value) {
+		if (K(i) >= K_prime) {
 			return i;
 		}
 	}
 	return -1; // invalid table state
 }
 
-int SystematicIndices::K(int K_index) {
+unsigned int SystematicIndices::K(unsigned int K_index) {
 	return table2[K_index][0];
 }
 
-int SystematicIndices::J(int K_index) {
+unsigned int SystematicIndices::J(unsigned int K_index) {
 	return table2[K_index][1];
 }
 
-int SystematicIndices::S(int K_index) {
+unsigned int SystematicIndices::S(unsigned int K_index) {
 	return table2[K_index][2];
 }
 
-int SystematicIndices::H(int K_index) {
+unsigned int SystematicIndices::H(unsigned int K_index) {
 	return table2[K_index][3];
 }
 
-int SystematicIndices::W(int K_index) {
+unsigned int SystematicIndices::W(unsigned int K_index) {
 	return table2[K_index][4];
 }
 
-int SystematicIndices::ceil(unsigned int K_value) {
+int SystematicIndices::ceil(unsigned int K_prime) {
 	// TODO check that k <= 56403
 	for (int i = 0; i < 477; i++) {
-		if (K(i) >= K_value) {
+		if (K(i) >= K_prime) {
 			return (K(i));
 		}
 	}
 	return -1; // invalid table state
 }
 
-int SystematicIndices::floor(unsigned int K_value) {
+int SystematicIndices::floor(unsigned int K_prime) {
 	// TODO check that k <= 56403
 	for (int i = 477 - 1; i >= 0; i--) {
-		if (K(i) <= K_value) {
+		if (K(i) <= K_prime) {
 			return (K(i));
 		}
 	}

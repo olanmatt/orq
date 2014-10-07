@@ -120,14 +120,14 @@ byte_t OctetOps::alphaPower(int i) {
 void OctetOps::betaProduct(byte_t beta, byte_t *U) {
 	// TODO check that U != null and length of U > 0
 	if (beta == 1) return;
-	for (int i = 0; i < sizeof(U)/sizeof(U[0]); i++)
+	for (int i = 0; i < (int)(sizeof(U)/sizeof(U[0])); i++)
 		U[i] = product(beta, U[i]);
 }
 
 void OctetOps::betaDivision(byte_t *U, byte_t beta) {
 	// TODO check that U != null and length of U > 0
 	if (beta == 1) return;
-	for (int i = 0; i < sizeof(U)/sizeof(U[0]); i++)
+	for (int i = 0; i < (int)(sizeof(U)/sizeof(U[0])); i++)
 		U[i] = division(U[i], beta);
 }
 

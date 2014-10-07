@@ -25,7 +25,7 @@
 #include <util/Deg.h>
 
 // 5.3.5.2 Degree Generator
-const int Deg::table1[] = {
+const unsigned int Deg::table1[] = {
 	0,
 	5243,
 	529531,

@@ -28,17 +28,17 @@
 class SystematicIndices {
 	
 	public:
-	static int getKIndex(unsigned int K_value);
-	static int K(int K_index);
-	static int J(int K_index);
-	static int S(int K_index);
-	static int H(int K_index);
-	static int W(int K_index);
+	static unsigned int getKIndex(unsigned int K_value);
+	static unsigned int K(unsigned int K_index);
+	static unsigned int J(unsigned int K_index);
+	static unsigned int S(unsigned int K_index);
+	static unsigned int H(unsigned int K_index);
+	static unsigned int W(unsigned int K_index);
 	static int ceil(unsigned int K_value);
 	static int floor(unsigned int K_value);
 
 	private:
-	static const int table2[][5];
+	static const unsigned int table2[][5];
 };
 
 #endif
