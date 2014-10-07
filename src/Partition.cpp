@@ -22,31 +22,28 @@
  * SOFTWARE.
  */
 
-#ifndef OCTETOPS_H
-#define OCTETOPS_H
+#include <Partition.h>
 
-#include <stdint.h>
+// 4.4.1.2 Source Block and Sub-Block Partitioning
+Partition::Partition(unsigned int I, unsigned int J) {
+	il = (I + J - 1) / J; // ceil(I / J)
+	is = I / J; // floor(I / J)
+	jl = I - (is * J);
+	js = J - jl;
+}
 
-typedef unsigned char byte_t;
+int Partition::IL() {
+	return il;
+}
 
-class OctetOps {
-	
-	public:
-	static byte_t getExp(int i);
-	static byte_t getLog(int i);
-	static byte_t addition(byte_t u, byte_t v);
-	static byte_t subtraction(byte_t u, byte_t v);
-	static byte_t product(byte_t u, byte_t v);
-	static byte_t division(byte_t u, byte_t v);
-	static byte_t alphaPower(int i);
-	static void betaProduct(byte_t beta, byte_t U[]);
-	static void betaDivision(byte_t U[], byte_t beta);
-	static void betaProduct(byte_t beta, byte_t U[], int pos, int length);
-	static void betaDivision(byte_t U[], byte_t beta, int pos, int length);
+int Partition::IS() {
+	return is;
+}
 
-	private:
-	static const int OCT_EXP[];
-	static const int OCT_LOG[];
-};
+int Partition::JL() {
+	return jl;
+}
 
-#endif
+int Partition::JS() {
+	return js;
+}
