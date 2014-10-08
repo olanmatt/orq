@@ -248,6 +248,10 @@ const int Rand::V3[] = {
 // 5.3.5.1 Random Number Generator
 int Rand::rand (uint32_t y, uint8_t i, uint32_t m) {
 
+	// if(y < 0) throw std::invalid_argument("y must be non-negative");
+	if(i < 0 || i > 255) throw std::invalid_argument("i must be non-negative and less than 256");
+	if(m < 1) throw std::invalid_argument("m must be positive");
+
 	int x0, x1, x2, x3;
 
 	x0 = (int)((y + i) % 256);

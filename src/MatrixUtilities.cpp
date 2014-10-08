@@ -24,6 +24,7 @@
 
 #include <MatrixUtilities.h>
 
+// TODO replace with a lookup table
 long MatrixUtilities::ceilPrime(long p) {
 
 	if (p == 1) p++;
@@ -35,11 +36,8 @@ long MatrixUtilities::ceilPrime(long p) {
 }
 
 bool MatrixUtilities::isPrime(long n) {
-
-	// check if n is a multiple of 2
 	if (n % 2 == 0) return false;
 
-	// if not, then just check the odds
 	for (long i = 3; i * i <= n; i += 2)
 		if (n % i == 0) return false;
 

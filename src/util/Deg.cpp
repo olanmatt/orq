@@ -66,7 +66,7 @@ int Deg::deg(unsigned int v, int W) {
 		if (v < table1[i]) break;
 	}
 
-	if (i == 31) return -1; // inconsistent table state
+	if (i == 31) throw std::runtime_error("Inconsistent table state");
 	return (std::min(i, W - 2));
 }
 

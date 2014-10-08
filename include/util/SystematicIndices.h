@@ -25,6 +25,8 @@
 #ifndef SYSTEMATICINDICES_H
 #define SYSTEMATICINDICES_H
 
+#include <stdexcept>
+
 class SystematicIndices {
 	
 	public:

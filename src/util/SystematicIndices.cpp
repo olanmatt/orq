@@ -506,13 +506,17 @@ const unsigned int SystematicIndices::table2[][5] = {
 };
 
 unsigned int SystematicIndices::getKIndex(unsigned int K_prime) {
-	// TODO check that k <= 56403
+
+	if(K_prime < 1) throw std::invalid_argument("K must be positive.");
+	if(K_prime > 56403) throw std::invalid_argument("K must be smaller than 56403.");
+
 	for (int i = 0; i < 477; i++) {
 		if (K(i) >= K_prime) {
 			return i;
 		}
 	}
-	return -1; // invalid table state
+	
+	throw std::runtime_error("Invalid table state");
 }
 
 unsigned int SystematicIndices::K(unsigned int K_index) {
@@ -536,21 +540,29 @@ unsigned int SystematicIndices::W(unsigned int K_index) {
 }
 
 int SystematicIndices::ceil(unsigned int K_prime) {
-	// TODO check that k <= 56403
+	
+	if(K_prime < 1) throw std::invalid_argument("K must be positive.");
+	if(K_prime > 56403) throw std::invalid_argument("K must be smaller than 56403.");
+
 	for (int i = 0; i < 477; i++) {
 		if (K(i) >= K_prime) {
 			return (K(i));
 		}
 	}
-	return -1; // invalid table state
+
+	throw std::runtime_error("Invalid table state");
 }
 
 int SystematicIndices::floor(unsigned int K_prime) {
-	// TODO check that k <= 56403
+	
+	if(K_prime < 1) throw std::invalid_argument("K must be positive.");
+	if(K_prime > 56403) throw std::invalid_argument("K must be smaller than 56403.");
+	
 	for (int i = 477 - 1; i >= 0; i--) {
 		if (K(i) <= K_prime) {
 			return (K(i));
 		}
 	}
-	return -1; // invalid table state
+	
+	throw std::runtime_error("Invalid table state");
 }

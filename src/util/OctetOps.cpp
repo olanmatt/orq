@@ -108,6 +108,7 @@ byte_t OctetOps::product(byte_t u, byte_t v) {
 }
 
 byte_t OctetOps::division(byte_t u, byte_t v) {
+	if(v == 0) throw std::invalid_argument("Denominator cannot be 0.");
 	if (u == 0) return 0;
 	return (byte_t)getExp((getLog(u) - getLog(v)) + 255);
 }

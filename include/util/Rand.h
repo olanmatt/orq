@@ -25,6 +25,7 @@
 #ifndef RAND_H
 #define RAND_H
 
+#include <stdexcept>
 #include <stdint.h>
 
 class Rand {

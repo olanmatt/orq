@@ -24,6 +24,7 @@
 
 #include <Tuple.h>
 
+// 5.3.3.2 Source Symbol Tuples
 Tuple::Tuple(int Kprime, long X) {
 
 	int Ki = SystematicIndices::getKIndex(Kprime);

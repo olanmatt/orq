@@ -25,6 +25,7 @@
 #ifndef DEG_H
 #define DEG_H
 
+#include <stdexcept>
 #include <stdint.h>
 #include <algorithm>
 

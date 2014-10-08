@@ -25,6 +25,7 @@
 #ifndef OCTETOPS_H
 #define OCTETOPS_H
 
+#include <stdexcept>
 #include <stdint.h>
 
 typedef unsigned char byte_t;
