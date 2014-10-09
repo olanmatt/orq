@@ -36,7 +36,7 @@ class InternalConstants {
     static const int Z_max = 256;                    // "maximum number of source blocks"
     static const int Kt_max = K_max * Z_max;         // "maximum number of symbols"
     static const int T_max = (65535 / Al) * Al;     // "maximum symbol size, in octets"
-    static const long F_max = Kt_max * T_max; // "maximum transfer length of the object, in octets"
+    static const uint64_t F_max = Kt_max * T_max; // "maximum transfer length of the object, in octets"
     static const int N_max = 1/* K_max */;           // "maximum interleaver length, in number of sub-blocks"
     // TODO enable interleaving
 
