@@ -38,6 +38,12 @@ class FECParameters {
 	static FECParameters newParameters(uint64_t dataLen, uint16_t symbSize, uint8_t numSrcBs, uint16_t interLen);
 	static FECParameters deriveParameters(uint64_t dataLen, uint16_t payLen, uint64_t maxDBMem);
 	static FECParameters newLocalInstance(uint64_t F, uint16_t T, uint8_t Z, uint16_t N, uint8_t Al);
+	uint64_t dataLength();
+	uint16_t symbolSize();
+	uint8_t numberOfSourceBlocks();
+	uint16_t interleaverLength();
+	uint8_t symbolAlignment();
+	uint16_t totalSymbols();
 
 	private:
 	static uint8_t deriveZ(uint16_t Kt, uint64_t WS, uint16_t T, uint8_t Al, uint16_t topN);

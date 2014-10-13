@@ -69,7 +69,7 @@ FECParameters FECParameters::deriveParameters(uint64_t dataLen, uint16_t payLen,
 }
 
 uint8_t FECParameters::deriveZ(uint16_t Kt, uint64_t WS, uint16_t T, uint8_t Al, uint16_t topN) {
-	
+
 	int Kl = InternalFunctions::KL(WS, T, Al, topN);
 	return ExtraMath::ceilDiv(Kt, Kl); // Z = ceil(Kt/KL(N_max))
 }
@@ -88,7 +88,7 @@ int FECParameters::deriveN(uint16_t Kt, uint8_t Z, uint64_t WS, uint16_t T, uint
 }
 
 FECParameters FECParameters::newLocalInstance(uint64_t F, uint16_t T, uint8_t Z, uint16_t N, uint8_t Al) {
-	
+
 	long commonFecOTI = ParameterIO::buildCommonFecOTI(F, T);
 	int schemeSpecFecOTI = ParameterIO::buildSchemeSpecFecOTI(Z, N, Al);
 	return FECParameters(commonFecOTI, schemeSpecFecOTI);
@@ -98,4 +98,34 @@ FECParameters::FECParameters(uint64_t common_fec_oti, uint32_t scheme_spec_fec_o
 
 	commonFecOTI = common_fec_oti;
 	schemeSpecFecOTI = scheme_spec_fec_oti;
+}
+
+uint64_t FECParameters::dataLength() {
+
+	return ParameterIO::extractDataLength(commonFecOTI);
+}
+
+uint16_t FECParameters::symbolSize() {
+
+	return ParameterIO::extractSymbolSize(commonFecOTI);
+}
+
+uint8_t FECParameters::numberOfSourceBlocks() {
+
+	return ParameterIO::extractNumSourceBlocks(schemeSpecFecOTI);
+}
+
+uint16_t FECParameters::interleaverLength() {
+
+	return ParameterIO::extractInterleaverLength(schemeSpecFecOTI);
+}
+
+uint8_t FECParameters::symbolAlignment() {
+
+	return ParameterIO::extractSymbolAlignment(schemeSpecFecOTI);
+}
+
+uint16_t FECParameters::totalSymbols() {
+
+	return InternalFunctions::getTotalSymbols(dataLength(), symbolSize());
 }

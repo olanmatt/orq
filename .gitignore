@@ -29,3 +29,6 @@
 
 # Ignore Mac specific files
 .DS_Store
+
+Vagrantfile
+.vagrant
