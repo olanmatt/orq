@@ -27,20 +27,21 @@
 
 #include <algorithm>
 #include <parameters/InternalConstants.h>
+#include <stdint.h>
 #include <util/ExtraMath.h>
 #include <util/SystematicIndices.h>
 
 class InternalFunctions {
 	
 	public:
-	static long getPossibleTotalSymbols(long F, int T);
-	static int getTotalSymbols(long F, int T);
-	static int topInterleaverLength(int T);
-	static int KL(long WS, int T, int Al, int n);
-	static long minWS(int Kprime, int T, int Al, int n);
+	static uint64_t getPossibleTotalSymbols(uint64_t F, uint16_t T);
+	static uint64_t getTotalSymbols(uint64_t F, uint16_t T);
+	static uint16_t topInterleaverLength(uint16_t T);
+	static uint16_t KL(uint64_t WS, uint16_t T, uint8_t Al, uint16_t n);
+	static uint64_t minWS(uint16_t Kprime, uint16_t T, uint8_t Al, uint16_t n);
 
 	private:
-	static int subSymbolSize(int T, int Al, int n);
+	static uint16_t subSymbolSize(uint16_t T, uint8_t Al, uint16_t n);
 };
 
 #endif

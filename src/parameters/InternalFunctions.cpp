@@ -24,35 +24,35 @@
 
 #include <parameters/InternalFunctions.h>
 
-long InternalFunctions::getPossibleTotalSymbols(long F, int T) {
+uint64_t InternalFunctions::getPossibleTotalSymbols(uint64_t F, uint16_t T) {
 
 	return ExtraMath::ceilDiv(F, T);
 }
 
-int InternalFunctions::getTotalSymbols(long F, int T) {
+uint64_t InternalFunctions::getTotalSymbols(uint64_t F, uint16_t T) {
 
-	return (int)ExtraMath::ceilDiv(F, T); // downcast never overflows since F and T are bounded
+	return (uint64_t)ExtraMath::ceilDiv(F, T); // downcast never overflows since F and T are bounded
 }
 
-int InternalFunctions::topInterleaverLength(int T) {
+uint16_t InternalFunctions::topInterleaverLength(uint16_t T) {
 	
-	int SStimesAl = T;
+	uint16_t SStimesAl = T;
 
 	return T / SStimesAl;
 }
 
-int InternalFunctions::KL(long WS, int T, int Al, int n) {
+uint16_t InternalFunctions::KL(uint64_t WS, uint16_t T, uint8_t Al, uint16_t n) {
 
-	int K_upper_bound = (int)std::min((int)InternalConstants::K_max, (int) (WS / subSymbolSize(T, Al, n)));
+	uint16_t K_upper_bound = (uint16_t)std::min((uint16_t)InternalConstants::K_max, (uint16_t) (WS / subSymbolSize(T, Al, n)));
 	return SystematicIndices::floor(K_upper_bound);
 }
 
-long InternalFunctions::minWS(int Kprime, int T, int Al, int n) {
+uint64_t InternalFunctions::minWS(uint16_t Kprime, uint16_t T, uint8_t Al, uint16_t n) {
 
-	return (long)SystematicIndices::ceil(Kprime) * subSymbolSize(T, Al, n);
+	return (uint64_t)SystematicIndices::ceil(Kprime) * subSymbolSize(T, Al, n);
 }
 
-int InternalFunctions::subSymbolSize(int T, int Al, int n) {
+uint16_t InternalFunctions::subSymbolSize(uint16_t T, uint8_t Al, uint16_t n) {
 
 	return Al * ExtraMath::ceilDiv(T, Al * n);
 }

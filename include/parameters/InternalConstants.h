@@ -30,32 +30,33 @@
 class InternalConstants {
 	
 	public:
-    static const int Al = 1;
+    static const uint8_t Al = 1;
 
-    static const int K_max = 56403;					// "maximum number of symbols in each source block"
-    static const int Z_max = 256;					// "maximum number of source blocks"
+    static const uint16_t K_max = 56403;					// "maximum number of symbols in each source block"
+    static const uint16_t Z_max = 256;					// "maximum number of source blocks"
     // static const int Kt_max = K_max * Z_max;
-    static const int Kt_max = 14439168;				// "maximum number of symbols"
+    static const uint32_t Kt_max = 14439168;				// "maximum number of symbols"
     // static const int T_max = (65535 / Al) * Al;
-    static const int T_max = 65535;					// "maximum symbol size, in octets"
+    static const uint16_t T_max = 65535;					// "maximum symbol size, in octets"
     // static const uint64_t F_max = Kt_max * T_max;
-    static const uint64_t F_max = 946270874880LL;		// "maximum transfer length of the object, in octets"
-    static const int N_max = 1	/* K_max */;		// "maximum interleaver length, in number of sub-blocks"
+    static const uint64_t F_max = 946270874880LLU;	// "maximum transfer length of the object, in octets"
+    static const uint16_t N_max = 1	/* K_max */;		// "maximum interleaver length, in number of sub-blocks"
     // TODO enable interleaving
 
-    static const int K_min = 1;
-    static const int K_prime_min = 10;  // the first K' value in the systematic indices table
-    static const int Z_min = 1;
-    static const int T_min = Al;
-    static const int F_min = 1; // RFC 6330 defines F as a non-negative value, but we force a positive value here
-    static const int N_min = 1;
+    static const uint16_t K_min = 1;
+    static const uint16_t K_prime_min = 10;  // the first K' value in the systematic indices table
+    static const uint16_t Z_min = 1;
+    static const uint8_t T_min = Al;
+    static const uint64_t F_min = 1; // RFC 6330 defines F as a non-negative value, but we force a positive value here
+    static const uint16_t N_min = 1;
 
-    static const int SBN_max = 255;
-    static const int ESI_max = 16777215;
+    static const uint8_t SBN_max = 255;
+    static const uint32_t ESI_max = 16777215;
 
-    static const int SBN_min = 0;
-    static const int ESI_min = 0;
+    static const uint8_t SBN_min = 0;
+    static const uint32_t ESI_min = 0;
 
+	// TODO convert to stdint.h
     static const int F_num_bytes = 5;
     static const int ESI_num_bytes = 3;
 
