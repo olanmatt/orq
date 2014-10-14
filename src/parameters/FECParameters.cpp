@@ -89,8 +89,8 @@ int FECParameters::deriveN(uint16_t Kt, uint8_t Z, uint64_t WS, uint16_t T, uint
 
 FECParameters FECParameters::newLocalInstance(uint64_t F, uint16_t T, uint8_t Z, uint16_t N, uint8_t Al) {
 
-	long commonFecOTI = ParameterIO::buildCommonFecOTI(F, T);
-	int schemeSpecFecOTI = ParameterIO::buildSchemeSpecFecOTI(Z, N, Al);
+	uint64_t commonFecOTI = ParameterIO::buildCommonFecOTI(F, T);
+	uint32_t schemeSpecFecOTI = ParameterIO::buildSchemeSpecFecOTI(Z, N, Al);
 	return FECParameters(commonFecOTI, schemeSpecFecOTI);
 }
 

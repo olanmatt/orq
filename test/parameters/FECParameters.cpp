@@ -28,7 +28,7 @@
 TEST_CASE( "FECParameters can be created, encoded into OTIs, then restored", "[FECParameters]" ) {
 	FECParameters f = FECParameters::newParameters(1024, 16, 64);
 
-	REQUIRE( f.dataLength() == 1024 );
+	REQUIRE( f.dataLength() == 1024LLU );
 	REQUIRE( f.symbolSize() == 16 );
 	REQUIRE( f.numberOfSourceBlocks() == 64 );
 	REQUIRE( f.interleaverLength() == 1 );

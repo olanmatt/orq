@@ -24,17 +24,17 @@
 
 #include <parameters/ParameterChecker.h>
 
-long ParameterChecker::minDataLength() {
+uint64_t ParameterChecker::minDataLength() {
 
 	return InternalConstants::F_min;
 }
 
-long ParameterChecker::maxDataLength() {
+uint64_t ParameterChecker::maxDataLength() {
 
 	return InternalConstants::F_max;
 }
 
-bool ParameterChecker::isDataLengthOutOfBounds(long dataLen) {
+bool ParameterChecker::isDataLengthOutOfBounds(uint64_t dataLen) {
 
 	return !(minDataLength() <= dataLen && dataLen <= maxDataLength());
 }
@@ -45,17 +45,17 @@ long ParameterChecker::maxAllowedDataLength(int symbSize) {
 	return _maxAllowedDataLength(symbSize);
 }
 
-int ParameterChecker::minSymbolSize() {
+uint16_t ParameterChecker::minSymbolSize() {
 
 	return InternalConstants::T_min;
 }
 
-int ParameterChecker::maxSymbolSize() {
+uint16_t ParameterChecker::maxSymbolSize() {
 
 	return InternalConstants::T_max;
 }
 
-bool ParameterChecker::isSymbolSizeOutOfBounds(int symbSize) {
+bool ParameterChecker::isSymbolSizeOutOfBounds(uint16_t symbSize) {
 
 	return !(minSymbolSize() <= symbSize && symbSize <= maxSymbolSize());
 }
@@ -316,12 +316,12 @@ int ParameterChecker::numRepairSymbolsPerBlock(int numSrcSymbs) {
 
 long ParameterChecker::_maxAllowedDataLength(int T) {
 
-	return std::min(maxDataLength(), (long)(T * InternalConstants::Kt_max));
+	return std::min(maxDataLength(), (uint64_t)(T * InternalConstants::Kt_max));
 }
 
 int ParameterChecker::_minAllowedSymbolSize(long F) {
 
-	return std::max(minSymbolSize(), (int)(ExtraMath::ceilDiv(F, InternalConstants::Kt_max)));
+	return std::max(minSymbolSize(), (uint16_t)(ExtraMath::ceilDiv(F, InternalConstants::Kt_max)));
 }
 
 int ParameterChecker::_minAllowedNumSourceBlocks(int Kt) {

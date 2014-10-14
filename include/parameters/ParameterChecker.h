@@ -33,13 +33,13 @@
 class ParameterChecker {
 	
 	public:
-	static long minDataLength();
-	static long maxDataLength();
-	static bool isDataLengthOutOfBounds(long dataLen);
+	static uint64_t minDataLength();
+	static uint64_t maxDataLength();
+	static bool isDataLengthOutOfBounds(uint64_t dataLen);
 	static long maxAllowedDataLength(int symbSize);
-	static int minSymbolSize();
-	static int maxSymbolSize();
-	static bool isSymbolSizeOutOfBounds(int symbSize);
+	static uint16_t minSymbolSize();
+	static uint16_t maxSymbolSize();
+	static bool isSymbolSizeOutOfBounds(uint16_t symbSize);
 	static int minAllowedSymbolSize(long dataLen);
 	static int minNumSourceBlocks();
 	static int maxNumSourceBlocks();

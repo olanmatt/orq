@@ -22,7 +22,13 @@
  * SOFTWARE.
  */
 
+#include <parameters/FECParameters.h>
+#include <stdio.h>
+
 // Suppressing compile errors until main class is written
 int main() {
+	FECParameters f = FECParameters::newParameters(1024, 16, 64);
+	printf("%llu\n", f.dataLength());
+
 	return 0;
 }
