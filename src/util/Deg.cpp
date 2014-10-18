@@ -61,13 +61,13 @@ const unsigned int Deg::table1[] = {
 
 int Deg::generate(unsigned int v, int W) {
 
-	int i;
-	for (i = 0; i < 31; i++) {
-		if (v < table1[i]) break;
+	for (int i = 0; i < 31; i++) {
+		if (v < table1[i]) {
+			return (std::min(i, W - 2));
+		}
 	}
 
-	if (i == 31) throw std::runtime_error("Inconsistent table state");
-	return (std::min(i, W - 2));
+	throw std::runtime_error("Inconsistent table state");
 }
 
 
