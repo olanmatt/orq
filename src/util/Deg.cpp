@@ -59,7 +59,7 @@ const unsigned int Deg::table1[] = {
 	1048576
 };
 
-int Deg::deg(unsigned int v, int W) {
+int Deg::generate(unsigned int v, int W) {
 
 	int i;
 	for (i = 0; i < 31; i++) {

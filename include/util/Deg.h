@@ -32,7 +32,7 @@
 class Deg {
 
 	public:
-	static int deg(unsigned int v, int W);
+	static int generate(unsigned int v, int W);
 
 	private:
 	static const unsigned int table1[];
