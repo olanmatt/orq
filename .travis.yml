@@ -20,45 +20,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-CC := g++
-SRCDIR := src
-TESTDIR := test
-BUILDDIR := build
-TARGET := bin/orq
-TESTTARGET := bin/test
- 
-SRCEXT := cpp
-SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
-OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-TESTSOURCES := $(shell find $(TESTDIR) -type f -name "*.$(SRCEXT)")
-TESTOBJECTS := $(patsubst $(TESTDIR)/%,$(BUILDDIR)/$(TESTDIR)/%,$(TESTSOURCES:.$(SRCEXT)=.o))
-CFLAGS := -g -Wall -pedantic -std=c++0x #-std=c++11
-LIB := 
-INC := -I include
+language: cpp
 
-# make
-$(TARGET): $(OBJECTS)
-	@echo ""; echo "Linking..."
-	$(CC) $^ -o $(TARGET) $(LIB)
+compiler:
+    - clang
+    - gcc
 
-$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
-
-# make test
-test: $(TARGET) $(TESTTARGET)
-$(TESTTARGET): $(TESTOBJECTS)
-	@echo ""; echo "Linking..."
-	$(CC) $^ $(filter-out $(BUILDDIR)/orq.o,$(OBJECTS)) -o $(TESTTARGET) $(LIB)
-	$(TESTTARGET)
-
-$(BUILDDIR)/$(TESTDIR)/%.o: $(TESTDIR)/%.$(SRCEXT)
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
-
-# make clean
-.PHONY: clean
-clean:
-	@echo " Cleaning..."; 
-	$(RM) -r $(BUILDDIR) $(TARGET) $(TESTTARGET)
-
+script: make && make test
