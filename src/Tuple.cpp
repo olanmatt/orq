@@ -45,7 +45,7 @@ Tuple::Tuple(int Kprime, long X) {
 
 	long v = Rand::rand(y, 0, 1048576L); // 2^^20
 
-	d = Deg::deg(v, W);
+	d = Deg::generate(v, W);
 	a = 1 + Rand::rand(y, 1, W - 1);
 	b = Rand::rand(y, 2, W);
 	if (d < 4) d1 = 2 + Rand::rand(X, 3, 2L);
