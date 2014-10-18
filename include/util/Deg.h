@@ -36,6 +36,7 @@ class Deg {
 
 	private:
 	static const unsigned int table1[];
+	Deg() { }; // Otherwise default constructor is generated
 };
 
 #endif
