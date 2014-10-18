@@ -22,24 +22,13 @@
  * SOFTWARE.
  */
 
-#ifndef ROW_H
-#define ROW_H
+#include <Catch.h>
+#include <Row.h>
 
-#include <set>
+TEST_CASE( "Row can be created, and equated", "[Row]" ) {
 
-class Row {
-	
-	public:
-	Row(int i, int r, int d, bool hdpc);
-	Row(int i, int r, int d, bool hdpc, std::set<int> e);
-	bool operator==(const Row& other);
+	Row r1 = Row(1, 2, 3, true);
+	Row r2 = Row(1, 2, 3, true);
 
-	private:
-	int position;
-	int nonZeros;
-	int originalDegree;
-	std::set<int> nodes;
-	bool isHDPC;
-};
-
-#endif
+	REQUIRE( r1 == r2 );
+}

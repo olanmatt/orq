@@ -43,6 +43,8 @@ Row::Row(int i, int r, int d, bool hdpc, std::set<int> e) {
 
 bool Row::operator==(const Row& other) {
 
-	if (other.position == this->position) return true;
-	else return false;
+	if (other.position == this->position){
+		return true;
+	}
+	return false;
 }
