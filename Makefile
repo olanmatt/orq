@@ -21,30 +21,31 @@
 # SOFTWARE.
 
 CC ?= gcc
-GXX ?= g++
+CXX ?= g++
 SRCDIR := src
 TESTDIR := test
 BUILDDIR := build
 TARGET := bin/orq
 TESTTARGET := bin/test
- 
+
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 TESTSOURCES := $(shell find $(TESTDIR) -type f -name "*.$(SRCEXT)")
 TESTOBJECTS := $(patsubst $(TESTDIR)/%,$(BUILDDIR)/$(TESTDIR)/%,$(TESTSOURCES:.$(SRCEXT)=.o))
 CFLAGS := -g -Wall -pedantic -std=c++0x
-LIB := 
+CXXFLAGS := $(CFLAGS)
+LIB :=
 INC := -I include
 
 # make
 $(TARGET): $(OBJECTS)
 	@echo ""; echo "Linking..."
-	$(GXX) $^ -o $(TARGET) $(LIB)
+	$(CXX) $^ -o $(TARGET) $(LIB)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
-	$(GXX) $(CFLAGS) $(INC) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
 
 # make test
 test: $(TARGET) $(TESTTARGET)
@@ -52,15 +53,15 @@ test: $(TARGET) $(TESTTARGET)
 
 $(TESTTARGET): $(TESTOBJECTS)
 	@echo ""; echo "Linking..."
-	$(GXX) $^ $(filter-out $(BUILDDIR)/orq.o,$(OBJECTS)) -o $(TESTTARGET) $(LIB)
+	$(CXX) $^ $(filter-out $(BUILDDIR)/orq.o,$(OBJECTS)) -o $(TESTTARGET) $(LIB)
 
 $(BUILDDIR)/$(TESTDIR)/%.o: $(TESTDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
-	$(GXX) $(CFLAGS) $(INC) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
 
 # make clean
 .PHONY: clean
 clean:
-	@echo " Cleaning..."; 
+	@echo " Cleaning...";
 	$(RM) -r $(BUILDDIR) $(TARGET) $(TESTTARGET)
 
