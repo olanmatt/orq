@@ -33,8 +33,8 @@ SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 TESTSOURCES := $(shell find $(TESTDIR) -type f -name "*.$(SRCEXT)")
 TESTOBJECTS := $(patsubst $(TESTDIR)/%,$(BUILDDIR)/$(TESTDIR)/%,$(TESTSOURCES:.$(SRCEXT)=.o))
-CFLAGS := -g -Wall -pedantic -std=c++11
-CXXFLAGS := $(CFLAGS)
+CFLAGS := -g -Wall -pedantic -std=c1x
+CXXFLAGS := -g -Wall -pedantic -std=c++0x
 LDFLAGS :=
 INC := -I include
 
@@ -60,6 +60,9 @@ $(TESTTARGET): $(TESTOBJECTS)
 $(BUILDDIR)/$(TESTDIR)/%.o: $(TESTDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
+
+gcov: clean
+	$(MAKE) CXXFLAGS="$(CXXFLAGS) -g -O0 --coverage" LDFLAGS="-lgcov" all test
 
 # make clean
 .PHONY: clean
