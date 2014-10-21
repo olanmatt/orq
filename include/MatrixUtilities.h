@@ -22,16 +22,14 @@
  * SOFTWARE.
  */
 
-#ifndef MATRIXUTILITIES_H
-#define MATRIXUTILITIES_H
+#ifndef MATRIX_UTILITIES_H
+#define MATRIX_UTILITIES_H
 
 class MatrixUtilities {
 	
 	public:
-	static long ceilPrime(long p);
-	static bool isPrime(long n);
-
-	private:
+	static long ceil_prime(long p);
+	static bool is_prime(long n);
 };
 
 #endif

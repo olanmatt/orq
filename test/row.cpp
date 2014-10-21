@@ -23,12 +23,12 @@
  */
 
 #include <Catch.h>
-#include <Row.h>
+#include <row.h>
 
-TEST_CASE( "Row can be created, and equated", "[Row]" ) {
+TEST_CASE( "Row can be created, and equated", "[row]" ) {
 
-	Row r1 = Row(1, 2, 3, true);
-	Row r2 = Row(1, 2, 3, true);
+	row r1 = row(1, 2, 3, true);
+	row r2 = row(1, 2, 3, true);
 
 	REQUIRE( r1 == r2 );
 }

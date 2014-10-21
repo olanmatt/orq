@@ -22,29 +22,24 @@
  * SOFTWARE.
  */
 
-#include <Row.h>
+#ifndef ROW_H
+#define ROW_H
 
-Row::Row(int i, int r, int d, bool hdpc) {
+#include <set>
 
-	position = i;
-	nonZeros = r;
-	originalDegree = d;
-	isHDPC = hdpc;
-}
+class row {
 
-Row::Row(int i, int r, int d, bool hdpc, std::set<int> e) {
+	public:
+	row(int i, int r, int d, bool hdpc);
+	row(int i, int r, int d, bool hdpc, std::set<int> e);
+	bool operator==(const row& other);
 
-	position = i;
-	nonZeros = r;
-	originalDegree = d;
-	nodes = e;
-	isHDPC = hdpc;
-}
+	private:
+	int position_;
+	int non_zeros_;
+	int original_degree_;
+	std::set<int> nodes_;
+	bool is_hdpc_;
+};
 
-bool Row::operator==(const Row& other) {
-
-	if (other.position == this->position){
-		return true;
-	}
-	return false;
-}
+#endif

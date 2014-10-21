@@ -25,17 +25,17 @@
 #include <MatrixUtilities.h>
 
 // TODO replace with a lookup table
-long MatrixUtilities::ceilPrime(long p) {
+long MatrixUtilities::ceil_prime(long p) {
 
 	if (p == 1) p++;
 
-	while (!isPrime(p))
+	while (!is_prime(p))
 		p++;
 
 	return p;
 }
 
-bool MatrixUtilities::isPrime(long n) {
+bool MatrixUtilities::is_prime(long n) {
 	if (n % 2 == 0) return false;
 
 	for (long i = 3; i * i <= n; i += 2)
