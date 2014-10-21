@@ -22,37 +22,43 @@
  * SOFTWARE.
  */
 
-#include <parameters/InternalFunctions.h>
+#include <parameters/internal_functions.h>
 
-uint64_t InternalFunctions::getPossibleTotalSymbols(uint64_t F, uint16_t T) {
+uint64_t internal_functions::get_possible_total_symbols(uint64_t F, uint16_t T) {
 
-	return extra_math::ceil_div(F, T);
+    return extra_math::ceil_div(F, T);
 }
 
-uint64_t InternalFunctions::getTotalSymbols(uint64_t F, uint16_t T) {
+uint64_t
+internal_functions::get_total_symbols(uint64_t F, uint16_t T) {
 
-	return (uint64_t)extra_math::ceil_div(F, T); // downcast never overflows since F and T are bounded
+    return (uint64_t)extra_math::ceil_div(F, T); // downcast never overflows since F and T are bounded
 }
 
-uint16_t InternalFunctions::topInterleaverLength(uint16_t T) {
+uint16_t
+internal_functions::top_interleaver_length(uint16_t T) {
 
-	uint16_t SStimesAl = T;
+    uint16_t SStimesAl = T;
 
-	return T / SStimesAl;
+    return T / SStimesAl;
 }
 
-uint16_t InternalFunctions::KL(uint64_t WS, uint16_t T, uint8_t Al, uint16_t n) {
+uint16_t
+internal_functions::KL(uint64_t WS, uint16_t T, uint8_t Al, uint16_t n) {
 
-	uint16_t K_upper_bound = (uint16_t)std::min((uint16_t)internal_constants::K_max, (uint16_t) (WS / subSymbolSize(T, Al, n)));
-	return systematic_indices::floor(K_upper_bound);
+    uint16_t K_upper_bound = (uint16_t)std::min((uint16_t)internal_constants::K_max,
+                                                (uint16_t)(WS / sub_symbol_size(T, Al, n)));
+    return systematic_indices::floor(K_upper_bound);
 }
 
-uint64_t InternalFunctions::minWS(uint16_t Kprime, uint16_t T, uint8_t Al, uint16_t n) {
+uint64_t
+internal_functions::min_WS(uint16_t K_prime, uint16_t T, uint8_t Al, uint16_t n) {
 
-	return (uint64_t)systematic_indices::ceil(Kprime) * subSymbolSize(T, Al, n);
+    return (uint64_t)SystematicIndices::ceil(K_prime) * sub_symbol_size(T, Al, n);
 }
 
-uint16_t InternalFunctions::subSymbolSize(uint16_t T, uint8_t Al, uint16_t n) {
+uint16_t
+internal_functions::sub_symbol_size(uint16_t T, uint8_t Al, uint16_t n) {
 
-	return Al * extra_math::ceil_div(T, Al * n);
+    return Al * extra_math::ceil_div(T, Al * n);
 }
