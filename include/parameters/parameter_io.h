@@ -31,23 +31,23 @@
 class ParameterIO {
 
 	public:
-	static uint64_t extractDataLength(uint64_t commonFecOTI);
-	static uint16_t extractSymbolSize(uint64_t commonFecOTI);
-	static uint8_t extractNumSourceBlocks(uint32_t schemeSpecFecOTI);
-	static uint16_t extractInterleaverLength(uint32_t schemeSpecFecOTI);
-	static uint8_t extractSymbolAlignment(uint32_t schemeSpecFecOTI);
-	static uint8_t extractSourceBlockNumber(uint32_t fecPayloadID);
-	static uint32_t extractEncodingSymbolID(uint32_t fecPayloadID);
-	static uint64_t buildCommonFecOTI(uint64_t dataLen, uint16_t symbolSize);
-	static uint64_t canonicalizeCommonFecOTI(uint64_t commonFecOTI);
-	static uint32_t buildSchemeSpecFecOTI(uint8_t numSrcBs, uint16_t interLen, uint8_t sAlign);
-	static uint32_t buildFECpayloadID(uint8_t sbn, uint32_t esi);
+	static uint64_t extract_data_length(uint64_t commonFecOTI);
+	static uint16_t extract_symbol_size(uint64_t commonFecOTI);
+	static uint8_t extract_num_source_blocks(uint32_t schemeSpecFecOTI);
+	static uint16_t extract_interleaver_length(uint32_t schemeSpecFecOTI);
+	static uint8_t extract_symbol_alignment(uint32_t schemeSpecFecOTI);
+	static uint8_t extract_source_block_number(uint32_t fecPayloadID);
+	static uint32_t extract_encoding_symbol_id(uint32_t fecPayloadID);
+	static uint64_t build_common_fec_oti(uint64_t dataLen, uint16_t symbolSize);
+	static uint64_t canonicalize_common_fec_oti(uint64_t commonFecOTI);
+	static uint32_t build_scheme_spec_fec_oti(uint8_t numSrcBs, uint16_t interLen, uint8_t sAlign);
+	static uint32_t build_fec_payload_id(uint8_t sbn, uint32_t esi);
 
 	private:
-	static int dataLengthShift();
-	static int numSourceBlocksShift();
-	static int interleaverLengthShift();
-	static int sourceBlockNumberShift();
+	static int data_length_shift();
+	static int num_source_blocks_shift();
+	static int interleaver_length_shift();
+	static int source_block_number_shift();
 };
 
 #endif

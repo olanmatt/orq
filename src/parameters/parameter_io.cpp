@@ -22,79 +22,79 @@
  * SOFTWARE.
  */
 
-#include <parameters/ParameterIO.h>
+#include <parameters/parameter_io.h>
 
-int ParameterIO::dataLengthShift() {
+int ParameterIO::data_length_shift() {
 
 	return (1 + sizeof(unsigned short)) * sizeof(uint8_t) * 8; // shift by (1 + 2) octets
 }
 
-uint64_t ParameterIO::extractDataLength(uint64_t commonFecOTI) {
+uint64_t ParameterIO::extract_data_length(uint64_t commonFecOTI) {
 
-	return commonFecOTI >> dataLengthShift();
+	return commonFecOTI >> data_length_shift();
 }
 
-uint16_t ParameterIO::extractSymbolSize(uint64_t commonFecOTI) {
+uint16_t ParameterIO::extract_symbol_size(uint64_t commonFecOTI) {
 
 	return (uint16_t)commonFecOTI;
 }
 
-int ParameterIO::numSourceBlocksShift() {
+int ParameterIO::num_source_blocks_shift() {
 
 	return (sizeof(uint16_t) + 1) * sizeof(uint8_t) * 8; // shift by (2 + 1) octets
 }
 
-uint8_t ParameterIO::extractNumSourceBlocks(uint32_t schemeSpecFecOTI) {
+uint8_t ParameterIO::extract_num_source_blocks(uint32_t schemeSpecFecOTI) {
 
-	return (uint8_t)(schemeSpecFecOTI >> numSourceBlocksShift());
+	return (uint8_t)(schemeSpecFecOTI >> num_source_blocks_shift());
 }
 
-int ParameterIO::interleaverLengthShift() {
+int ParameterIO::interleaver_length_shift() {
 
 	return 1 * sizeof(uint8_t) * 8; // shift by 1 octet
 }
 
-uint16_t ParameterIO::extractInterleaverLength(uint32_t schemeSpecFecOTI) {
+uint16_t ParameterIO::extract_interleaver_length(uint32_t schemeSpecFecOTI) {
 
-	return (uint16_t)(schemeSpecFecOTI >> interleaverLengthShift());
+	return (uint16_t)(schemeSpecFecOTI >> interleaver_length_shift());
 }
 
-uint8_t ParameterIO::extractSymbolAlignment(uint32_t schemeSpecFecOTI) {
+uint8_t ParameterIO::extract_symbol_alignment(uint32_t schemeSpecFecOTI) {
 
 	return (uint8_t)schemeSpecFecOTI;
 }
 
-int ParameterIO::sourceBlockNumberShift() {
+int ParameterIO::source_block_number_shift() {
 
 	return internal_constants::ESI_num_bytes * sizeof(uint8_t) * 8;
 }
 
-uint8_t ParameterIO::extractSourceBlockNumber(uint32_t fecPayloadID) {
+uint8_t ParameterIO::extract_source_block_number(uint32_t fecPayloadID) {
 
-	return (uint8_t)(fecPayloadID >> sourceBlockNumberShift());
+	return (uint8_t)(fecPayloadID >> source_block_number_shift());
 }
 
-uint32_t ParameterIO::extractEncodingSymbolID(uint32_t fecPayloadID) {
+uint32_t ParameterIO::extract_encoding_symbol_id(uint32_t fecPayloadID) {
 
 	return fecPayloadID;
 }
 
-uint64_t ParameterIO::buildCommonFecOTI(uint64_t dataLen, uint16_t symbolSize) {
+uint64_t ParameterIO::build_common_fec_oti(uint64_t dataLen, uint16_t symbolSize) {
 
-	return (dataLen << dataLengthShift()) | symbolSize;
+	return (dataLen << data_length_shift()) | symbolSize;
 }
 
-uint64_t ParameterIO::canonicalizeCommonFecOTI(uint64_t commonFecOTI) {
+uint64_t ParameterIO::canonicalize_common_fec_oti(uint64_t commonFecOTI) {
 
 	return commonFecOTI & internal_constants::common_oti_reserved_inverse_mask;
 }
 
-uint32_t ParameterIO::buildSchemeSpecFecOTI(uint8_t numSrcBs, uint16_t interLen, uint8_t sAlign) {
+uint32_t ParameterIO::build_scheme_spec_fec_oti(uint8_t numSrcBs, uint16_t interLen, uint8_t sAlign) {
 
-	return (numSrcBs << numSourceBlocksShift()) | (interLen << interleaverLengthShift()) | sAlign;
+	return (numSrcBs << num_source_blocks_shift()) | (interLen << interleaver_length_shift()) | sAlign;
 }
 
-uint32_t ParameterIO::buildFECpayloadID(uint8_t sbn, uint32_t esi) {
+uint32_t ParameterIO::build_fec_payload_id(uint8_t sbn, uint32_t esi) {
 
-	return (sbn << sourceBlockNumberShift()) | esi;
+	return (sbn << source_block_number_shift()) | esi;
 }
