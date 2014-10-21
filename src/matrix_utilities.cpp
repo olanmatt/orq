@@ -24,7 +24,7 @@
 
 #include <matrix_utilities.h>
 
-// TODO replace with a lookup table
+// TODO(olanmatt): Replace with a lookup table.
 long matrix_utilities::ceil_prime(long p)
 {
     if (p == 1) {

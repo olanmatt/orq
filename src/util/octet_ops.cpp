@@ -131,9 +131,11 @@ byte_t octet_ops::alphaPower(int i)
 }
 
 // 5.7.5 Operations on Symbols
+// TODO(pbhandari): Convert byte_t arrays to vectors.
+// TODO(pbhandari): Contert byte_t to uint8_t.
 void octet_ops::betaProduct(byte_t beta, byte_t *U)
 {
-    // TODO check that U != null and length of U > 0
+    // TODO(pbhandari): Check that U != null and length of U > 0.
     if (beta == 1) {
         return;
     }
@@ -144,7 +146,7 @@ void octet_ops::betaProduct(byte_t beta, byte_t *U)
 
 void octet_ops::betaDivision(byte_t *U, byte_t beta)
 {
-    // TODO check that U != null and length of U > 0
+    // TODO(pbhandari): Check that U != null and length of U > 0.
     if (beta == 1) {
         return;
     }
@@ -155,7 +157,7 @@ void octet_ops::betaDivision(byte_t *U, byte_t beta)
 
 void octet_ops::betaProduct(byte_t beta, byte_t U[], int pos, int length)
 {
-    // TODO check that U != null and length of U > 0
+    // TODO(pbhandari): Check that U != null and length of U > 0.
     if (beta == 1) {
         return;
     }
@@ -166,7 +168,7 @@ void octet_ops::betaProduct(byte_t beta, byte_t U[], int pos, int length)
 
 void octet_ops::betaDivision(byte_t U[], byte_t beta, int pos, int length)
 {
-    // TODO check that U != null and length of U > 0
+    // TODO(pbhandari): Check that U != null and length of U > 0.
     if (beta == 1) {
         return;
     }

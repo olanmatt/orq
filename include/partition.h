@@ -36,10 +36,10 @@ public:
     int JS();
 
 private:
-    int IL_;
-    int IS_;
-    int JL_;
-    int JS_;
+    int m_IL;
+    int m_IS;
+    int m_JL;
+    int m_JS;
 };
 
 #endif

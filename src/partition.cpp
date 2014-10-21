@@ -27,28 +27,29 @@
 // 4.4.1.2 Source Block and Sub-Block Partitioning
 partition::partition(unsigned int I, unsigned int J)
 {
-    IL_ = (I + J - 1) / J;  // ceil(I / J)
-    IS_ = I / J;  // floor(I / J)
-    JL_ = I - (IS_ * J);
-    JS_ = J - JL_;
+    m_IL = (I + J - 1) / J;  // ceil(I / J)
+    m_IS = I / J;  // floor(I / J)
+    m_JL = I - (m_IS * J);
+    m_JS = J - m_JL;
 }
 
+// TODO(pbhandari): Convert these to constant member variables.
 int partition::IL()
 {
-    return IL_;
+    return m_IL;
 }
 
 int partition::IS()
 {
-    return IS_;
+    return m_IS;
 }
 
 int partition::JL()
 {
-    return JL_;
+    return m_JL;
 }
 
 int partition::JS()
 {
-    return JS_;
+    return m_JS;
 }

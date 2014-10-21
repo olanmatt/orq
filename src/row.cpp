@@ -26,23 +26,23 @@
 
 row::row(int i, int r, int d, bool hdpc)
 {
-    position_ = i;
-    non_zeros_ = r;
-    original_degree_ = d;
-    nodes_ = std::set<int>();
-    is_hdpc_ = hdpc;
+    m_position = i;
+    m_non_zeros = r;
+    m_original_degree = d;
+    m_nodes = std::set<int>();
+    m_is_hdpc = hdpc;
 }
 
 row::row(int i, int r, int d, bool hdpc, std::set<int> e)
 {
-    position_ = i;
-    non_zeros_ = r;
-    original_degree_ = d;
-    nodes_ = e;
-    is_hdpc_ = hdpc;
+    m_position = i;
+    m_non_zeros = r;
+    m_original_degree = d;
+    m_nodes = e;
+    m_is_hdpc = hdpc;
 }
 
 bool row::operator==(const row &other)
 {
-    return other.position_ == this->position_;
+    return other.m_position == this->m_position;
 }

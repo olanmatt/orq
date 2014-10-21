@@ -43,7 +43,7 @@ public:
     long B1();
 
 private:
-    long d_, a_, b_, d1_, a1_, b1_;
+    long m_d, m_a, m_b, m_d1, m_a1, m_b1;
 };
 
 #endif

@@ -47,44 +47,44 @@ tuple::tuple(int k_prime, long x)
 
     long v = rand::generate(y, 0, 1048576L);  // 2^^20
 
-    d_ = deg::generate(v, W);
-    a_ = 1 + rand::generate(y, 1, W - 1);
-    b_ = rand::generate(y, 2, W);
-    if (d_ < 4) {
-        d1_ = 2 + rand::generate(x, 3, 2L);
+    m_d = deg::generate(v, W);
+    m_a = 1 + rand::generate(y, 1, W - 1);
+    m_b = rand::generate(y, 2, W);
+    if (m_d < 4) {
+        m_d1 = 2 + rand::generate(x, 3, 2L);
     } else {
-        d1_ = 2;
+        m_d1 = 2;
     }
-    a1_ = 1 + rand::generate(x, 4, P1 - 1);
-    b1_ = rand::generate(x, 5, P1);
+    m_a1 = 1 + rand::generate(x, 4, P1 - 1);
+    m_b1 = rand::generate(x, 5, P1);
 }
 
 long tuple::D()
 {
-    return d_;
+    return m_d;
 }
 
 long tuple::A()
 {
-    return a_;
+    return m_a;
 }
 
 long tuple::B()
 {
-    return b_;
+    return m_b;
 }
 
 long tuple::D1()
 {
-    return d1_;
+    return m_d1;
 }
 
 long tuple::A1()
 {
-    return a1_;
+    return m_a1;
 }
 
 long tuple::B1()
 {
-    return b1_;
+    return m_b1;
 }

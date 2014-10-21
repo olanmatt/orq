@@ -47,7 +47,7 @@ fec_parameters::new_parameters(uint64_t data_length,
     if (ParameterChecker::areValidFECParameters(F, T, Z, N)) {
         return new_local_instance(F, T, Z, N, Al);
     } else {
-        // TODO add more exception specificity
+        // TODO(olanmatt): Add more exception specificity.
         throw std::invalid_argument("invalid FECParameter argument");
     }
 }
@@ -73,7 +73,7 @@ fec_parameters::derive_parameters(uint64_t data_length,
 
         return new_local_instance(F, T, Z, N, Al);
     } else {
-        // TODO add more exception specificity
+        // TODO(olanmatt): Add more exception specificity.
         throw std::invalid_argument("invalid FECParameter argument");
     }
 }

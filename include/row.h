@@ -36,11 +36,11 @@ public:
     bool operator==(const row &other);
 
 private:
-    int position_;
-    int non_zeros_;
-    int original_degree_;
-    std::set<int> nodes_;
-    bool is_hdpc_;
+    int m_position;
+    int m_non_zeros;
+    int m_original_degree;
+    std::set<int> m_nodes;
+    bool m_is_hdpc;
 };
 
 #endif
