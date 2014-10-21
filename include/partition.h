@@ -22,15 +22,23 @@
  * SOFTWARE.
  */
 
-#ifndef EXTRAMATH_H
-#define EXTRAMATH_H
+#ifndef PARTITION_H
+#define PARTITION_H
 
-class ExtraMath {
+class partition {
 
 	public:
-	static int ceilDiv(int num, int den);
+	partition(unsigned int I, unsigned int J);
+	int IL();
+	int IS();
+	int JL();
+	int JS();
 
 	private:
+	int IL_;
+	int IS_;
+	int JL_;
+	int JS_;
 };
 
 #endif

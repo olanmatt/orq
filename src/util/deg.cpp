@@ -22,21 +22,53 @@
  * SOFTWARE.
  */
 
-#ifndef DEG_H
-#define DEG_H
+#include <util/deg.h>
 
-#include <stdexcept>
-#include <stdint.h>
-#include <algorithm>
-
-class Deg {
-
-	public:
-	static int generate(unsigned int v, int W);
-
-	private:
-	static const unsigned int table1[];
-	Deg() { }; // Otherwise default constructor is generated
+// 5.3.5.2 Degree Generator
+const unsigned int deg::table1[] = {
+	0,
+	5243,
+	529531,
+	704294,
+	791675,
+	844104,
+	879057,
+	904023,
+	922747,
+	937311,
+	948962,
+	958494,
+	966438,
+	973160,
+	978921,
+	983914,
+	988283,
+	992138,
+	995565,
+	998631,
+	1001391,
+	1003887,
+	1006157,
+	1008229,
+	1010129,
+	1011876,
+	1013490,
+	1014983,
+	1016370,
+	1017662,
+	1048576
 };
 
-#endif
+int deg::generate(unsigned int v, int W) {
+
+	for (int i = 0; i < 31; i++) {
+		if (v < table1[i]) {
+			return (std::min(i, W - 2));
+		}
+	}
+
+	throw std::runtime_error("Inconsistent table state");
+}
+
+
+

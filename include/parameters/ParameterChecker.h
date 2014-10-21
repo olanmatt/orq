@@ -28,10 +28,10 @@
 #include <algorithm>
 #include <parameters/InternalConstants.h>
 #include <parameters/InternalFunctions.h>
-#include <util/ExtraMath.h>
+#include <util/extra_math.h>
 
 class ParameterChecker {
-	
+
 	public:
 	static uint64_t minDataLength();
 	static uint64_t maxDataLength();

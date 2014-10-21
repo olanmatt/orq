@@ -71,13 +71,13 @@ FECParameters FECParameters::deriveParameters(uint64_t dataLen, uint16_t payLen,
 uint8_t FECParameters::deriveZ(uint16_t Kt, uint64_t WS, uint16_t T, uint8_t Al, uint16_t topN) {
 
 	int Kl = InternalFunctions::KL(WS, T, Al, topN);
-	return ExtraMath::ceilDiv(Kt, Kl); // Z = ceil(Kt/KL(N_max))
+	return extra_math::ceil_div(Kt, Kl); // Z = ceil(Kt/KL(N_max))
 }
 
 int FECParameters::deriveN(uint16_t Kt, uint8_t Z, uint64_t WS, uint16_t T, uint8_t Al, uint16_t topN) {
 
 	// N is the minimum n=1, ..., N_max such that ceil(Kt/Z) <= KL(n)
-	int topK = ExtraMath::ceilDiv(Kt, Z);
+	int topK = extra_math::ceil_div(Kt, Z);
 	for (int n = topN; n >= 1; n--) {
 		if (topK <= InternalFunctions::KL(WS, T, Al, n)) {
 			return n;

@@ -22,25 +22,32 @@
  * SOFTWARE.
  */
 
-#ifndef SYSTEMATICINDICES_H
-#define SYSTEMATICINDICES_H
+#ifndef OCTETOPS_H
+#define OCTETOPS_H
 
+#include <cstdint>
 #include <stdexcept>
 
-class SystematicIndices {
-	
+typedef unsigned char byte_t;
+
+class octet_ops {
+
 	public:
-	static unsigned int getKIndex(unsigned int K_value);
-	static unsigned int K(unsigned int K_index);
-	static unsigned int J(unsigned int K_index);
-	static unsigned int S(unsigned int K_index);
-	static unsigned int H(unsigned int K_index);
-	static unsigned int W(unsigned int K_index);
-	static int ceil(unsigned int K_value);
-	static int floor(unsigned int K_value);
+	static byte_t getExp(int i);
+	static byte_t getLog(int i);
+	static byte_t addition(byte_t u, byte_t v);
+	static byte_t subtraction(byte_t u, byte_t v);
+	static byte_t product(byte_t u, byte_t v);
+	static byte_t division(byte_t u, byte_t v);
+	static byte_t alphaPower(int i);
+	static void betaProduct(byte_t beta, byte_t U[]);
+	static void betaDivision(byte_t U[], byte_t beta);
+	static void betaProduct(byte_t beta, byte_t U[], int pos, int length);
+	static void betaDivision(byte_t U[], byte_t beta, int pos, int length);
 
 	private:
-	static const unsigned int table2[][5];
+	static const int OCT_EXP[];
+	static const int OCT_LOG[];
 };
 
 #endif

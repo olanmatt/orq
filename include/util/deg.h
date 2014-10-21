@@ -22,10 +22,21 @@
  * SOFTWARE.
  */
 
-#include <catch.h>
-#include <util/Rand.h>
+#ifndef DEG_H
+#define DEG_H
 
-TEST_CASE( "Rand can be called and values are consistant", "[Rand]" ) {
+#include <algorithm>
+#include <cstdint>
+#include <stdexcept>
 
-	REQUIRE( Rand::rand(12345, 128, 54321) == 44030 );
-}
+class deg {
+
+	public:
+	static int generate(unsigned int v, int W);
+
+	private:
+	static const unsigned int table1[];
+	deg() { }; // Otherwise default constructor is generated
+};
+
+#endif

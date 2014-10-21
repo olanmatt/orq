@@ -123,7 +123,7 @@ uint16_t ParameterChecker::maxAllowedInterleaverLength(uint16_t symbSize) {
 }
 
 uint8_t ParameterChecker::symbolAlignmentValue() {
-	
+
 	return InternalConstants::Al;
 }
 
@@ -146,7 +146,7 @@ bool ParameterChecker::areValidFECParameters(uint64_t dataLen, uint16_t symbSize
 	if (isInterleaverLengthOutOfBounds(N)) {
 		return false;
 	}
-	
+
 	if (_areDataLengthAndSymbolSizeOutOfBounds(F, T)) {
 		return false;
 	}
@@ -321,12 +321,12 @@ uint64_t ParameterChecker::_maxAllowedDataLength(uint16_t T) {
 
 uint16_t ParameterChecker::_minAllowedSymbolSize(uint64_t F) {
 
-	return std::max(minSymbolSize(), (uint16_t)(ExtraMath::ceilDiv(F, InternalConstants::Kt_max)));
+	return std::max(minSymbolSize(), (uint16_t)(extra_math::ceil_div(F, InternalConstants::Kt_max)));
 }
 
 uint16_t ParameterChecker::_minAllowedNumSourceBlocks(uint16_t Kt) {
 
-	return std::max(minNumSourceBlocks(), (uint16_t)ExtraMath::ceilDiv(Kt, InternalConstants::K_max));
+	return std::max(minNumSourceBlocks(), (uint16_t)extra_math::ceil_div(Kt, InternalConstants::K_max));
 }
 
 uint16_t ParameterChecker::_maxAllowedNumSourceBlocks(uint16_t Kt) {
@@ -344,8 +344,8 @@ uint64_t ParameterChecker::_minAllowedDecodingBlockSize(uint64_t F, uint16_t T) 
 	int Kt = InternalFunctions::getTotalSymbols(F, T);
 
 	// TODO K_prime_min hardcoded to suppress linker error
-	//int Kprime = std::max(InternalConstants::K_prime_min, ExtraMath::ceilDiv(Kt, InternalConstants::Z_max));
-	int Kprime = std::max(10, ExtraMath::ceilDiv(Kt, InternalConstants::Z_max));
+	//int Kprime = std::max(InternalConstants::K_prime_min, extra_math::ceil_div(Kt, InternalConstants::Z_max));
+	int Kprime = std::max(10, extra_math::ceil_div(Kt, InternalConstants::Z_max));
 
 	return InternalFunctions::minWS(Kprime, T, InternalConstants::Al, InternalFunctions::topInterleaverLength(T));
 }

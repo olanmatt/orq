@@ -29,10 +29,10 @@
 #include <parameters/InternalFunctions.h>
 #include <parameters/ParameterChecker.h>
 #include <parameters/ParameterIO.h>
-#include <util/OctetOps.h>
+#include <util/octet_ops.h>
 
 class FECParameters {
-	
+
 	public:
 	static FECParameters newParameters(uint64_t dataLen, uint16_t symbSize, uint8_t numSrcBs);
 	static FECParameters newParameters(uint64_t dataLen, uint16_t symbSize, uint8_t numSrcBs, uint16_t interLen);

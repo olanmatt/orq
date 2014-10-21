@@ -22,15 +22,13 @@
  * SOFTWARE.
  */
 
-#include <catch.h>
-#include <Partition.h>
+#ifndef EXTRA_MATH_H
+#define EXTRA_MATH_H
 
-TEST_CASE( "Partition can be created, and values are valid", "[Partition]" ) {
+class extra_math {
 
-	Partition p = Partition(1337, 5);
+	public:
+	static int ceil_div(int num, int den);
+};
 
-	REQUIRE( p.IL() == 268 );
-	REQUIRE( p.IS() == 267 );
-	REQUIRE( p.JL() == 2 );
-	REQUIRE( p.JS() == 3 );
-}
+#endif

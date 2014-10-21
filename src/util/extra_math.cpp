@@ -22,23 +22,9 @@
  * SOFTWARE.
  */
 
-#ifndef PARTITION_H
-#define PARTITION_H
+#include <util/extra_math.h>
 
-class Partition {
+int extra_math::ceil_div(int num, int den) {
 
-	public:
-	Partition(unsigned int I, unsigned int J);
-	int IL();
-	int IS();
-	int JL();
-	int JS();
-
-	private:
-	int il;
-	int is;
-	int jl;
-	int js;
-};
-
-#endif
+	return (int)((num + (den - 1L)) / den);
+}

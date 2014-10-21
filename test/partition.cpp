@@ -22,28 +22,15 @@
  * SOFTWARE.
  */
 
-#include <Partition.h>
+#include <catch.h>
+#include <partition.h>
 
-// 4.4.1.2 Source Block and Sub-Block Partitioning
-Partition::Partition(unsigned int I, unsigned int J) {
-	il = (I + J - 1) / J; // ceil(I / J)
-	is = I / J; // floor(I / J)
-	jl = I - (is * J);
-	js = J - jl;
-}
+TEST_CASE( "Partition can be created, and values are valid", "[partition]" ) {
 
-int Partition::IL() {
-	return il;
-}
+	partition p = partition(1337, 5);
 
-int Partition::IS() {
-	return is;
-}
-
-int Partition::JL() {
-	return jl;
-}
-
-int Partition::JS() {
-	return js;
+	REQUIRE( p.IL() == 268 );
+	REQUIRE( p.IS() == 267 );
+	REQUIRE( p.JL() == 2 );
+	REQUIRE( p.JS() == 3 );
 }

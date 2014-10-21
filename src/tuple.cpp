@@ -27,12 +27,12 @@
 // 5.3.3.2 Source Symbol Tuples
 tuple::tuple(int k_prime, long x) {
 
-	int Ki = SystematicIndices::getKIndex(k_prime);
-	int S = SystematicIndices::S(Ki);
-	int H = SystematicIndices::H(Ki);
-	int W = SystematicIndices::W(Ki);
+	int Ki = systematic_indices::get_k_index(k_prime);
+	int S = systematic_indices::S(Ki);
+	int H = systematic_indices::H(Ki);
+	int W = systematic_indices::W(Ki);
 	int L = k_prime + S + H;
-	int J = SystematicIndices::J(Ki);
+	int J = systematic_indices::J(Ki);
 	int P = L - W;
 	long P1 = matrix_utilities::ceil_prime(P);
 
@@ -43,15 +43,15 @@ tuple::tuple(int k_prime, long x) {
 
 	long y = (B + x * A) % 4294967296L; // 2^^32
 
-	long v = Rand::rand(y, 0, 1048576L); // 2^^20
+	long v = rand::generate(y, 0, 1048576L); // 2^^20
 
-	d_ = Deg::generate(v, W);
-	a_ = 1 + Rand::rand(y, 1, W - 1);
-	b_ = Rand::rand(y, 2, W);
-	if (d_ < 4) d1_ = 2 + Rand::rand(x, 3, 2L);
+	d_ = deg::generate(v, W);
+	a_ = 1 + rand::generate(y, 1, W - 1);
+	b_ = rand::generate(y, 2, W);
+	if (d_ < 4) d1_ = 2 + rand::generate(x, 3, 2L);
 	else d1_ = 2;
-	a1_ = 1 + Rand::rand(x, 4, P1 - 1);
-	b1_ = Rand::rand(x, 5, P1);
+	a1_ = 1 + rand::generate(x, 4, P1 - 1);
+	b1_ = rand::generate(x, 5, P1);
 }
 
 long tuple::D() {

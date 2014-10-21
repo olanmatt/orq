@@ -22,53 +22,25 @@
  * SOFTWARE.
  */
 
-#include <util/Deg.h>
+#ifndef SYSTEMATICINDICES_H
+#define SYSTEMATICINDICES_H
 
-// 5.3.5.2 Degree Generator
-const unsigned int Deg::table1[] = {
-	0,
-	5243,
-	529531,
-	704294,
-	791675,
-	844104,
-	879057,
-	904023,
-	922747,
-	937311,
-	948962,
-	958494,
-	966438,
-	973160,
-	978921,
-	983914,
-	988283,
-	992138,
-	995565,
-	998631,
-	1001391,
-	1003887,
-	1006157,
-	1008229,
-	1010129,
-	1011876,
-	1013490,
-	1014983,
-	1016370,
-	1017662,
-	1048576
+#include <stdexcept>
+
+class systematic_indices {
+
+	public:
+	static unsigned int get_k_index(unsigned int k_prime);
+	static unsigned int K(unsigned int k_index);
+	static unsigned int J(unsigned int k_index);
+	static unsigned int S(unsigned int k_index);
+	static unsigned int H(unsigned int k_index);
+	static unsigned int W(unsigned int k_index);
+	static int ceil(unsigned int k_prime);
+	static int floor(unsigned int k_prime);
+
+	private:
+	static const unsigned int table2[][5];
 };
 
-int Deg::generate(unsigned int v, int W) {
-
-	for (int i = 0; i < 31; i++) {
-		if (v < table1[i]) {
-			return (std::min(i, W - 2));
-		}
-	}
-
-	throw std::runtime_error("Inconsistent table state");
-}
-
-
-
+#endif

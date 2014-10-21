@@ -25,10 +25,10 @@
 #ifndef INTERNALCONSTANTS_H
 #define INTERNALCONSTANTS_H
 
-#include <stdint.h>
+#include <cstdint>
 
 class InternalConstants {
-	
+
 	public:
     static const uint8_t Al = 1;
 

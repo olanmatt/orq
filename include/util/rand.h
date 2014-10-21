@@ -22,9 +22,22 @@
  * SOFTWARE.
  */
 
-#include <util/ExtraMath.h>
+#ifndef RAND_H
+#define RAND_H
 
-int ExtraMath::ceilDiv(int num, int den) {
+#include <cstdint>
+#include <stdexcept>
 
-	return (int)((num + (den - 1L)) / den);
-}
+class rand {
+
+	public:
+	static int generate(uint32_t y, uint8_t i, uint32_t m);
+
+	private:
+	static const uint32_t V0[];
+	static const uint32_t V1[];
+	static const uint32_t V2[];
+	static const uint32_t V3[];
+};
+
+#endif

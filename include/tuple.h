@@ -26,9 +26,9 @@
 #define TUPLE_H
 
 #include <matrix_utilities.h>
-#include <util/Deg.h>
-#include <util/Rand.h>
-#include <util/SystematicIndices.h>
+#include <util/deg.h>
+#include <util/rand.h>
+#include <util/systematic_indices.h>
 
 class tuple {
 

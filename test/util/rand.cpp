@@ -22,22 +22,10 @@
  * SOFTWARE.
  */
 
-#ifndef RAND_H
-#define RAND_H
+#include <catch.h>
+#include <util/rand.h>
 
-#include <stdexcept>
-#include <stdint.h>
+TEST_CASE( "Rand can be called and values are consistant", "[rand]" ) {
 
-class Rand {
-	
-	public:
-	static int rand(uint32_t y, uint8_t i, uint32_t m);
-
-	private:
-	static const uint32_t V0[];
-	static const uint32_t V1[];
-	static const uint32_t V2[];
-	static const uint32_t V3[];
-};
-
-#endif
+	REQUIRE( rand::generate(12345, 128, 54321) == 44030 );
+}
