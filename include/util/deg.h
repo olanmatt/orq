@@ -29,14 +29,15 @@
 #include <cstdint>
 #include <stdexcept>
 
-class deg {
+class deg
+{
 
-	public:
-	static int generate(unsigned int v, int W);
+public:
+    static int generate(unsigned int v, int W);
 
-	private:
-	static const unsigned int table1[];
-	deg() { }; // Otherwise default constructor is generated
+private:
+    static const unsigned int table1[];
+    deg() { }; // Otherwise default constructor is generated
 };
 
 #endif

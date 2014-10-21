@@ -25,7 +25,8 @@
 #include <catch.h>
 #include <util/rand.h>
 
-TEST_CASE( "Rand can be called and values are consistant", "[rand]" ) {
+TEST_CASE( "Rand can be called and values are consistant", "[rand]" )
+{
 
-	REQUIRE( rand::generate(12345, 128, 54321) == 44030 );
+    REQUIRE( rand::generate(12345, 128, 54321) == 44030 );
 }

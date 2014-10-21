@@ -25,20 +25,21 @@
 #ifndef PARTITION_H
 #define PARTITION_H
 
-class partition {
+class partition
+{
 
-	public:
-	partition(unsigned int I, unsigned int J);
-	int IL();
-	int IS();
-	int JL();
-	int JS();
+public:
+    partition(unsigned int I, unsigned int J);
+    int IL();
+    int IS();
+    int JL();
+    int JS();
 
-	private:
-	int IL_;
-	int IS_;
-	int JL_;
-	int JS_;
+private:
+    int IL_;
+    int IS_;
+    int JL_;
+    int JS_;
 };
 
 #endif

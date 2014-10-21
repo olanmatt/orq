@@ -24,25 +24,25 @@
 
 #include <row.h>
 
-row::row(int i, int r, int d, bool hdpc) {
-
-	position_ = i;
-	non_zeros_ = r;
-	original_degree_ = d;
-	nodes_ = std::set<int>();
-	is_hdpc_ = hdpc;
+row::row(int i, int r, int d, bool hdpc)
+{
+    position_ = i;
+    non_zeros_ = r;
+    original_degree_ = d;
+    nodes_ = std::set<int>();
+    is_hdpc_ = hdpc;
 }
 
-row::row(int i, int r, int d, bool hdpc, std::set<int> e) {
-
-	position_ = i;
-	non_zeros_ = r;
-	original_degree_ = d;
-	nodes_ = e;
-	is_hdpc_ = hdpc;
+row::row(int i, int r, int d, bool hdpc, std::set<int> e)
+{
+    position_ = i;
+    non_zeros_ = r;
+    original_degree_ = d;
+    nodes_ = e;
+    is_hdpc_ = hdpc;
 }
 
-bool row::operator==(const row& other) {
-
-	return other.position_ == this->position_;
+bool row::operator==(const row &other)
+{
+    return other.position_ == this->position_;
 }

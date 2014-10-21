@@ -25,11 +25,12 @@
 #ifndef MATRIX_UTILITIES_H
 #define MATRIX_UTILITIES_H
 
-class matrix_utilities {
+class matrix_utilities
+{
 
-	public:
-	static long ceil_prime(long p);
-	static bool is_prime(long n);
+public:
+    static long ceil_prime(long p);
+    static bool is_prime(long n);
 };
 
 #endif

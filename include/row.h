@@ -27,19 +27,20 @@
 
 #include <set>
 
-class row {
+class row
+{
 
-	public:
-	row(int i, int r, int d, bool hdpc);
-	row(int i, int r, int d, bool hdpc, std::set<int> e);
-	bool operator==(const row& other);
+public:
+    row(int i, int r, int d, bool hdpc);
+    row(int i, int r, int d, bool hdpc, std::set<int> e);
+    bool operator==(const row &other);
 
-	private:
-	int position_;
-	int non_zeros_;
-	int original_degree_;
-	std::set<int> nodes_;
-	bool is_hdpc_;
+private:
+    int position_;
+    int non_zeros_;
+    int original_degree_;
+    std::set<int> nodes_;
+    bool is_hdpc_;
 };
 
 #endif

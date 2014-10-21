@@ -25,55 +25,66 @@
 #include <tuple.h>
 
 // 5.3.3.2 Source Symbol Tuples
-tuple::tuple(int k_prime, long x) {
+tuple::tuple(int k_prime, long x)
+{
+    int Ki = systematic_indices::get_k_index(k_prime);
+    int S = systematic_indices::S(Ki);
+    int H = systematic_indices::H(Ki);
+    int W = systematic_indices::W(Ki);
+    int L = k_prime + S + H;
+    int J = systematic_indices::J(Ki);
+    int P = L - W;
+    long P1 = matrix_utilities::ceil_prime(P);
 
-	int Ki = systematic_indices::get_k_index(k_prime);
-	int S = systematic_indices::S(Ki);
-	int H = systematic_indices::H(Ki);
-	int W = systematic_indices::W(Ki);
-	int L = k_prime + S + H;
-	int J = systematic_indices::J(Ki);
-	int P = L - W;
-	long P1 = matrix_utilities::ceil_prime(P);
+    long A = 53591 + J * 997;
+    if (A % 2 == 0) {
+        A++;
+    }
 
-	long A = 53591 + J * 997;
-	if (A % 2 == 0) A++;
+    long B = 10267 * (J + 1);
 
-	long B = 10267 * (J + 1);
+    long y = (B + x * A) % 4294967296L;  // 2^^32
 
-	long y = (B + x * A) % 4294967296L; // 2^^32
+    long v = rand::generate(y, 0, 1048576L);  // 2^^20
 
-	long v = rand::generate(y, 0, 1048576L); // 2^^20
-
-	d_ = deg::generate(v, W);
-	a_ = 1 + rand::generate(y, 1, W - 1);
-	b_ = rand::generate(y, 2, W);
-	if (d_ < 4) d1_ = 2 + rand::generate(x, 3, 2L);
-	else d1_ = 2;
-	a1_ = 1 + rand::generate(x, 4, P1 - 1);
-	b1_ = rand::generate(x, 5, P1);
+    d_ = deg::generate(v, W);
+    a_ = 1 + rand::generate(y, 1, W - 1);
+    b_ = rand::generate(y, 2, W);
+    if (d_ < 4) {
+        d1_ = 2 + rand::generate(x, 3, 2L);
+    } else {
+        d1_ = 2;
+    }
+    a1_ = 1 + rand::generate(x, 4, P1 - 1);
+    b1_ = rand::generate(x, 5, P1);
 }
 
-long tuple::D() {
-	return d_;
+long tuple::D()
+{
+    return d_;
 }
 
-long tuple::A() {
-	return a_;
+long tuple::A()
+{
+    return a_;
 }
 
-long tuple::B() {
-	return b_;
+long tuple::B()
+{
+    return b_;
 }
 
-long tuple::D1() {
-	return d1_;
+long tuple::D1()
+{
+    return d1_;
 }
 
-long tuple::A1() {
-	return a1_;
+long tuple::A1()
+{
+    return a1_;
 }
 
-long tuple::B1() {
-	return b1_;
+long tuple::B1()
+{
+    return b1_;
 }

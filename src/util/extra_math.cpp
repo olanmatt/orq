@@ -24,7 +24,7 @@
 
 #include <util/extra_math.h>
 
-int extra_math::ceil_div(int num, int den) {
-
-	return (int)((num + (den - 1L)) / den);
+int extra_math::ceil_div(int num, int den)
+{
+    return (int)((num + (den - 1L)) / den);
 }

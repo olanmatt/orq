@@ -1,0 +1,13 @@
+--style=linux
+--suffix=none
+--indent=spaces=4
+--recursive
+--formatted
+--pad-oper
+--pad-header
+--align-pointer=name
+--align-reference=name
+--add-brackets
+--convert-tabs
+# --max-code-length=80
+# --exclude="include/catch.h"

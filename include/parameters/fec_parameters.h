@@ -28,12 +28,13 @@
 #include <parameters/internal_constants.h>
 #include <parameters/internal_functions.h>
 #include <parameters/ParameterChecker.h>
-#include <parameters/ParameterIO.h>
+#include <parameters/parameter_io.h>
 #include <util/octet_ops.h>
 
-class fec_parameters {
+class fec_parameters
+{
 
-    public:
+public:
     static fec_parameters new_parameters(uint64_t data_len,
                                          uint16_t symbol_size,
                                          uint8_t num_source_blocks);
@@ -48,10 +49,10 @@ class fec_parameters {
                                             uint64_t max_db_mem);
 
     static fec_parameters new_local_instance(uint64_t F,
-                                             uint16_t T,
-                                             uint8_t Z,
-                                             uint16_t N,
-                                             uint8_t Al);
+            uint16_t T,
+            uint8_t Z,
+            uint16_t N,
+            uint8_t Al);
     uint64_t data_length();
     uint16_t symbol_size();
     uint8_t num_source_blocks();
@@ -59,19 +60,19 @@ class fec_parameters {
     uint8_t symbol_alignment();
     uint16_t total_symbols();
 
-    private:
+private:
     static uint8_t derive_Z(uint16_t Kt,
-                           uint64_t WS,
-                           uint16_t T,
-                           uint8_t Al,
-                           uint16_t topN);
+                            uint64_t WS,
+                            uint16_t T,
+                            uint8_t Al,
+                            uint16_t topN);
 
     static int derive_N(uint16_t Kt,
-                       uint8_t Z,
-                       uint64_t WS,
-                       uint16_t T,
-                       uint8_t Al,
-                       uint16_t topN);
+                        uint8_t Z,
+                        uint64_t WS,
+                        uint16_t T,
+                        uint8_t Al,
+                        uint16_t topN);
 
     fec_parameters(uint64_t common_fec_oti, uint32_t scheme_spec_fec_oti);
     uint64_t common_fec_oti_;

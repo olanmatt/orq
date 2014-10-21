@@ -28,16 +28,17 @@
 #include <cstdint>
 #include <stdexcept>
 
-class rand {
+class rand
+{
 
-	public:
-	static int generate(uint32_t y, uint8_t i, uint32_t m);
+public:
+    static int generate(uint32_t y, uint8_t i, uint32_t m);
 
-	private:
-	static const uint32_t V0[];
-	static const uint32_t V1[];
-	static const uint32_t V2[];
-	static const uint32_t V3[];
+private:
+    static const uint32_t V0[];
+    static const uint32_t V1[];
+    static const uint32_t V2[];
+    static const uint32_t V3[];
 };
 
 #endif

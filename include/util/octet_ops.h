@@ -30,24 +30,25 @@
 
 typedef unsigned char byte_t;
 
-class octet_ops {
+class octet_ops
+{
 
-	public:
-	static byte_t getExp(int i);
-	static byte_t getLog(int i);
-	static byte_t addition(byte_t u, byte_t v);
-	static byte_t subtraction(byte_t u, byte_t v);
-	static byte_t product(byte_t u, byte_t v);
-	static byte_t division(byte_t u, byte_t v);
-	static byte_t alphaPower(int i);
-	static void betaProduct(byte_t beta, byte_t U[]);
-	static void betaDivision(byte_t U[], byte_t beta);
-	static void betaProduct(byte_t beta, byte_t U[], int pos, int length);
-	static void betaDivision(byte_t U[], byte_t beta, int pos, int length);
+public:
+    static byte_t getExp(int i);
+    static byte_t getLog(int i);
+    static byte_t addition(byte_t u, byte_t v);
+    static byte_t subtraction(byte_t u, byte_t v);
+    static byte_t product(byte_t u, byte_t v);
+    static byte_t division(byte_t u, byte_t v);
+    static byte_t alphaPower(int i);
+    static void betaProduct(byte_t beta, byte_t U[]);
+    static void betaDivision(byte_t U[], byte_t beta);
+    static void betaProduct(byte_t beta, byte_t U[], int pos, int length);
+    static void betaDivision(byte_t U[], byte_t beta, int pos, int length);
 
-	private:
-	static const int OCT_EXP[];
-	static const int OCT_LOG[];
+private:
+    static const int OCT_EXP[];
+    static const int OCT_LOG[];
 };
 
 #endif

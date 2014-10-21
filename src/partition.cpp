@@ -25,25 +25,30 @@
 #include <partition.h>
 
 // 4.4.1.2 Source Block and Sub-Block Partitioning
-partition::partition(unsigned int I, unsigned int J) {
-	IL_ = (I + J - 1) / J; // ceil(I / J)
-	IS_ = I / J; // floor(I / J)
-	JL_ = I - (IS_ * J);
-	JS_ = J - JL_;
+partition::partition(unsigned int I, unsigned int J)
+{
+    IL_ = (I + J - 1) / J;  // ceil(I / J)
+    IS_ = I / J;  // floor(I / J)
+    JL_ = I - (IS_ * J);
+    JS_ = J - JL_;
 }
 
-int partition::IL() {
-	return IL_;
+int partition::IL()
+{
+    return IL_;
 }
 
-int partition::IS() {
-	return IS_;
+int partition::IS()
+{
+    return IS_;
 }
 
-int partition::JL() {
-	return JL_;
+int partition::JL()
+{
+    return JL_;
 }
 
-int partition::JS() {
-	return JS_;
+int partition::JS()
+{
+    return JS_;
 }

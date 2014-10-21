@@ -27,9 +27,9 @@
 
 #include <cstdint>
 
-class internal_constants {
+namespace internal_constants
+{
 
-    public:
     static const uint8_t Al = 1;
     // "maximum number of symbols in each source block"
     static const uint16_t K_max = 56403;
@@ -45,7 +45,7 @@ class internal_constants {
     // "maximum transfer length of the object, in octets"
     static const uint64_t F_max = 946270874880LLU;
     // "maximum interleaver length, in number of sub-blocks"
-    static const uint16_t N_max = 1	/* K_max */;
+    static const uint16_t N_max = 1 /* K_max */;
     // TODO enable interleaving
 
     static const uint16_t K_min = 1;
@@ -69,7 +69,6 @@ class internal_constants {
 
     // third octet is reserved bits
     static const uint64_t common_oti_reserved_inverse_mask = 0xFFFFFFFFFF00FFFF;
-
 };
 
 #endif

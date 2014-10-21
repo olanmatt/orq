@@ -23,6 +23,7 @@
  */
 
 // Suppressing compile errors until main class is written
-int main() {
-	return 0;
+int main()
+{
+    return 0;
 }

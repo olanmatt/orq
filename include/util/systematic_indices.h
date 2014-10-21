@@ -27,20 +27,21 @@
 
 #include <stdexcept>
 
-class systematic_indices {
+class systematic_indices
+{
 
-	public:
-	static unsigned int get_k_index(unsigned int k_prime);
-	static unsigned int K(unsigned int k_index);
-	static unsigned int J(unsigned int k_index);
-	static unsigned int S(unsigned int k_index);
-	static unsigned int H(unsigned int k_index);
-	static unsigned int W(unsigned int k_index);
-	static int ceil(unsigned int k_prime);
-	static int floor(unsigned int k_prime);
+public:
+    static unsigned int get_k_index(unsigned int k_prime);
+    static unsigned int K(unsigned int k_index);
+    static unsigned int J(unsigned int k_index);
+    static unsigned int S(unsigned int k_index);
+    static unsigned int H(unsigned int k_index);
+    static unsigned int W(unsigned int k_index);
+    static int ceil(unsigned int k_prime);
+    static int floor(unsigned int k_prime);
 
-	private:
-	static const unsigned int table2[][5];
+private:
+    static const unsigned int table2[][5];
 };
 
 #endif

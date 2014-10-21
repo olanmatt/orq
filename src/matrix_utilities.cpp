@@ -25,30 +25,30 @@
 #include <matrix_utilities.h>
 
 // TODO replace with a lookup table
-long matrix_utilities::ceil_prime(long p) {
+long matrix_utilities::ceil_prime(long p)
+{
+    if (p == 1) {
+        p++;
+    }
 
-	if (p == 1) {
-		p++;
-	}
+    while (!is_prime(p)) {
+        p++;
+    }
 
-	while (!is_prime(p)) {
-		p++;
-	}
-
-	return p;
+    return p;
 }
 
-bool matrix_utilities::is_prime(long n) {
+bool matrix_utilities::is_prime(long n)
+{
+    if ((n & 1) == 0) {
+        return false;
+    }
 
-	if ((n & 1) == 0) {
-		return false;
-	}
+    for (long i = 3; i * i <= n; i += 2) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
 
-	for (long i = 3; i * i <= n; i += 2) {
-		if (n % i == 0) {
-			return false;
-		}
-	}
-
-	return true;
+    return true;
 }

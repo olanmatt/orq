@@ -26,19 +26,18 @@
 
 fec_parameters
 fec_parameters::new_parameters(uint64_t data_length,
-                              uint16_t symbol_size,
-                              uint8_t num_source_blocks)
+                               uint16_t symbol_size,
+                               uint8_t num_source_blocks)
 {
-	return new_parameters(data_length, symbol_size, num_source_blocks, 1);
+    return new_parameters(data_length, symbol_size, num_source_blocks, 1);
 }
 
 fec_parameters
 fec_parameters::new_parameters(uint64_t data_length,
-                              uint16_t symbol_size,
-                              uint8_t num_source_blocks,
-                              uint16_t interleaver_length)
+                               uint16_t symbol_size,
+                               uint8_t num_source_blocks,
+                               uint16_t interleaver_length)
 {
-
     uint64_t F = data_length;
     uint16_t T = symbol_size;
     uint8_t Z = num_source_blocks;
@@ -55,10 +54,9 @@ fec_parameters::new_parameters(uint64_t data_length,
 
 fec_parameters
 fec_parameters::derive_parameters(uint64_t data_length,
-                                 uint16_t payload_length,
-                                 uint64_t max_db_mem)
+                                  uint16_t payload_length,
+                                  uint64_t max_db_mem)
 {
-
     uint64_t F = data_length;
     uint16_t P = payload_length;
     uint64_t WS = max_db_mem;
@@ -87,18 +85,18 @@ fec_parameters::derive_Z(uint16_t Kt,
                          uint8_t Al,
                          uint16_t topN)
 {
-	int Kl = internal_functions::KL(WS, T, Al, topN);
-	return extra_math::ceil_div(Kt, Kl); // Z = ceil(Kt/KL(N_max))
+    int Kl = internal_functions::KL(WS, T, Al, topN);
+    return extra_math::ceil_div(Kt, Kl);  // Z = ceil(Kt/KL(N_max))
 }
 
 int
 fec_parameters::derive_N(uint16_t Kt,
-                        uint8_t Z,
-                        uint64_t WS,
-                        uint16_t T,
-                        uint8_t Al,
-                        uint16_t topN) {
-
+                         uint8_t Z,
+                         uint64_t WS,
+                         uint16_t T,
+                         uint8_t Al,
+                         uint16_t topN)
+{
     // N is the minimum n=1, ..., N_max such that ceil(Kt/Z) <= KL(n)
     int topK = extra_math::ceil_div(Kt, Z);
     for (int n = topN; n >= 1; n--) {
@@ -117,51 +115,50 @@ fec_parameters::new_local_instance(uint64_t F,
                                    uint16_t N,
                                    uint8_t Al)
 {
-
-    uint64_t common_fec_oti = ParameterIO::buildCommonFecOTI(F, T);
-    uint32_t scheme_spec_fec_oti = ParameterIO::buildSchemeSpecFecOTI(Z, N, Al);
+    uint64_t common_fec_oti = ParameterIO::build_common_fec_oti(F, T);
+    uint32_t scheme_spec_fec_oti = ParameterIO::build_scheme_spec_fec_oti(Z, N, Al);
     return fec_parameters(common_fec_oti, scheme_spec_fec_oti);
 }
 
 fec_parameters::fec_parameters(uint64_t common_fec_oti,
-                             uint32_t scheme_spec_fec_oti)
+                               uint32_t scheme_spec_fec_oti)
 {
     common_fec_oti_ = common_fec_oti;
     scheme_spec_fec_oti_ = scheme_spec_fec_oti;
 }
 
 uint64_t
-fec_parameters::data_length(void) {
-
-    return ParameterIO::extractDataLength(common_fec_oti_);
+fec_parameters::data_length(void)
+{
+    return ParameterIO::extract_data_length(common_fec_oti_);
 }
 
 uint16_t
-fec_parameters::symbol_size(void) {
-
-    return ParameterIO::extractSymbolSize(common_fec_oti_);
+fec_parameters::symbol_size(void)
+{
+    return ParameterIO::extract_symbol_size(common_fec_oti_);
 }
 
 uint8_t
-fec_parameters::num_source_blocks(void) {
-
-    return ParameterIO::extractNumSourceBlocks(scheme_spec_fec_oti_);
+fec_parameters::num_source_blocks(void)
+{
+    return ParameterIO::extract_num_source_blocks(scheme_spec_fec_oti_);
 }
 
 uint16_t
-fec_parameters::interleaver_length(void) {
-
-    return ParameterIO::extractInterleaverLength(scheme_spec_fec_oti_);
+fec_parameters::interleaver_length(void)
+{
+    return ParameterIO::extract_interleaver_length(scheme_spec_fec_oti_);
 }
 
 uint8_t
-fec_parameters::symbol_alignment(void) {
-
-    return ParameterIO::extractSymbolAlignment(scheme_spec_fec_oti_);
+fec_parameters::symbol_alignment(void)
+{
+    return ParameterIO::extract_symbol_alignment(scheme_spec_fec_oti_);
 }
 
 uint16_t
-fec_parameters::total_symbols(void) {
-
+fec_parameters::total_symbols(void)
+{
     return internal_functions::get_total_symbols(data_length(), symbol_size());
 }

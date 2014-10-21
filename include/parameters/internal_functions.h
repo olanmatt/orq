@@ -31,17 +31,18 @@
 #include <util/extra_math.h>
 #include <util/systematic_indices.h>
 
-class internal_functions {
+class internal_functions
+{
 
-	public:
-	static uint64_t get_possible_total_symbols(uint64_t F, uint16_t T);
-	static uint64_t get_total_symbols(uint64_t F, uint16_t T);
-	static uint16_t top_interleaver_length(uint16_t T);
-	static uint16_t KL(uint64_t WS, uint16_t T, uint8_t Al, uint16_t n);
-	static uint64_t min_WS(uint16_t Kprime, uint16_t T, uint8_t Al, uint16_t n);
+public:
+    static uint64_t get_possible_total_symbols(uint64_t F, uint16_t T);
+    static uint64_t get_total_symbols(uint64_t F, uint16_t T);
+    static uint16_t top_interleaver_length(uint16_t T);
+    static uint16_t KL(uint64_t WS, uint16_t T, uint8_t Al, uint16_t n);
+    static uint64_t min_WS(uint16_t Kprime, uint16_t T, uint8_t Al, uint16_t n);
 
-	private:
-	static uint16_t sub_symbol_size(uint16_t T, uint8_t Al, uint16_t n);
+private:
+    static uint16_t sub_symbol_size(uint16_t T, uint8_t Al, uint16_t n);
 };
 
 #endif

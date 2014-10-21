@@ -25,10 +25,11 @@
 #ifndef EXTRA_MATH_H
 #define EXTRA_MATH_H
 
-class extra_math {
+class extra_math
+{
 
-	public:
-	static int ceil_div(int num, int den);
+public:
+    static int ceil_div(int num, int den);
 };
 
 #endif

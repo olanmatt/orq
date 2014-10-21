@@ -30,19 +30,20 @@
 #include <util/rand.h>
 #include <util/systematic_indices.h>
 
-class tuple {
+class tuple
+{
 
-	public:
-	tuple(int k_prime, long x);
-	long D();
-	long A();
-	long B();
-	long D1();
-	long A1();
-	long B1();
+public:
+    tuple(int k_prime, long x);
+    long D();
+    long A();
+    long B();
+    long D1();
+    long A1();
+    long B1();
 
-	private:
-	long d_, a_, b_, d1_, a1_, b1_;
+private:
+    long d_, a_, b_, d1_, a1_, b1_;
 };
 
 #endif

@@ -24,18 +24,19 @@ CC ?= gcc
 GXX ?= g++
 SRCDIR := src
 TESTDIR := test
+INCDIR := include
 BUILDDIR := build
 TARGET := bin/orq
 TESTTARGET := bin/test
- 
+
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 TESTSOURCES := $(shell find $(TESTDIR) -type f -name "*.$(SRCEXT)")
 TESTOBJECTS := $(patsubst $(TESTDIR)/%,$(BUILDDIR)/$(TESTDIR)/%,$(TESTSOURCES:.$(SRCEXT)=.o))
 CFLAGS := -g -Wall -pedantic -std=c++0x
-LIB := 
-INC := -I include
+LIB :=
+INC := -I $(INCDIR)
 
 # make
 $(TARGET): $(OBJECTS)
@@ -58,9 +59,12 @@ $(BUILDDIR)/$(TESTDIR)/%.o: $(TESTDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
 	$(GXX) $(CFLAGS) $(INC) -c -o $@ $<
 
+astyle:
+	astyle --options=.astylerc "$(SRCDIR)/*.cpp" "$(INCDIR)/*.h" "$(TESTDIR)/*.cpp"
+
 # make clean
 .PHONY: clean
 clean:
-	@echo " Cleaning..."; 
+	@echo " Cleaning...";
 	$(RM) -r $(BUILDDIR) $(TARGET) $(TESTTARGET)
 
