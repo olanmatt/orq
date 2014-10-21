@@ -22,32 +22,39 @@
  * SOFTWARE.
  */
 
-#ifndef INTERNALCONSTANTS_H
-#define INTERNALCONSTANTS_H
+#ifndef INTERNAL_CONSTANTS_H
+#define INTERNAL_CONSTANTS_H
 
 #include <stdint.h>
 
-class InternalConstants {
-	
-	public:
-    static const uint8_t Al = 1;
+class internal_constants {
 
-    static const uint16_t K_max = 56403;					// "maximum number of symbols in each source block"
-    static const uint16_t Z_max = 256;					// "maximum number of source blocks"
+    public:
+    static const uint8_t Al = 1;
+    // "maximum number of symbols in each source block"
+    static const uint16_t K_max = 56403;
+    // "maximum number of source blocks"
+    static const uint16_t Z_max = 256;
     // static const int Kt_max = K_max * Z_max;
-    static const uint32_t Kt_max = 14439168;				// "maximum number of symbols"
+    // "maximum number of symbols"
+    static const uint32_t Kt_max = 14439168;
     // static const int T_max = (65535 / Al) * Al;
-    static const uint16_t T_max = 65535;					// "maximum symbol size, in octets"
+    // "maximum symbol size, in octets"
+    static const uint16_t T_max = 65535;
     // static const uint64_t F_max = Kt_max * T_max;
-    static const uint64_t F_max = 946270874880LLU;	// "maximum transfer length of the object, in octets"
-    static const uint16_t N_max = 1	/* K_max */;		// "maximum interleaver length, in number of sub-blocks"
+    // "maximum transfer length of the object, in octets"
+    static const uint64_t F_max = 946270874880LLU;
+    // "maximum interleaver length, in number of sub-blocks"
+    static const uint16_t N_max = 1	/* K_max */;
     // TODO enable interleaving
 
     static const uint16_t K_min = 1;
-    static const uint16_t K_prime_min = 10;  // the first K' value in the systematic indices table
+    // the first K' value in the systematic indices table
+    static const uint16_t K_prime_min = 10;
     static const uint16_t Z_min = 1;
     static const uint8_t T_min = Al;
-    static const uint64_t F_min = 1; // RFC 6330 defines F as a non-negative value, but we force a positive value here
+    // RFC 6330 defines F as a non-negative value, but we force a positive value here
+    static const uint64_t F_min = 1;
     static const uint16_t N_min = 1;
 
     static const uint8_t SBN_max = 255;
@@ -56,13 +63,13 @@ class InternalConstants {
     static const uint8_t SBN_min = 0;
     static const uint32_t ESI_min = 0;
 
-	// TODO convert to stdint.h
+    // TODO convert to stdint.h
     static const int F_num_bytes = 5;
     static const int ESI_num_bytes = 3;
 
-    static const uint64_t common_OTI_reserved_inverse_mask = 0xFFFFFFFFFF00FFFF; // third octet is reserved bits
+    // third octet is reserved bits
+    static const uint64_t common_oti_reserved_inverse_mask = 0xFFFFFFFFFF00FFFF;
 
-	private:
 };
 
 #endif

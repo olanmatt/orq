@@ -66,7 +66,7 @@ uint8_t ParameterIO::extractSymbolAlignment(uint32_t schemeSpecFecOTI) {
 
 int ParameterIO::sourceBlockNumberShift() {
 
-	return InternalConstants::ESI_num_bytes * sizeof(uint8_t) * 8;
+	return internal_constants::ESI_num_bytes * sizeof(uint8_t) * 8;
 }
 
 uint8_t ParameterIO::extractSourceBlockNumber(uint32_t fecPayloadID) {
@@ -86,7 +86,7 @@ uint64_t ParameterIO::buildCommonFecOTI(uint64_t dataLen, uint16_t symbolSize) {
 
 uint64_t ParameterIO::canonicalizeCommonFecOTI(uint64_t commonFecOTI) {
 
-	return commonFecOTI & InternalConstants::common_OTI_reserved_inverse_mask;
+	return commonFecOTI & internal_constants::common_oti_reserved_inverse_mask;
 }
 
 uint32_t ParameterIO::buildSchemeSpecFecOTI(uint8_t numSrcBs, uint16_t interLen, uint8_t sAlign) {

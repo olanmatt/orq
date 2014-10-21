@@ -26,12 +26,12 @@
 
 uint64_t ParameterChecker::minDataLength() {
 
-	return InternalConstants::F_min;
+	return internal_constants::F_min;
 }
 
 uint64_t ParameterChecker::maxDataLength() {
 
-	return InternalConstants::F_max;
+	return internal_constants::F_max;
 }
 
 bool ParameterChecker::isDataLengthOutOfBounds(uint64_t dataLen) {
@@ -47,12 +47,12 @@ uint64_t ParameterChecker::maxAllowedDataLength(uint16_t symbSize) {
 
 uint16_t ParameterChecker::minSymbolSize() {
 
-	return InternalConstants::T_min;
+	return internal_constants::T_min;
 }
 
 uint16_t ParameterChecker::maxSymbolSize() {
 
-	return InternalConstants::T_max;
+	return internal_constants::T_max;
 }
 
 bool ParameterChecker::isSymbolSizeOutOfBounds(uint16_t symbSize) {
@@ -68,12 +68,12 @@ uint16_t ParameterChecker::minAllowedSymbolSize(uint64_t dataLen) {
 
 uint16_t ParameterChecker::minNumSourceBlocks() {
 
-	return InternalConstants::Z_min;
+	return internal_constants::Z_min;
 }
 
 uint16_t ParameterChecker::maxNumSourceBlocks() {
 
-	return InternalConstants::Z_max;
+	return internal_constants::Z_max;
 }
 
 bool ParameterChecker::isNumSourceBlocksOutOfBounds(uint8_t numSrcBs) {
@@ -103,12 +103,12 @@ uint8_t ParameterChecker::maxAllowedNumSourceBlocks(uint64_t dataLen, uint16_t s
 
 uint16_t ParameterChecker::minInterleaverLength() {
 
-	return InternalConstants::N_min;
+	return internal_constants::N_min;
 }
 
 uint16_t ParameterChecker::maxInterleaverLength() {
 
-	return InternalConstants::N_max;
+	return internal_constants::N_max;
 }
 
 bool ParameterChecker::isInterleaverLengthOutOfBounds(uint16_t interLen) {
@@ -123,8 +123,8 @@ uint16_t ParameterChecker::maxAllowedInterleaverLength(uint16_t symbSize) {
 }
 
 uint8_t ParameterChecker::symbolAlignmentValue() {
-	
-	return InternalConstants::Al;
+
+	return internal_constants::Al;
 }
 
 bool ParameterChecker::areValidFECParameters(uint64_t dataLen, uint16_t symbSize, uint8_t numSrcBs, uint16_t interLen) {
@@ -146,7 +146,7 @@ bool ParameterChecker::areValidFECParameters(uint64_t dataLen, uint16_t symbSize
 	if (isInterleaverLengthOutOfBounds(N)) {
 		return false;
 	}
-	
+
 	if (_areDataLengthAndSymbolSizeOutOfBounds(F, T)) {
 		return false;
 	}
@@ -246,12 +246,12 @@ bool ParameterChecker::areValidDeriverParameters(uint64_t dataLen, uint16_t payL
 
 uint8_t ParameterChecker::minSourceBlockNumber() {
 
-	return InternalConstants::SBN_min;
+	return internal_constants::SBN_min;
 }
 
 uint8_t ParameterChecker::maxSourceBlockNumber() {
 
-	return InternalConstants::SBN_max;
+	return internal_constants::SBN_max;
 }
 
 bool ParameterChecker::isSourceBlockNumberOutOfBounds(uint8_t sbn) {
@@ -261,12 +261,12 @@ bool ParameterChecker::isSourceBlockNumberOutOfBounds(uint8_t sbn) {
 
 uint32_t ParameterChecker::minEncodingSymbolID() {
 
-	return InternalConstants::ESI_min;
+	return internal_constants::ESI_min;
 }
 
 uint32_t ParameterChecker::maxEncodingSymbolID() {
 
-	return InternalConstants::ESI_max;
+	return internal_constants::ESI_max;
 }
 
 bool ParameterChecker::isEncodingSymbolIDOutOfBounds(uint32_t esi) {
@@ -278,7 +278,7 @@ bool ParameterChecker::isValidFECPayloadID(uint8_t sbn, uint32_t esi, uint8_t nu
 
 	_checkNumSourceBlocksOutOfBounds(numSrcBs);
 
-	if (sbn < InternalConstants::SBN_min || sbn >= numSrcBs) {
+	if (sbn < internal_constants::SBN_min || sbn >= numSrcBs) {
 		return false;
 	}
 	if (isEncodingSymbolIDOutOfBounds(esi)) {
@@ -290,12 +290,12 @@ bool ParameterChecker::isValidFECPayloadID(uint8_t sbn, uint32_t esi, uint8_t nu
 
 uint16_t ParameterChecker::minNumSourceSymbolsPerBlock() {
 
-	return InternalConstants::K_min;
+	return internal_constants::K_min;
 }
 
 uint16_t ParameterChecker::maxNumSourceSymbolsPerBlock() {
 
-	return InternalConstants::K_max;
+	return internal_constants::K_max;
 }
 
 bool ParameterChecker::isNumSourceSymbolsPerBlockOutOfBounds(uint16_t numSrcSymbs) {
@@ -316,17 +316,17 @@ uint32_t ParameterChecker::numRepairSymbolsPerBlock(uint16_t numSrcSymbs) {
 
 uint64_t ParameterChecker::_maxAllowedDataLength(uint16_t T) {
 
-	return std::min(maxDataLength(), (uint64_t)(T * InternalConstants::Kt_max));
+	return std::min(maxDataLength(), (uint64_t)(T * internal_constants::Kt_max));
 }
 
 uint16_t ParameterChecker::_minAllowedSymbolSize(uint64_t F) {
 
-	return std::max(minSymbolSize(), (uint16_t)(ExtraMath::ceilDiv(F, InternalConstants::Kt_max)));
+	return std::max(minSymbolSize(), (uint16_t)(ExtraMath::ceilDiv(F, internal_constants::Kt_max)));
 }
 
 uint16_t ParameterChecker::_minAllowedNumSourceBlocks(uint16_t Kt) {
 
-	return std::max(minNumSourceBlocks(), (uint16_t)ExtraMath::ceilDiv(Kt, InternalConstants::K_max));
+	return std::max(minNumSourceBlocks(), (uint16_t)ExtraMath::ceilDiv(Kt, internal_constants::K_max));
 }
 
 uint16_t ParameterChecker::_maxAllowedNumSourceBlocks(uint16_t Kt) {
@@ -336,7 +336,7 @@ uint16_t ParameterChecker::_maxAllowedNumSourceBlocks(uint16_t Kt) {
 
 uint16_t ParameterChecker::_maxAllowedInterleaverLength(uint16_t T) {
 
-	return std::min(maxInterleaverLength(), (uint16_t)(T / InternalConstants::Al));
+	return std::min(maxInterleaverLength(), (uint16_t)(T / internal_constants::Al));
 }
 
 uint64_t ParameterChecker::_minAllowedDecodingBlockSize(uint64_t F, uint16_t T) {
@@ -344,25 +344,25 @@ uint64_t ParameterChecker::_minAllowedDecodingBlockSize(uint64_t F, uint16_t T) 
 	int Kt = InternalFunctions::getTotalSymbols(F, T);
 
 	// TODO K_prime_min hardcoded to suppress linker error
-	//int Kprime = std::max(InternalConstants::K_prime_min, ExtraMath::ceilDiv(Kt, InternalConstants::Z_max));
-	int Kprime = std::max(10, ExtraMath::ceilDiv(Kt, InternalConstants::Z_max));
+	//int Kprime = std::max(internal_constants::K_prime_min, ExtraMath::ceilDiv(Kt, internal_constants::Z_max));
+	int Kprime = std::max(10, ExtraMath::ceilDiv(Kt, internal_constants::Z_max));
 
-	return InternalFunctions::minWS(Kprime, T, InternalConstants::Al, InternalFunctions::topInterleaverLength(T));
+	return InternalFunctions::minWS(Kprime, T, internal_constants::Al, InternalFunctions::topInterleaverLength(T));
 }
 
 uint64_t ParameterChecker::_maxAllowedDataLength(uint16_t T, uint64_t WS) {
 
 	long boundFromT = _maxAllowedDataLength(T);
 
-	int KL = InternalFunctions::KL(WS, T, InternalConstants::Al, InternalFunctions::topInterleaverLength(T));
-	long boundFromWS = (long)InternalConstants::Z_max * KL * T;
+	int KL = InternalFunctions::KL(WS, T, internal_constants::Al, InternalFunctions::topInterleaverLength(T));
+	long boundFromWS = (long)internal_constants::Z_max * KL * T;
 
 	return std::min(boundFromT, boundFromWS);
 }
 
 bool ParameterChecker::_areDataLengthAndSymbolSizeOutOfBounds(uint64_t F, uint16_t T) {
 
-	return InternalFunctions::getPossibleTotalSymbols(F, T) > InternalConstants::Kt_max;
+	return InternalFunctions::getPossibleTotalSymbols(F, T) > internal_constants::Kt_max;
 }
 
 bool ParameterChecker::_areDataLengthAndPayloadLengthOutOfBounds(uint64_t F, uint16_t P) {

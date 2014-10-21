@@ -25,7 +25,7 @@
 #ifndef FEC_PARAMETERS_H
 #define FEC_PARAMETERS_H
 
-#include <parameters/InternalConstants.h>
+#include <parameters/internal_constants.h>
 #include <parameters/InternalFunctions.h>
 #include <parameters/ParameterChecker.h>
 #include <parameters/ParameterIO.h>

@@ -26,13 +26,13 @@
 #define INTERNALFUNCTIONS_H
 
 #include <algorithm>
-#include <parameters/InternalConstants.h>
+#include <parameters/internal_constants.h>
 #include <stdint.h>
 #include <util/ExtraMath.h>
 #include <util/SystematicIndices.h>
 
 class InternalFunctions {
-	
+
 	public:
 	static uint64_t getPossibleTotalSymbols(uint64_t F, uint16_t T);
 	static uint64_t getTotalSymbols(uint64_t F, uint16_t T);

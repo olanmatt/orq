@@ -35,7 +35,7 @@ uint64_t InternalFunctions::getTotalSymbols(uint64_t F, uint16_t T) {
 }
 
 uint16_t InternalFunctions::topInterleaverLength(uint16_t T) {
-	
+
 	uint16_t SStimesAl = T;
 
 	return T / SStimesAl;
@@ -43,7 +43,7 @@ uint16_t InternalFunctions::topInterleaverLength(uint16_t T) {
 
 uint16_t InternalFunctions::KL(uint64_t WS, uint16_t T, uint8_t Al, uint16_t n) {
 
-	uint16_t K_upper_bound = (uint16_t)std::min((uint16_t)InternalConstants::K_max, (uint16_t) (WS / subSymbolSize(T, Al, n)));
+	uint16_t K_upper_bound = (uint16_t)std::min((uint16_t)internal_constants::K_max, (uint16_t) (WS / subSymbolSize(T, Al, n)));
 	return SystematicIndices::floor(K_upper_bound);
 }
 

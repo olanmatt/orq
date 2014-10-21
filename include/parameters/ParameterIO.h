@@ -25,11 +25,11 @@
 #ifndef PARAMETERIO_H
 #define PARAMETERIO_H
 
-#include <parameters/InternalConstants.h>
+#include <parameters/internal_constants.h>
 #include <stdint.h>
 
 class ParameterIO {
-	
+
 	public:
 	static uint64_t extractDataLength(uint64_t commonFecOTI);
 	static uint16_t extractSymbolSize(uint64_t commonFecOTI);
