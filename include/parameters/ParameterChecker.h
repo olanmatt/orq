@@ -22,17 +22,16 @@
  * SOFTWARE.
  */
 
-#ifndef PARAMETERCHECKER_H
-#define PARAMETERCHECKER_H
+#ifndef INCLUDE_PARAMETERS_PARAMETERCHECKER_H_
+#define INCLUDE_PARAMETERS_PARAMETERCHECKER_H_
 
-#include <algorithm>
 #include <parameters/internal_constants.h>
 #include <parameters/internal_functions.h>
 #include <util/extra_math.h>
+#include <algorithm>
 
 class ParameterChecker
 {
-
 public:
     static uint64_t minDataLength();
     static uint64_t maxDataLength();
@@ -52,7 +51,8 @@ public:
     static bool isInterleaverLengthOutOfBounds(uint16_t interLen);
     static uint16_t maxAllowedInterleaverLength(uint16_t symbSize);
     static uint8_t symbolAlignmentValue();
-    static bool areValidFECParameters(uint64_t dataLen, uint16_t symbSize, uint8_t numSrcBs, uint16_t interLen);
+    static bool areValidFECParameters(uint64_t dataLen, uint16_t symbSize,
+                                      uint8_t numSrcBs, uint16_t interLen);
     static uint16_t minPayloadLength();
     static uint16_t maxPayloadLength();
     static bool isPayloadLengthOutOfBounds(uint16_t payLen);
@@ -60,7 +60,8 @@ public:
     static uint64_t minDecodingBlockSize();
     static uint64_t minAllowedDecodingBlockSize(uint64_t dataLen, uint16_t payLen);
     static uint64_t maxAllowedDataLength(uint16_t payLen, uint64_t maxDBMem);
-    static bool areValidDeriverParameters(uint64_t dataLen, uint16_t payLen, uint64_t maxDBMem);
+    static bool areValidDeriverParameters(uint64_t dataLen, uint16_t payLen,
+                                          uint64_t maxDBMem);
     static uint8_t minSourceBlockNumber();
     static uint8_t maxSourceBlockNumber();
     static bool isSourceBlockNumberOutOfBounds(uint8_t sbn);
@@ -93,4 +94,4 @@ private:
     static void _checkNumSourceSymbolsPerBlockOutOfBounds(uint16_t K);
 };
 
-#endif
+#endif  // INCLUDE_PARAMETERS_PARAMETERCHECKER_H_

@@ -25,7 +25,7 @@
 #include <util/octet_ops.h>
 
 // 5.7.3 The Table OCT_EXP
-const int octet_ops::OCT_EXP[] = {
+const int octet_ops::m_OCT_EXP[] = {
     1, 2, 4, 8, 16, 32, 64, 128, 29, 58, 116, 232, 205, 135, 19, 38, 76,
     152, 45, 90, 180, 117, 234, 201, 143, 3, 6, 12, 24, 48, 96, 192, 157,
     39, 78, 156, 37, 74, 148, 53, 106, 212, 181, 119, 238, 193, 159, 35,
@@ -64,7 +64,7 @@ const int octet_ops::OCT_EXP[] = {
 };
 
 // 5.7.4 The Table OCT_LOG
-const int octet_ops::OCT_LOG[] = {
+const int octet_ops::m_OCT_LOG[] = {
     0, 1, 25, 2, 50, 26, 198, 3, 223, 51, 238, 27, 104, 199, 75, 4, 100,
     224, 14, 52, 141, 239, 129, 28, 193, 105, 248, 200, 8, 76, 113, 5,
     138, 101, 47, 225, 36, 15, 33, 53, 147, 142, 218, 240, 18, 130, 69,
@@ -86,35 +86,35 @@ const int octet_ops::OCT_LOG[] = {
 };
 
 // 5.7.2 Arithmetic Operations on Octets
-byte_t octet_ops::getExp(int i)
+uint8_t octet_ops::getExp(int i)
 {
-    return OCT_EXP[i];
+    return m_OCT_EXP[i];
 }
 
-byte_t octet_ops::getLog(int i)
+uint8_t octet_ops::getLog(int i)
 {
-    return OCT_LOG[i - 1];
+    return m_OCT_LOG[i - 1];
 }
 
-byte_t octet_ops::addition(byte_t u, byte_t v)
+uint8_t octet_ops::addition(uint8_t u, uint8_t v)
 {
-    return (byte_t)(u ^ v);
+    return (uint8_t)(u ^ v);
 }
 
-byte_t octet_ops::subtraction(byte_t u, byte_t v)
+uint8_t octet_ops::subtraction(uint8_t u, uint8_t v)
 {
     return addition(u, v);
 }
 
-byte_t octet_ops::product(byte_t u, byte_t v)
+uint8_t octet_ops::product(uint8_t u, uint8_t v)
 {
     if (u == 0 || v == 0) {
         return 0;
     }
-    return (byte_t)getExp(getLog(u) + getLog(v));
+    return (uint8_t)getExp(getLog(u) + getLog(v));
 }
 
-byte_t octet_ops::division(byte_t u, byte_t v)
+uint8_t octet_ops::division(uint8_t u, uint8_t v)
 {
     if (v == 0) {
         throw std::invalid_argument("Denominator cannot be 0.");
@@ -122,18 +122,17 @@ byte_t octet_ops::division(byte_t u, byte_t v)
     if (u == 0) {
         return 0;
     }
-    return (byte_t)getExp((getLog(u) - getLog(v)) + 255);
+    return (uint8_t)getExp((getLog(u) - getLog(v)) + 255);
 }
 
-byte_t octet_ops::alphaPower(int i)
+uint8_t octet_ops::alphaPower(int i)
 {
     return getExp(i);
 }
 
 // 5.7.5 Operations on Symbols
-// TODO(pbhandari): Convert byte_t arrays to vectors.
-// TODO(pbhandari): Contert byte_t to uint8_t.
-void octet_ops::betaProduct(byte_t beta, byte_t *U)
+// TODO(pbhandari): Convert uint8_t arrays to vectors.
+void octet_ops::betaProduct(uint8_t beta, uint8_t *U)
 {
     // TODO(pbhandari): Check that U != null and length of U > 0.
     if (beta == 1) {
@@ -144,7 +143,7 @@ void octet_ops::betaProduct(byte_t beta, byte_t *U)
     }
 }
 
-void octet_ops::betaDivision(byte_t *U, byte_t beta)
+void octet_ops::betaDivision(uint8_t *U, uint8_t beta)
 {
     // TODO(pbhandari): Check that U != null and length of U > 0.
     if (beta == 1) {
@@ -155,7 +154,7 @@ void octet_ops::betaDivision(byte_t *U, byte_t beta)
     }
 }
 
-void octet_ops::betaProduct(byte_t beta, byte_t U[], int pos, int length)
+void octet_ops::betaProduct(uint8_t beta, uint8_t U[], int pos, int length)
 {
     // TODO(pbhandari): Check that U != null and length of U > 0.
     if (beta == 1) {
@@ -166,7 +165,7 @@ void octet_ops::betaProduct(byte_t beta, byte_t U[], int pos, int length)
     }
 }
 
-void octet_ops::betaDivision(byte_t U[], byte_t beta, int pos, int length)
+void octet_ops::betaDivision(uint8_t U[], uint8_t beta, int pos, int length)
 {
     // TODO(pbhandari): Check that U != null and length of U > 0.
     if (beta == 1) {

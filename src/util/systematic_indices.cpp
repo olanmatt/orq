@@ -25,7 +25,7 @@
 #include <util/systematic_indices.h>
 
 // 5.6 Systematic Indicies and Other Parameters
-const unsigned int systematic_indices::table2[][5] = {
+const unsigned int systematic_indices::m_table2[][5] = {
     {10, 254, 7, 10, 17},
     {12, 630, 7, 10, 19},
     {18, 682, 11, 10, 29},
@@ -525,27 +525,27 @@ unsigned int systematic_indices::get_k_index(unsigned int k_prime)
 
 unsigned int systematic_indices::K(unsigned int k_index)
 {
-    return table2[k_index][0];
+    return m_table2[k_index][0];
 }
 
 unsigned int systematic_indices::J(unsigned int k_index)
 {
-    return table2[k_index][1];
+    return m_table2[k_index][1];
 }
 
 unsigned int systematic_indices::S(unsigned int k_index)
 {
-    return table2[k_index][2];
+    return m_table2[k_index][2];
 }
 
 unsigned int systematic_indices::H(unsigned int k_index)
 {
-    return table2[k_index][3];
+    return m_table2[k_index][3];
 }
 
 unsigned int systematic_indices::W(unsigned int k_index)
 {
-    return table2[k_index][4];
+    return m_table2[k_index][4];
 }
 
 int systematic_indices::ceil(unsigned int k_prime)

@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-#ifndef ROW_H
-#define ROW_H
+#ifndef INCLUDE_ROW_H_
+#define INCLUDE_ROW_H_
 
 #include <set>
 
 class row
 {
-
 public:
     row(int i, int r, int d, bool hdpc);
     row(int i, int r, int d, bool hdpc, std::set<int> e);
@@ -43,4 +42,4 @@ private:
     bool m_is_hdpc;
 };
 
-#endif
+#endif  // INCLUDE_ROW_H_

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-#ifndef TUPLE_H
-#define TUPLE_H
+#ifndef INCLUDE_TUPLE_H_
+#define INCLUDE_TUPLE_H_
 
 #include <matrix_utilities.h>
 #include <util/deg.h>
@@ -32,7 +32,6 @@
 
 class tuple
 {
-
 public:
     tuple(int k_prime, long x);
     long D();
@@ -46,4 +45,4 @@ private:
     long m_d, m_a, m_b, m_d1, m_a1, m_b1;
 };
 
-#endif
+#endif  // INCLUDE_TUPLE_H_

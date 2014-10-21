@@ -22,15 +22,14 @@
  * SOFTWARE.
  */
 
-#ifndef MATRIX_UTILITIES_H
-#define MATRIX_UTILITIES_H
+#ifndef INCLUDE_MATRIX_UTILITIES_H_
+#define INCLUDE_MATRIX_UTILITIES_H_
 
 class matrix_utilities
 {
-
 public:
     static long ceil_prime(long p);
     static bool is_prime(long n);
 };
 
-#endif
+#endif  // INCLUDE_MATRIX_UTILITIES_H_

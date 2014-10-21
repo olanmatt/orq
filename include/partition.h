@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-#ifndef PARTITION_H
-#define PARTITION_H
+#ifndef INCLUDE_PARTITION_H_
+#define INCLUDE_PARTITION_H_
 
 class partition
 {
-
 public:
     partition(unsigned int I, unsigned int J);
     int IL();
@@ -42,4 +41,4 @@ private:
     int m_JS;
 };
 
-#endif
+#endif  // INCLUDE_PARTITION_H_

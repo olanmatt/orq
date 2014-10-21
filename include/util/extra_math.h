@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-#ifndef EXTRA_MATH_H
-#define EXTRA_MATH_H
+#ifndef INCLUDE_UTIL_EXTRA_MATH_H_
+#define INCLUDE_UTIL_EXTRA_MATH_H_
 
 class extra_math
 {
-
 public:
     static int ceil_div(int num, int den);
 };
 
-#endif
+#endif  // INCLUDE_UTIL_EXTRA_MATH_H_

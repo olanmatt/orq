@@ -25,7 +25,7 @@
 #include <util/deg.h>
 
 // 5.3.5.2 Degree Generator
-const unsigned int deg::table1[] = {
+const unsigned int deg::m_table1[] = {
     0,
     5243,
     529531,
@@ -62,7 +62,7 @@ const unsigned int deg::table1[] = {
 int deg::generate(unsigned int v, int W)
 {
     for (int i = 0; i < 31; i++) {
-        if (v < table1[i]) {
+        if (v < m_table1[i]) {
             return (std::min(i, W - 2));
         }
     }

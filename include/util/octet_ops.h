@@ -22,33 +22,30 @@
  * SOFTWARE.
  */
 
-#ifndef OCTETOPS_H
-#define OCTETOPS_H
+#ifndef INCLUDE_UTIL_OCTET_OPS_H_
+#define INCLUDE_UTIL_OCTET_OPS_H_
 
 #include <cstdint>
 #include <stdexcept>
 
-typedef unsigned char byte_t;
-
 class octet_ops
 {
-
 public:
-    static byte_t getExp(int i);
-    static byte_t getLog(int i);
-    static byte_t addition(byte_t u, byte_t v);
-    static byte_t subtraction(byte_t u, byte_t v);
-    static byte_t product(byte_t u, byte_t v);
-    static byte_t division(byte_t u, byte_t v);
-    static byte_t alphaPower(int i);
-    static void betaProduct(byte_t beta, byte_t U[]);
-    static void betaDivision(byte_t U[], byte_t beta);
-    static void betaProduct(byte_t beta, byte_t U[], int pos, int length);
-    static void betaDivision(byte_t U[], byte_t beta, int pos, int length);
+    static uint8_t getExp(int i);
+    static uint8_t getLog(int i);
+    static uint8_t addition(uint8_t u, uint8_t v);
+    static uint8_t subtraction(uint8_t u, uint8_t v);
+    static uint8_t product(uint8_t u, uint8_t v);
+    static uint8_t division(uint8_t u, uint8_t v);
+    static uint8_t alphaPower(int i);
+    static void betaProduct(uint8_t beta, uint8_t U[]);
+    static void betaDivision(uint8_t U[], uint8_t beta);
+    static void betaProduct(uint8_t beta, uint8_t U[], int pos, int length);
+    static void betaDivision(uint8_t U[], uint8_t beta, int pos, int length);
 
 private:
-    static const int OCT_EXP[];
-    static const int OCT_LOG[];
+    static const int m_OCT_EXP[];
+    static const int m_OCT_LOG[];
 };
 
-#endif
+#endif  // INCLUDE_UTIL_OCTET_OPS_H_

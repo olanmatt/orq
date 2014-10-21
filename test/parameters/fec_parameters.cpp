@@ -25,15 +25,15 @@
 #include <catch.h>
 #include <parameters/fec_parameters.h>
 
-TEST_CASE( "fec_parameters can be created, encoded into OTIs, then restored",
-           "[fec_parameters]" )
+TEST_CASE("fec_parameters can be created, encoded into OTIs, then restored",
+          "[fec_parameters]")
 {
     fec_parameters f = fec_parameters::new_parameters(1024, 16, 64);
 
-    REQUIRE( f.data_length() == 1024LLU );
-    REQUIRE( f.symbol_size() == 16 );
-    REQUIRE( f.num_source_blocks() == 64 );
-    REQUIRE( f.interleaver_length() == 1 );
-    REQUIRE( f.symbol_alignment() == 1 );
-    REQUIRE( f.total_symbols() == 64 );
+    REQUIRE(f.data_length() == 1024LLU);
+    REQUIRE(f.symbol_size() == 16);
+    REQUIRE(f.num_source_blocks() == 64);
+    REQUIRE(f.interleaver_length() == 1);
+    REQUIRE(f.symbol_alignment() == 1);
+    REQUIRE(f.total_symbols() == 64);
 }

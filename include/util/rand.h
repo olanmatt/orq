@@ -22,23 +22,22 @@
  * SOFTWARE.
  */
 
-#ifndef RAND_H
-#define RAND_H
+#ifndef INCLUDE_UTIL_RAND_H_
+#define INCLUDE_UTIL_RAND_H_
 
 #include <cstdint>
 #include <stdexcept>
 
 class rand
 {
-
 public:
     static int generate(uint32_t y, uint8_t i, uint32_t m);
 
 private:
-    static const uint32_t V0[];
-    static const uint32_t V1[];
-    static const uint32_t V2[];
-    static const uint32_t V3[];
+    static const uint32_t m_V0[];
+    static const uint32_t m_V1[];
+    static const uint32_t m_V2[];
+    static const uint32_t m_V3[];
 };
 
-#endif
+#endif  // INCLUDE_UTIL_RAND_H_

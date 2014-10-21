@@ -59,8 +59,10 @@ $(BUILDDIR)/$(TESTDIR)/%.o: $(TESTDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
 	$(GXX) $(CFLAGS) $(INC) -c -o $@ $<
 
-astyle:
+style:
 	astyle --options=.astylerc "$(SRCDIR)/*.cpp" "$(INCDIR)/*.h" "$(TESTDIR)/*.cpp"
+	cpplint --filter=,-whitespace/line_length,-whitespace/braces,-whitespace/labels,-runtime/int `find $(INCDIR) -type f -name "*.h" -a -not -name "catch.h"`
+	cpplint --filter=,-whitespace/line_length,-whitespace/braces,-readability/casting,-build/include_what_you_use,-whitespace/line_length,-runtime/int `find $(SRCDIR) $(TESTDIR) -type f -name "*.cpp"`
 
 # make clean
 .PHONY: clean

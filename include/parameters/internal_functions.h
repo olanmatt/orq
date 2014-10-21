@@ -22,18 +22,17 @@
  * SOFTWARE.
  */
 
-#ifndef INTERNAL_FUNCTIONS_H
-#define INTERNAL_FUNCTIONS_H
+#ifndef INCLUDE_PARAMETERS_INTERNAL_FUNCTIONS_H_
+#define INCLUDE_PARAMETERS_INTERNAL_FUNCTIONS_H_
 
-#include <algorithm>
-#include <cstdint>
 #include <parameters/internal_constants.h>
 #include <util/extra_math.h>
 #include <util/systematic_indices.h>
+#include <cstdint>
+#include <algorithm>
 
 class internal_functions
 {
-
 public:
     static uint64_t get_possible_total_symbols(uint64_t F, uint16_t T);
     static uint64_t get_total_symbols(uint64_t F, uint16_t T);
@@ -45,4 +44,4 @@ private:
     static uint16_t sub_symbol_size(uint16_t T, uint8_t Al, uint16_t n);
 };
 
-#endif
+#endif  // INCLUDE_PARAMETERS_INTERNAL_FUNCTIONS_H_

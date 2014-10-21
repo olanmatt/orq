@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-#ifndef SYSTEMATICINDICES_H
-#define SYSTEMATICINDICES_H
+#ifndef INCLUDE_UTIL_SYSTEMATIC_INDICES_H_
+#define INCLUDE_UTIL_SYSTEMATIC_INDICES_H_
 
 #include <stdexcept>
 
 class systematic_indices
 {
-
 public:
     static unsigned int get_k_index(unsigned int k_prime);
     static unsigned int K(unsigned int k_index);
@@ -41,7 +40,7 @@ public:
     static int floor(unsigned int k_prime);
 
 private:
-    static const unsigned int table2[][5];
+    static const unsigned int m_table2[][5];
 };
 
-#endif
+#endif  // INCLUDE_UTIL_SYSTEMATIC_INDICES_H_

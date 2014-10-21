@@ -22,22 +22,21 @@
  * SOFTWARE.
  */
 
-#ifndef DEG_H
-#define DEG_H
+#ifndef INCLUDE_UTIL_DEG_H_
+#define INCLUDE_UTIL_DEG_H_
 
-#include <algorithm>
 #include <cstdint>
+#include <algorithm>
 #include <stdexcept>
 
 class deg
 {
-
 public:
     static int generate(unsigned int v, int W);
 
 private:
-    static const unsigned int table1[];
-    deg() { }; // Otherwise default constructor is generated
+    static const unsigned int m_table1[];
+    deg() { }  // Otherwise default constructor is generated
 };
 
-#endif
+#endif  // INCLUDE_UTIL_DEG_H_
