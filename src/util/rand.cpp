@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include <util/Rand.h>
+#include <util/rand.h>
 
 // 5.5 Random Numbers
 const uint32_t rand::V0[] = {
