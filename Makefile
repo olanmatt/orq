@@ -61,8 +61,16 @@ $(BUILDDIR)/$(TESTDIR)/%.o: $(TESTDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
 
-gcov: clean
-	$(MAKE) CXXFLAGS="$(CXXFLAGS) -g -O0 --coverage" LDFLAGS="-lgcov" all test
+gcov:
+ifeq ($(CXX),g++)
+gcov: CXXFLAGS += -g -O0 --coverage
+gcov: LDFLAGS += -lgcov
+gcov: clean test
+else ifeq ($(CC),gcc)
+gcov: CFLAGS += -g -O0 --coverage
+gcov: LDFLAGS += -lgcov
+gcov: clean test
+endif
 
 # make clean
 .PHONY: clean
