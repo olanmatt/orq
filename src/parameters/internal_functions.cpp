@@ -54,7 +54,7 @@ internal_functions::KL(uint64_t WS, uint16_t T, uint8_t Al, uint16_t n) {
 uint64_t
 internal_functions::min_WS(uint16_t K_prime, uint16_t T, uint8_t Al, uint16_t n) {
 
-    return (uint64_t)SystematicIndices::ceil(K_prime) * sub_symbol_size(T, Al, n);
+    return (uint64_t)systematic_indices::ceil(K_prime) * sub_symbol_size(T, Al, n);
 }
 
 uint16_t
