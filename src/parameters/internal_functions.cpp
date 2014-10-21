@@ -22,26 +22,43 @@
  * SOFTWARE.
  */
 
-#ifndef INTERNALFUNCTIONS_H
-#define INTERNALFUNCTIONS_H
+#include <parameters/internal_functions.h>
 
-#include <algorithm>
-#include <cstdint>
-#include <parameters/internal_constants.h>
-#include <util/extra_math.h>
-#include <util/systematic_indices.h>
+uint64_t internal_functions::get_possible_total_symbols(uint64_t F, uint16_t T) {
 
-class InternalFunctions {
+    return extra_math::ceil_div(F, T);
+}
 
-	public:
-	static uint64_t getPossibleTotalSymbols(uint64_t F, uint16_t T);
-	static uint64_t getTotalSymbols(uint64_t F, uint16_t T);
-	static uint16_t topInterleaverLength(uint16_t T);
-	static uint16_t KL(uint64_t WS, uint16_t T, uint8_t Al, uint16_t n);
-	static uint64_t minWS(uint16_t Kprime, uint16_t T, uint8_t Al, uint16_t n);
+uint64_t
+internal_functions::get_total_symbols(uint64_t F, uint16_t T) {
 
-	private:
-	static uint16_t subSymbolSize(uint16_t T, uint8_t Al, uint16_t n);
-};
+    return (uint64_t)extra_math::ceil_div(F, T); // downcast never overflows since F and T are bounded
+}
 
-#endif
+uint16_t
+internal_functions::top_interleaver_length(uint16_t T) {
+
+    uint16_t SStimesAl = T;
+
+    return T / SStimesAl;
+}
+
+uint16_t
+internal_functions::KL(uint64_t WS, uint16_t T, uint8_t Al, uint16_t n) {
+
+    uint16_t K_upper_bound = (uint16_t)std::min((uint16_t)internal_constants::K_max,
+                                                (uint16_t)(WS / sub_symbol_size(T, Al, n)));
+    return systematic_indices::floor(K_upper_bound);
+}
+
+uint64_t
+internal_functions::min_WS(uint16_t K_prime, uint16_t T, uint8_t Al, uint16_t n) {
+
+    return (uint64_t)systematic_indices::ceil(K_prime) * sub_symbol_size(T, Al, n);
+}
+
+uint16_t
+internal_functions::sub_symbol_size(uint16_t T, uint8_t Al, uint16_t n) {
+
+    return Al * extra_math::ceil_div(T, Al * n);
+}

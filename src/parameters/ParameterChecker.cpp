@@ -87,7 +87,7 @@ uint8_t ParameterChecker::minAllowedNumSourceBlocks(uint64_t dataLen, uint16_t s
 	_checkSymbolSizeOutOfBounds(symbSize);
 	_checkDataLengthAndSymbolSizeOutOfBounds(dataLen, symbSize);
 
-	uint32_t Kt = InternalFunctions::getTotalSymbols(dataLen, symbSize);
+	uint32_t Kt = internal_functions::get_total_symbols(dataLen, symbSize);
 	return _minAllowedNumSourceBlocks(Kt);
 }
 
@@ -97,7 +97,7 @@ uint8_t ParameterChecker::maxAllowedNumSourceBlocks(uint64_t dataLen, uint16_t s
 	_checkSymbolSizeOutOfBounds(symbSize);
 	_checkDataLengthAndSymbolSizeOutOfBounds(dataLen, symbSize);
 
-	uint16_t Kt = InternalFunctions::getTotalSymbols(dataLen, symbSize);
+	uint16_t Kt = internal_functions::get_total_symbols(dataLen, symbSize);
 	return _maxAllowedNumSourceBlocks(Kt);
 }
 
@@ -151,7 +151,7 @@ bool ParameterChecker::areValidFECParameters(uint64_t dataLen, uint16_t symbSize
 		return false;
 	}
 
-	int Kt = InternalFunctions::getTotalSymbols(F, T);
+	int Kt = internal_functions::get_total_symbols(F, T);
 	int minAllowedZ = _minAllowedNumSourceBlocks(Kt);
 	int maxAllowedZ = _maxAllowedNumSourceBlocks(Kt);
 
@@ -341,18 +341,20 @@ uint16_t ParameterChecker::_maxAllowedInterleaverLength(uint16_t T) {
 
 uint64_t ParameterChecker::_minAllowedDecodingBlockSize(uint64_t F, uint16_t T) {
 
-	int Kt = InternalFunctions::getTotalSymbols(F, T);
+	int Kt = internal_functions::get_total_symbols(F, T);
 
 	int Kprime = std::max((uint16_t)internal_constants::K_prime_min, (uint16_t)extra_math::ceil_div(Kt, internal_constants::Z_max));
 
-	return InternalFunctions::minWS(Kprime, T, internal_constants::Al, InternalFunctions::topInterleaverLength(T));
+	return internal_functions::min_WS(Kprime, T, internal_constants::Al,
+	                                  internal_functions::top_interleaver_length(T));
 }
 
 uint64_t ParameterChecker::_maxAllowedDataLength(uint16_t T, uint64_t WS) {
 
 	long boundFromT = _maxAllowedDataLength(T);
 
-	int KL = InternalFunctions::KL(WS, T, internal_constants::Al, InternalFunctions::topInterleaverLength(T));
+	int KL = internal_functions::KL(WS, T, internal_constants::Al,
+	                                internal_functions::top_interleaver_length(T));
 	long boundFromWS = (long)internal_constants::Z_max * KL * T;
 
 	return std::min(boundFromT, boundFromWS);
@@ -360,7 +362,7 @@ uint64_t ParameterChecker::_maxAllowedDataLength(uint16_t T, uint64_t WS) {
 
 bool ParameterChecker::_areDataLengthAndSymbolSizeOutOfBounds(uint64_t F, uint16_t T) {
 
-	return InternalFunctions::getPossibleTotalSymbols(F, T) > internal_constants::Kt_max;
+	return internal_functions::get_possible_total_symbols(F, T) > internal_constants::Kt_max;
 }
 
 bool ParameterChecker::_areDataLengthAndPayloadLengthOutOfBounds(uint64_t F, uint16_t P) {

@@ -67,8 +67,8 @@ fec_parameters::derive_parameters(uint64_t data_length,
     if (ParameterChecker::areValidDeriverParameters(F, P, WS)) {
         uint16_t T = P;
 
-        uint16_t Kt = InternalFunctions::getTotalSymbols(F, T);
-        uint16_t topN = InternalFunctions::topInterleaverLength(T);
+        uint16_t Kt = internal_functions::get_total_symbols(F, T);
+        uint16_t topN = internal_functions::top_interleaver_length(T);
 
         uint8_t Z = derive_Z(Kt, WS, T, Al, topN);
         uint16_t N = derive_N(Kt, Z, WS, T, Al, topN);
@@ -87,7 +87,7 @@ fec_parameters::derive_Z(uint16_t Kt,
                          uint8_t Al,
                          uint16_t topN)
 {
-	int Kl = InternalFunctions::KL(WS, T, Al, topN);
+	int Kl = internal_functions::KL(WS, T, Al, topN);
 	return extra_math::ceil_div(Kt, Kl); // Z = ceil(Kt/KL(N_max))
 }
 
@@ -102,7 +102,7 @@ fec_parameters::derive_N(uint16_t Kt,
     // N is the minimum n=1, ..., N_max such that ceil(Kt/Z) <= KL(n)
     int topK = extra_math::ceil_div(Kt, Z);
     for (int n = topN; n >= 1; n--) {
-        if (topK <= InternalFunctions::KL(WS, T, Al, n)) {
+        if (topK <= internal_functions::KL(WS, T, Al, n)) {
             return n;
         }
     }
@@ -163,5 +163,5 @@ fec_parameters::symbol_alignment(void) {
 uint16_t
 fec_parameters::total_symbols(void) {
 
-    return InternalFunctions::getTotalSymbols(data_length(), symbol_size());
+    return internal_functions::get_total_symbols(data_length(), symbol_size());
 }

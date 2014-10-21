@@ -27,7 +27,7 @@
 
 #include <algorithm>
 #include <parameters/internal_constants.h>
-#include <parameters/InternalFunctions.h>
+#include <parameters/internal_functions.h>
 #include <util/extra_math.h>
 
 class ParameterChecker {
