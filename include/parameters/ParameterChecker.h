@@ -26,7 +26,7 @@
 #define PARAMETERCHECKER_H
 
 #include <algorithm>
-#include <parameters/InternalConstants.h>
+#include <parameters/internal_constants.h>
 #include <parameters/InternalFunctions.h>
 #include <util/extra_math.h>
 

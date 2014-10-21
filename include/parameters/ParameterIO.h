@@ -26,7 +26,7 @@
 #define PARAMETERIO_H
 
 #include <cstdint>
-#include <parameters/InternalConstants.h>
+#include <parameters/internal_constants.h>
 
 class ParameterIO {
 
