@@ -25,13 +25,13 @@
 #ifndef TUPLE_H
 #define TUPLE_H
 
-#include <MatrixUtilities.h>
+#include <matrix_utilities.h>
 #include <util/Deg.h>
 #include <util/Rand.h>
 #include <util/SystematicIndices.h>
 
 class Tuple {
-	
+
 	public:
 	Tuple(int Kprime, long X);
 	long D();

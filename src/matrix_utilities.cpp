@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include <MatrixUtilities.h>
+#include <matrix_utilities.h>
 
 // TODO replace with a lookup table
 long matrix_utilities::ceil_prime(long p) {
@@ -40,7 +40,7 @@ long matrix_utilities::ceil_prime(long p) {
 
 bool matrix_utilities::is_prime(long n) {
 
-	if (n & 1 == 0) {
+	if ((n & 1) == 0) {
 		return false;
 	}
 

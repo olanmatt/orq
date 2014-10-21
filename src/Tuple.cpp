@@ -34,7 +34,7 @@ Tuple::Tuple(int Kprime, long X) {
 	int L = Kprime + S + H;
 	int J = SystematicIndices::J(Ki);
 	int P = L - W;
-	long P1 = MatrixUtilities::ceil_prime(P);
+	long P1 = matrix_utilities::ceil_prime(P);
 
 	long A = 53591 + J * 997;
 	if (A % 2 == 0) A++;
