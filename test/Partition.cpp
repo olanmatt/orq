@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-#include <Catch.h>
+#include <catch.h>
 #include <Partition.h>
 
-TEST_CASE( "Partition can be created, and values are valid", "[Tuple]" ) {
+TEST_CASE( "Partition can be created, and values are valid", "[Partition]" ) {
 
 	Partition p = Partition(1337, 5);
 

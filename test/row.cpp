@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include <Catch.h>
+#include <catch.h>
 #include <row.h>
 
 TEST_CASE( "Row can be created, and equated", "[row]" ) {

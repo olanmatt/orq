@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include <Catch.h>
+#include <catch.h>
 #include <util/Rand.h>
 
 TEST_CASE( "Rand can be called and values are consistant", "[Rand]" ) {

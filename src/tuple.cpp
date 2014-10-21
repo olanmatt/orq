@@ -22,27 +22,58 @@
  * SOFTWARE.
  */
 
-#ifndef TUPLE_H
-#define TUPLE_H
+#include <tuple.h>
 
-#include <matrix_utilities.h>
-#include <util/Deg.h>
-#include <util/Rand.h>
-#include <util/SystematicIndices.h>
+// 5.3.3.2 Source Symbol Tuples
+tuple::tuple(int k_prime, long x) {
 
-class Tuple {
+	int Ki = SystematicIndices::getKIndex(k_prime);
+	int S = SystematicIndices::S(Ki);
+	int H = SystematicIndices::H(Ki);
+	int W = SystematicIndices::W(Ki);
+	int L = k_prime + S + H;
+	int J = SystematicIndices::J(Ki);
+	int P = L - W;
+	long P1 = matrix_utilities::ceil_prime(P);
 
-	public:
-	Tuple(int Kprime, long X);
-	long D();
-	long A();
-	long B();
-	long D1();
-	long A1();
-	long B1();
+	long A = 53591 + J * 997;
+	if (A % 2 == 0) A++;
 
-	private:
-	long d, a, b, d1, a1, b1;
-};
+	long B = 10267 * (J + 1);
 
-#endif
+	long y = (B + x * A) % 4294967296L; // 2^^32
+
+	long v = Rand::rand(y, 0, 1048576L); // 2^^20
+
+	d_ = Deg::generate(v, W);
+	a_ = 1 + Rand::rand(y, 1, W - 1);
+	b_ = Rand::rand(y, 2, W);
+	if (d_ < 4) d1_ = 2 + Rand::rand(x, 3, 2L);
+	else d1_ = 2;
+	a1_ = 1 + Rand::rand(x, 4, P1 - 1);
+	b1_ = Rand::rand(x, 5, P1);
+}
+
+long tuple::D() {
+	return d_;
+}
+
+long tuple::A() {
+	return a_;
+}
+
+long tuple::B() {
+	return b_;
+}
+
+long tuple::D1() {
+	return d1_;
+}
+
+long tuple::A1() {
+	return a1_;
+}
+
+long tuple::B1() {
+	return b1_;
+}

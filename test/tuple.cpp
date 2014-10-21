@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-#include <Catch.h>
-#include <Tuple.h>
+#include <catch.h>
+#include <tuple.h>
 
-TEST_CASE( "Tuple can be created, and values are valid", "[Tuple]" ) {
+TEST_CASE( "Tuple can be created, and values are valid", "[tuple]" ) {
 
-	Tuple t = Tuple(1337, 5);
+	tuple t = tuple(1337, 5);
 
 	REQUIRE( t.D() == 6 );
 	REQUIRE( t.A() == 1340 );

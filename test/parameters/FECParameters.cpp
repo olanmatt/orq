@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include <Catch.h>
+#include <catch.h>
 #include <parameters/FECParameters.h>
 
 TEST_CASE( "FECParameters can be created, encoded into OTIs, then restored", "[FECParameters]" ) {
