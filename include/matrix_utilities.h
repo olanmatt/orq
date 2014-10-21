@@ -22,24 +22,14 @@
  * SOFTWARE.
  */
 
-#include <MatrixUtilities.h>
+#ifndef MATRIX_UTILITIES_H
+#define MATRIX_UTILITIES_H
 
-// TODO replace with a lookup table
-long MatrixUtilities::ceil_prime(long p) {
+class matrix_utilities {
 
-	if (p == 1) p++;
+	public:
+	static long ceil_prime(long p);
+	static bool is_prime(long n);
+};
 
-	while (!is_prime(p))
-		p++;
-
-	return p;
-}
-
-bool MatrixUtilities::is_prime(long n) {
-	if (n % 2 == 0) return false;
-
-	for (long i = 3; i * i <= n; i += 2)
-		if (n % i == 0) return false;
-
-	return true;
-}
+#endif
