@@ -33,15 +33,17 @@ SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 TESTSOURCES := $(shell find $(TESTDIR) -type f -name "*.$(SRCEXT)")
 TESTOBJECTS := $(patsubst $(TESTDIR)/%,$(BUILDDIR)/$(TESTDIR)/%,$(TESTSOURCES:.$(SRCEXT)=.o))
-CFLAGS := -g -Wall -pedantic -std=c++0x
+CFLAGS := -g -Wall -pedantic -std=c++11
 CXXFLAGS := $(CFLAGS)
-LIB :=
+LDFLAGS :=
 INC := -I include
+
+all: $(TARGET)
 
 # make
 $(TARGET): $(OBJECTS)
 	@echo ""; echo "Linking..."
-	$(CXX) $^ -o $(TARGET) $(LIB)
+	$(CXX) $^ -o $(TARGET) $(LDFLAGS)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
@@ -53,7 +55,7 @@ test: $(TARGET) $(TESTTARGET)
 
 $(TESTTARGET): $(TESTOBJECTS)
 	@echo ""; echo "Linking..."
-	$(CXX) $^ $(filter-out $(BUILDDIR)/orq.o,$(OBJECTS)) -o $(TESTTARGET) $(LIB)
+	$(CXX) $^ $(filter-out $(BUILDDIR)/orq.o,$(OBJECTS)) -o $(TESTTARGET) $(LDFLAGS)
 
 $(BUILDDIR)/$(TESTDIR)/%.o: $(TESTDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
