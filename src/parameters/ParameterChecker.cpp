@@ -316,36 +316,34 @@ uint32_t ParameterChecker::numRepairSymbolsPerBlock(uint16_t numSrcSymbs) {
 
 uint64_t ParameterChecker::_maxAllowedDataLength(uint16_t T) {
 
-	return std::min(maxDataLength(), (uint64_t)(T * internal_constants::Kt_max));
+	return std::min(internal_constants::F_max, (uint64_t)(T * internal_constants::Kt_max));
 }
 
 uint16_t ParameterChecker::_minAllowedSymbolSize(uint64_t F) {
 
-	return std::max(minSymbolSize(), (uint16_t)(extra_math::ceil_div(F, internal_constants::Kt_max)));
+	return std::max((uint16_t)internal_constants::T_min, (uint16_t)(extra_math::ceil_div(F, internal_constants::Kt_max)));
 }
 
 uint16_t ParameterChecker::_minAllowedNumSourceBlocks(uint16_t Kt) {
 
-	return std::max(minNumSourceBlocks(), (uint16_t)extra_math::ceil_div(Kt, internal_constants::K_max));
+	return std::max(internal_constants::Z_min, (uint16_t)extra_math::ceil_div(Kt, internal_constants::K_max));
 }
 
 uint16_t ParameterChecker::_maxAllowedNumSourceBlocks(uint16_t Kt) {
 
-	return std::min(maxNumSourceBlocks(), Kt);
+	return std::min(internal_constants::Z_max, Kt);
 }
 
 uint16_t ParameterChecker::_maxAllowedInterleaverLength(uint16_t T) {
 
-	return std::min(maxInterleaverLength(), (uint16_t)(T / internal_constants::Al));
+	return std::min(internal_constants::N_max, (uint16_t)(T / internal_constants::Al));
 }
 
 uint64_t ParameterChecker::_minAllowedDecodingBlockSize(uint64_t F, uint16_t T) {
 
 	int Kt = InternalFunctions::getTotalSymbols(F, T);
 
-	// TODO K_prime_min hardcoded to suppress linker error
-	//int Kprime = std::max(InternalConstants::K_prime_min, extra_math::ceil_div(Kt, InternalConstants::Z_max));
-	int Kprime = std::max(10, extra_math::ceil_div(Kt, internal_constants::Z_max));
+	int Kprime = std::max((uint16_t)internal_constants::K_prime_min, (uint16_t)extra_math::ceil_div(Kt, internal_constants::Z_max));
 
 	return InternalFunctions::minWS(Kprime, T, internal_constants::Al, InternalFunctions::topInterleaverLength(T));
 }
