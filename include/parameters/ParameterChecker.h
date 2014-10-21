@@ -33,28 +33,17 @@
 class ParameterChecker
 {
 public:
-    static uint64_t minDataLength();
-    static uint64_t maxDataLength();
     static bool isDataLengthOutOfBounds(uint64_t dataLen);
     static uint64_t maxAllowedDataLength(uint16_t symbSize);
-    static uint16_t minSymbolSize();
-    static uint16_t maxSymbolSize();
     static bool isSymbolSizeOutOfBounds(uint16_t symbSize);
     static uint16_t minAllowedSymbolSize(uint64_t dataLen);
-    static uint16_t minNumSourceBlocks();
-    static uint16_t maxNumSourceBlocks();
     static bool isNumSourceBlocksOutOfBounds(uint8_t numSrcBs);
     static uint8_t minAllowedNumSourceBlocks(uint64_t dataLen, uint16_t symbSize);
     static uint8_t maxAllowedNumSourceBlocks(uint64_t dataLen, uint16_t symbSize);
-    static uint16_t minInterleaverLength();
-    static uint16_t maxInterleaverLength();
     static bool isInterleaverLengthOutOfBounds(uint16_t interLen);
     static uint16_t maxAllowedInterleaverLength(uint16_t symbSize);
-    static uint8_t symbolAlignmentValue();
     static bool areValidFECParameters(uint64_t dataLen, uint16_t symbSize,
                                       uint8_t numSrcBs, uint16_t interLen);
-    static uint16_t minPayloadLength();
-    static uint16_t maxPayloadLength();
     static bool isPayloadLengthOutOfBounds(uint16_t payLen);
     static uint16_t minAllowedPayloadLength(uint64_t dataLen);
     static uint64_t minDecodingBlockSize();
@@ -62,15 +51,9 @@ public:
     static uint64_t maxAllowedDataLength(uint16_t payLen, uint64_t maxDBMem);
     static bool areValidDeriverParameters(uint64_t dataLen, uint16_t payLen,
                                           uint64_t maxDBMem);
-    static uint8_t minSourceBlockNumber();
-    static uint8_t maxSourceBlockNumber();
     static bool isSourceBlockNumberOutOfBounds(uint8_t sbn);
-    static uint32_t minEncodingSymbolID();
-    static uint32_t maxEncodingSymbolID();
     static bool isEncodingSymbolIDOutOfBounds(uint32_t esi);
     static bool isValidFECPayloadID(uint8_t sbn, uint32_t esi, uint8_t numSrcBs);
-    static uint16_t minNumSourceSymbolsPerBlock();
-    static uint16_t maxNumSourceSymbolsPerBlock();
     static bool isNumSourceSymbolsPerBlockOutOfBounds(uint16_t numSrcSymbs);
     static uint32_t numRepairSymbolsPerBlock(uint16_t numSrcSymbs);
 

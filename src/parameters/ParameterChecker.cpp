@@ -24,19 +24,10 @@
 
 #include <parameters/ParameterChecker.h>
 
-uint64_t ParameterChecker::minDataLength()
-{
-    return internal_constants::F_min;
-}
-
-uint64_t ParameterChecker::maxDataLength()
-{
-    return internal_constants::F_max;
-}
-
 bool ParameterChecker::isDataLengthOutOfBounds(uint64_t dataLen)
 {
-    return !(minDataLength() <= dataLen && dataLen <= maxDataLength());
+    return !(internal_constants::F_min <= dataLen
+             && dataLen <= internal_constants::F_max);
 }
 
 uint64_t ParameterChecker::maxAllowedDataLength(uint16_t symbSize)
@@ -45,19 +36,10 @@ uint64_t ParameterChecker::maxAllowedDataLength(uint16_t symbSize)
     return _maxAllowedDataLength(symbSize);
 }
 
-uint16_t ParameterChecker::minSymbolSize()
-{
-    return internal_constants::T_min;
-}
-
-uint16_t ParameterChecker::maxSymbolSize()
-{
-    return internal_constants::T_max;
-}
-
 bool ParameterChecker::isSymbolSizeOutOfBounds(uint16_t symbSize)
 {
-    return !(minSymbolSize() <= symbSize && symbSize <= maxSymbolSize());
+    return !(internal_constants::T_min <= symbSize
+             && symbSize <= internal_constants::T_max);
 }
 
 uint16_t ParameterChecker::minAllowedSymbolSize(uint64_t dataLen)
@@ -66,19 +48,11 @@ uint16_t ParameterChecker::minAllowedSymbolSize(uint64_t dataLen)
     return _minAllowedSymbolSize(dataLen);
 }
 
-uint16_t ParameterChecker::minNumSourceBlocks()
-{
-    return internal_constants::Z_min;
-}
-
-uint16_t ParameterChecker::maxNumSourceBlocks()
-{
-    return internal_constants::Z_max;
-}
-
 bool ParameterChecker::isNumSourceBlocksOutOfBounds(uint8_t numSrcBs)
 {
-    return !(minNumSourceBlocks() <= numSrcBs && numSrcBs <= maxNumSourceBlocks());
+    // TODO(olanmatt): Verify overflow control that throws warning.
+    return !(internal_constants::Z_min <=
+             numSrcBs);  // && numSrcBs <= internal_constants::Z_max);
 }
 
 uint8_t ParameterChecker::minAllowedNumSourceBlocks(uint64_t dataLen,
@@ -103,31 +77,16 @@ uint8_t ParameterChecker::maxAllowedNumSourceBlocks(uint64_t dataLen,
     return _maxAllowedNumSourceBlocks(Kt);
 }
 
-uint16_t ParameterChecker::minInterleaverLength()
-{
-    return internal_constants::N_min;
-}
-
-uint16_t ParameterChecker::maxInterleaverLength()
-{
-    return internal_constants::N_max;
-}
-
 bool ParameterChecker::isInterleaverLengthOutOfBounds(uint16_t interLen)
 {
-    return !(minInterleaverLength() <= interLen
-             && interLen <= maxInterleaverLength());
+    return !(internal_constants::N_min <= interLen
+             && interLen <= internal_constants::N_max);
 }
 
 uint16_t ParameterChecker::maxAllowedInterleaverLength(uint16_t symbSize)
 {
     _checkSymbolSizeOutOfBounds(symbSize);
     return _maxAllowedInterleaverLength(symbSize);
-}
-
-uint8_t ParameterChecker::symbolAlignmentValue()
-{
-    return internal_constants::Al;
 }
 
 bool ParameterChecker::areValidFECParameters(uint64_t dataLen,
@@ -172,19 +131,10 @@ bool ParameterChecker::areValidFECParameters(uint64_t dataLen,
     return true;
 }
 
-uint16_t ParameterChecker::minPayloadLength()
-{
-    return minSymbolSize();
-}
-
-uint16_t ParameterChecker::maxPayloadLength()
-{
-    return maxSymbolSize();
-}
-
 bool ParameterChecker::isPayloadLengthOutOfBounds(uint16_t payLen)
 {
-    return !(minPayloadLength() <= payLen && payLen <= maxPayloadLength());
+    return !(internal_constants::T_min <= payLen
+             && payLen <= internal_constants::T_max);
 }
 
 uint16_t ParameterChecker::minAllowedPayloadLength(uint64_t dataLen)
@@ -194,7 +144,8 @@ uint16_t ParameterChecker::minAllowedPayloadLength(uint64_t dataLen)
 
 uint64_t ParameterChecker::minDecodingBlockSize()
 {
-    return _minAllowedDecodingBlockSize(minDataLength(), minSymbolSize());
+    return _minAllowedDecodingBlockSize(internal_constants::F_min,
+                                        internal_constants::T_min);
 }
 
 uint64_t ParameterChecker::minAllowedDecodingBlockSize(uint64_t dataLen,
@@ -251,34 +202,17 @@ bool ParameterChecker::areValidDeriverParameters(uint64_t dataLen,
     return true;
 }
 
-uint8_t ParameterChecker::minSourceBlockNumber()
-{
-    return internal_constants::SBN_min;
-}
-
-uint8_t ParameterChecker::maxSourceBlockNumber()
-{
-    return internal_constants::SBN_max;
-}
-
 bool ParameterChecker::isSourceBlockNumberOutOfBounds(uint8_t sbn)
 {
-    return !(minSourceBlockNumber() <= sbn && sbn <= maxSourceBlockNumber());
-}
-
-uint32_t ParameterChecker::minEncodingSymbolID()
-{
-    return internal_constants::ESI_min;
-}
-
-uint32_t ParameterChecker::maxEncodingSymbolID()
-{
-    return internal_constants::ESI_max;
+    return !(internal_constants::SBN_min <= sbn
+             && sbn <= internal_constants::SBN_max);
 }
 
 bool ParameterChecker::isEncodingSymbolIDOutOfBounds(uint32_t esi)
 {
-    return !(minEncodingSymbolID() <= esi && esi <= maxEncodingSymbolID());
+    // TODO(olanmatt): Verify overflow control that throws warning.
+    return !(esi <=
+             internal_constants::ESI_max);  // && internal_constants::ESI_min <= esi
 }
 
 bool ParameterChecker::isValidFECPayloadID(uint8_t sbn, uint32_t esi,
@@ -296,29 +230,19 @@ bool ParameterChecker::isValidFECPayloadID(uint8_t sbn, uint32_t esi,
     return true;
 }
 
-uint16_t ParameterChecker::minNumSourceSymbolsPerBlock()
-{
-    return internal_constants::K_min;
-}
-
-uint16_t ParameterChecker::maxNumSourceSymbolsPerBlock()
-{
-    return internal_constants::K_max;
-}
-
 bool ParameterChecker::isNumSourceSymbolsPerBlockOutOfBounds(
     uint16_t numSrcSymbs)
 {
-    return !(minNumSourceSymbolsPerBlock() <= numSrcSymbs
-             && numSrcSymbs <= maxNumSourceSymbolsPerBlock());
+    return !(internal_constants::K_min <= numSrcSymbs
+             && numSrcSymbs <= internal_constants::K_max);
 }
 
 uint32_t ParameterChecker::numRepairSymbolsPerBlock(uint16_t numSrcSymbs)
 {
     _checkNumSourceSymbolsPerBlockOutOfBounds(numSrcSymbs);
 
-    int minESI = minEncodingSymbolID();
-    int maxESI = maxEncodingSymbolID();
+    int minESI = internal_constants::ESI_min;
+    int maxESI = internal_constants::ESI_max;
     int totalSymbs = 1 + maxESI - minESI;
 
     return totalSymbs - numSrcSymbs;

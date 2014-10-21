@@ -61,8 +61,7 @@ $(BUILDDIR)/$(TESTDIR)/%.o: $(TESTDIR)/%.$(SRCEXT)
 
 style:
 	astyle --options=.astylerc "$(SRCDIR)/*.cpp" "$(INCDIR)/*.h" "$(TESTDIR)/*.cpp"
-	cpplint --filter=,-whitespace/line_length,-whitespace/braces,-whitespace/labels,-runtime/int `find $(INCDIR) -type f -name "*.h" -a -not -name "catch.h"`
-	cpplint --filter=,-whitespace/line_length,-whitespace/braces,-readability/casting,-build/include_what_you_use,-whitespace/line_length,-runtime/int `find $(SRCDIR) $(TESTDIR) -type f -name "*.cpp"`
+	cpplint --filter=,-whitespace/line_length,-whitespace/braces,-runtime/int,-build/include_what_you_use,-readability/casting,-whitespace/labels `find $(SRCDIR) $(TESTDIR) $(INCDIR) -type f -name "*.cpp" -o -name "*.h" -a -not -name "catch.h"`
 
 # make clean
 .PHONY: clean

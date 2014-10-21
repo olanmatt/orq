@@ -42,7 +42,7 @@ fec_parameters::new_parameters(uint64_t data_length,
     uint16_t T = symbol_size;
     uint8_t Z = num_source_blocks;
     uint16_t N = interleaver_length;
-    uint8_t Al = ParameterChecker::symbolAlignmentValue();
+    uint8_t Al = internal_constants::Al;
 
     if (ParameterChecker::areValidFECParameters(F, T, Z, N)) {
         return new_local_instance(F, T, Z, N, Al);
@@ -60,7 +60,7 @@ fec_parameters::derive_parameters(uint64_t data_length,
     uint64_t F = data_length;
     uint16_t P = payload_length;
     uint64_t WS = max_db_mem;
-    uint8_t Al = ParameterChecker::symbolAlignmentValue();
+    uint8_t Al = internal_constants::Al;
 
     if (ParameterChecker::areValidDeriverParameters(F, P, WS)) {
         uint16_t T = P;
