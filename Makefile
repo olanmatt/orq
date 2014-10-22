@@ -70,8 +70,8 @@ astyle:
 	@astyle --options=.astylerc $(ASTYLE_FLAGS) $(SOURCES) $(HEADERS) $(TESTSOURCES)
 
 cpplint:
-	@cpplint \
-		--filter=-whitespace/indent,-whitespace/line_length,-whitespace/braces,-runtime/int,-readability/casting,-whitespace/labels\
+	@cpplint  $(CPPLINT_EXTRA)\
+		--filter=-whitespace/indent,-whitespace/line_length,-whitespace/braces,-runtime/int,-whitespace/labels\
 		$(SOURCES) $(HEADERS) $(TESTSOURCES)
 
 clean:

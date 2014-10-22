@@ -24,6 +24,7 @@
 
 #include <util/octet_ops.h>
 
+// TODO(pbhandari): make this table a bit more organized.
 // 5.7.3 The Table OCT_EXP
 const int octet_ops::m_OCT_EXP[] = {
     1, 2, 4, 8, 16, 32, 64, 128, 29, 58, 116, 232, 205, 135, 19, 38, 76,
@@ -63,6 +64,7 @@ const int octet_ops::m_OCT_EXP[] = {
     142
 };
 
+// TODO(pbhandari): make this table a bit more organized.
 // 5.7.4 The Table OCT_LOG
 const int octet_ops::m_OCT_LOG[] = {
     0, 1, 25, 2, 50, 26, 198, 3, 223, 51, 238, 27, 104, 199, 75, 4, 100,
@@ -138,22 +140,25 @@ void octet_ops::betaProduct(uint8_t beta, uint8_t *U)
     if (beta == 1) {
         return;
     }
-    for (int i = 0; i < (int)(sizeof(U) / sizeof(U[0])); i++) {
+
+    for (int i = 0; i < (sizeof(U) / sizeof(U[0])); i++) {
         U[i] = product(beta, U[i]);
     }
 }
 
+// TODO(pbhandari): Convert uint8_t arrays to vectors.
 void octet_ops::betaDivision(uint8_t *U, uint8_t beta)
 {
     // TODO(pbhandari): Check that U != null and length of U > 0.
     if (beta == 1) {
         return;
     }
-    for (int i = 0; i < (int)(sizeof(U) / sizeof(U[0])); i++) {
+    for (int i = 0; i < (sizeof(U) / sizeof(U[0])); i++) {
         U[i] = division(U[i], beta);
     }
 }
 
+// TODO(pbhandari): Convert uint8_t arrays to vectors.
 void octet_ops::betaProduct(uint8_t beta, uint8_t U[], int pos, int length)
 {
     // TODO(pbhandari): Check that U != null and length of U > 0.
@@ -165,6 +170,7 @@ void octet_ops::betaProduct(uint8_t beta, uint8_t U[], int pos, int length)
     }
 }
 
+// TODO(pbhandari): Convert uint8_t arrays to vectors.
 void octet_ops::betaDivision(uint8_t U[], uint8_t beta, int pos, int length)
 {
     // TODO(pbhandari): Check that U != null and length of U > 0.

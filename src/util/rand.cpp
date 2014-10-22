@@ -256,10 +256,10 @@ int rand::generate(uint32_t y, uint8_t i, uint32_t m)
         throw std::invalid_argument("m must be positive");
     }
 
-    int x0 = (int)((y + i) % 256);
-    int x1 = (int)((y / 256 + i) % 256);
-    int x2 = (int)((y / 65536 + i) % 256);
-    int x3 = (int)((y / 16777216 + i) % 256);
+    int x0 = (y + i) % 256;
+    int x1 = (y / 256 + i) % 256;
+    int x2 = (y / 65536 + i) % 256;
+    int x3 = (y / 16777216 + i) % 256;
 
     int v0 = m_V0[x0];
     int v1 = m_V1[x1];
