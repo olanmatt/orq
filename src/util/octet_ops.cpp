@@ -141,7 +141,7 @@ void octet_ops::betaProduct(uint8_t beta, uint8_t *U)
         return;
     }
 
-    for (int i = 0; i < (sizeof(U) / sizeof(U[0])); i++) {
+    for (int i = 0; i < static_cast<int>(sizeof(U) / sizeof(U[0])); i++) {
         U[i] = product(beta, U[i]);
     }
 }
@@ -153,7 +153,7 @@ void octet_ops::betaDivision(uint8_t *U, uint8_t beta)
     if (beta == 1) {
         return;
     }
-    for (int i = 0; i < (sizeof(U) / sizeof(U[0])); i++) {
+    for (int i = 0; i < static_cast<int>(sizeof(U) / sizeof(U[0])); i++) {
         U[i] = division(U[i], beta);
     }
 }
