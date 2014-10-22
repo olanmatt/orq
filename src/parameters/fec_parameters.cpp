@@ -115,8 +115,8 @@ fec_parameters::new_local_instance(uint64_t F,
                                    uint16_t N,
                                    uint8_t Al)
 {
-    uint64_t common_fec_oti = ParameterIO::build_common_fec_oti(F, T);
-    uint32_t scheme_spec_fec_oti = ParameterIO::build_scheme_spec_fec_oti(Z, N, Al);
+    uint64_t common_fec_oti = parameter_io::build_common_fec_oti(F, T);
+    uint32_t scheme_spec_fec_oti = parameter_io::build_scheme_spec_fec_oti(Z, N, Al);
     return fec_parameters(common_fec_oti, scheme_spec_fec_oti);
 }
 
@@ -130,31 +130,31 @@ fec_parameters::fec_parameters(uint64_t common_fec_oti,
 uint64_t
 fec_parameters::data_length(void)
 {
-    return ParameterIO::extract_data_length(common_fec_oti_);
+    return parameter_io::extract_data_length(common_fec_oti_);
 }
 
 uint16_t
 fec_parameters::symbol_size(void)
 {
-    return ParameterIO::extract_symbol_size(common_fec_oti_);
+    return parameter_io::extract_symbol_size(common_fec_oti_);
 }
 
 uint8_t
 fec_parameters::num_source_blocks(void)
 {
-    return ParameterIO::extract_num_source_blocks(scheme_spec_fec_oti_);
+    return parameter_io::extract_num_source_blocks(scheme_spec_fec_oti_);
 }
 
 uint16_t
 fec_parameters::interleaver_length(void)
 {
-    return ParameterIO::extract_interleaver_length(scheme_spec_fec_oti_);
+    return parameter_io::extract_interleaver_length(scheme_spec_fec_oti_);
 }
 
 uint8_t
 fec_parameters::symbol_alignment(void)
 {
-    return ParameterIO::extract_symbol_alignment(scheme_spec_fec_oti_);
+    return parameter_io::extract_symbol_alignment(scheme_spec_fec_oti_);
 }
 
 uint16_t

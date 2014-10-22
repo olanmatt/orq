@@ -28,7 +28,7 @@
 #include <parameters/internal_constants.h>
 #include <cstdint>
 
-class ParameterIO
+class parameter_io
 {
 public:
     static uint64_t extract_data_length(uint64_t commonFecOTI);
