@@ -68,6 +68,6 @@ namespace internal_constants
 
     // third octet is reserved bits
     static const uint64_t common_oti_reserved_inverse_mask = 0xFFFFFFFFFF00FFFF;
-}
+}  // namespace internal_constants
 
 #endif  // INCLUDE_PARAMETERS_INTERNAL_CONSTANTS_H_

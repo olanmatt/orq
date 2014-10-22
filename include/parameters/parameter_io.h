@@ -25,8 +25,8 @@
 #ifndef INCLUDE_PARAMETERS_PARAMETER_IO_H_
 #define INCLUDE_PARAMETERS_PARAMETER_IO_H_
 
-#include <cstdint>
 #include <parameters/internal_constants.h>
+#include <cstdint>
 
 class ParameterIO
 {
