@@ -22,41 +22,41 @@
  * SOFTWARE.
  */
 
-#include <parameters/ParameterChecker.h>
+#include <parameters/parameter_checker.h>
 #include <algorithm>
 
-bool ParameterChecker::isDataLengthOutOfBounds(uint64_t dataLen)
+bool parameter_checker::isDataLengthOutOfBounds(uint64_t dataLen)
 {
     return !(internal_constants::F_min <= dataLen
              && dataLen <= internal_constants::F_max);
 }
 
-uint64_t ParameterChecker::maxAllowedDataLength(uint16_t symbSize)
+uint64_t parameter_checker::maxAllowedDataLength(uint16_t symbSize)
 {
     _checkSymbolSizeOutOfBounds(symbSize);
     return _maxAllowedDataLength(symbSize);
 }
 
-bool ParameterChecker::isSymbolSizeOutOfBounds(uint16_t symbSize)
+bool parameter_checker::isSymbolSizeOutOfBounds(uint16_t symbSize)
 {
     return !(internal_constants::T_min <= symbSize
              && symbSize <= internal_constants::T_max);
 }
 
-uint16_t ParameterChecker::minAllowedSymbolSize(uint64_t dataLen)
+uint16_t parameter_checker::minAllowedSymbolSize(uint64_t dataLen)
 {
     _checkDataLengthOutOfBounds(dataLen);
     return _minAllowedSymbolSize(dataLen);
 }
 
-bool ParameterChecker::isNumSourceBlocksOutOfBounds(uint8_t numSrcBs)
+bool parameter_checker::isNumSourceBlocksOutOfBounds(uint8_t numSrcBs)
 {
     // TODO(olanmatt): Verify overflow control that throws warning.
     return !(internal_constants::Z_min <=
              numSrcBs);  // && numSrcBs <= internal_constants::Z_max);
 }
 
-uint8_t ParameterChecker::minAllowedNumSourceBlocks(uint64_t dataLen,
+uint8_t parameter_checker::minAllowedNumSourceBlocks(uint64_t dataLen,
         uint16_t symbSize)
 {
     _checkDataLengthOutOfBounds(dataLen);
@@ -67,7 +67,7 @@ uint8_t ParameterChecker::minAllowedNumSourceBlocks(uint64_t dataLen,
     return _minAllowedNumSourceBlocks(Kt);
 }
 
-uint8_t ParameterChecker::maxAllowedNumSourceBlocks(uint64_t dataLen,
+uint8_t parameter_checker::maxAllowedNumSourceBlocks(uint64_t dataLen,
         uint16_t symbSize)
 {
     _checkDataLengthOutOfBounds(dataLen);
@@ -78,19 +78,19 @@ uint8_t ParameterChecker::maxAllowedNumSourceBlocks(uint64_t dataLen,
     return _maxAllowedNumSourceBlocks(Kt);
 }
 
-bool ParameterChecker::isInterleaverLengthOutOfBounds(uint16_t interLen)
+bool parameter_checker::isInterleaverLengthOutOfBounds(uint16_t interLen)
 {
     return !(internal_constants::N_min <= interLen
              && interLen <= internal_constants::N_max);
 }
 
-uint16_t ParameterChecker::maxAllowedInterleaverLength(uint16_t symbSize)
+uint16_t parameter_checker::maxAllowedInterleaverLength(uint16_t symbSize)
 {
     _checkSymbolSizeOutOfBounds(symbSize);
     return _maxAllowedInterleaverLength(symbSize);
 }
 
-bool ParameterChecker::areValidFECParameters(uint64_t dataLen,
+bool parameter_checker::areValidFECParameters(uint64_t dataLen,
         uint16_t symbSize, uint8_t numSrcBs, uint16_t interLen)
 {
     uint64_t F = dataLen;
@@ -132,24 +132,24 @@ bool ParameterChecker::areValidFECParameters(uint64_t dataLen,
     return true;
 }
 
-bool ParameterChecker::isPayloadLengthOutOfBounds(uint16_t payLen)
+bool parameter_checker::isPayloadLengthOutOfBounds(uint16_t payLen)
 {
     return !(internal_constants::T_min <= payLen
              && payLen <= internal_constants::T_max);
 }
 
-uint16_t ParameterChecker::minAllowedPayloadLength(uint64_t dataLen)
+uint16_t parameter_checker::minAllowedPayloadLength(uint64_t dataLen)
 {
     return minAllowedSymbolSize(dataLen);
 }
 
-uint64_t ParameterChecker::minDecodingBlockSize()
+uint64_t parameter_checker::minDecodingBlockSize()
 {
     return _minAllowedDecodingBlockSize(internal_constants::F_min,
                                         internal_constants::T_min);
 }
 
-uint64_t ParameterChecker::minAllowedDecodingBlockSize(uint64_t dataLen,
+uint64_t parameter_checker::minAllowedDecodingBlockSize(uint64_t dataLen,
         uint16_t payLen)
 {
     _checkDataLengthOutOfBounds(dataLen);
@@ -159,7 +159,7 @@ uint64_t ParameterChecker::minAllowedDecodingBlockSize(uint64_t dataLen,
     return _minAllowedDecodingBlockSize(dataLen, payLen);
 }
 
-uint64_t ParameterChecker::maxAllowedDataLength(uint16_t payLen,
+uint64_t parameter_checker::maxAllowedDataLength(uint16_t payLen,
         uint64_t maxDBMem)
 {
     _checkPayloadLengthOutOfBounds(payLen);
@@ -171,7 +171,7 @@ uint64_t ParameterChecker::maxAllowedDataLength(uint16_t payLen,
     return _maxAllowedDataLength(payLen, maxDBMem);
 }
 
-bool ParameterChecker::areValidDeriverParameters(uint64_t dataLen,
+bool parameter_checker::areValidDeriverParameters(uint64_t dataLen,
         uint16_t payLen, uint64_t maxDBMem)
 {
     long F = dataLen;
@@ -203,20 +203,20 @@ bool ParameterChecker::areValidDeriverParameters(uint64_t dataLen,
     return true;
 }
 
-bool ParameterChecker::isSourceBlockNumberOutOfBounds(uint8_t sbn)
+bool parameter_checker::isSourceBlockNumberOutOfBounds(uint8_t sbn)
 {
     return !(internal_constants::SBN_min <= sbn
              && sbn <= internal_constants::SBN_max);
 }
 
-bool ParameterChecker::isEncodingSymbolIDOutOfBounds(uint32_t esi)
+bool parameter_checker::isEncodingSymbolIDOutOfBounds(uint32_t esi)
 {
     // TODO(olanmatt): Verify overflow control that throws warning.
     return !(esi <=
              internal_constants::ESI_max);  // && internal_constants::ESI_min <= esi
 }
 
-bool ParameterChecker::isValidFECPayloadID(uint8_t sbn, uint32_t esi,
+bool parameter_checker::isValidFECPayloadID(uint8_t sbn, uint32_t esi,
         uint8_t numSrcBs)
 {
     _checkNumSourceBlocksOutOfBounds(numSrcBs);
@@ -231,14 +231,14 @@ bool ParameterChecker::isValidFECPayloadID(uint8_t sbn, uint32_t esi,
     return true;
 }
 
-bool ParameterChecker::isNumSourceSymbolsPerBlockOutOfBounds(
+bool parameter_checker::isNumSourceSymbolsPerBlockOutOfBounds(
     uint16_t numSrcSymbs)
 {
     return !(internal_constants::K_min <= numSrcSymbs
              && numSrcSymbs <= internal_constants::K_max);
 }
 
-uint32_t ParameterChecker::numRepairSymbolsPerBlock(uint16_t numSrcSymbs)
+uint32_t parameter_checker::numRepairSymbolsPerBlock(uint16_t numSrcSymbs)
 {
     _checkNumSourceSymbolsPerBlockOutOfBounds(numSrcSymbs);
 
@@ -249,36 +249,36 @@ uint32_t ParameterChecker::numRepairSymbolsPerBlock(uint16_t numSrcSymbs)
     return totalSymbs - numSrcSymbs;
 }
 
-uint64_t ParameterChecker::_maxAllowedDataLength(uint16_t T)
+uint64_t parameter_checker::_maxAllowedDataLength(uint16_t T)
 {
     return std::min(internal_constants::F_max,
                     (uint64_t)(T * internal_constants::Kt_max));
 }
 
-uint16_t ParameterChecker::_minAllowedSymbolSize(uint64_t F)
+uint16_t parameter_checker::_minAllowedSymbolSize(uint64_t F)
 {
     return std::max((uint16_t)internal_constants::T_min,
                     (uint16_t)(extra_math::ceil_div(F, internal_constants::Kt_max)));
 }
 
-uint16_t ParameterChecker::_minAllowedNumSourceBlocks(uint16_t Kt)
+uint16_t parameter_checker::_minAllowedNumSourceBlocks(uint16_t Kt)
 {
     return std::max(internal_constants::Z_min, (uint16_t)extra_math::ceil_div(Kt,
                     internal_constants::K_max));
 }
 
-uint16_t ParameterChecker::_maxAllowedNumSourceBlocks(uint16_t Kt)
+uint16_t parameter_checker::_maxAllowedNumSourceBlocks(uint16_t Kt)
 {
     return std::min(internal_constants::Z_max, Kt);
 }
 
-uint16_t ParameterChecker::_maxAllowedInterleaverLength(uint16_t T)
+uint16_t parameter_checker::_maxAllowedInterleaverLength(uint16_t T)
 {
     return std::min(internal_constants::N_max,
                     (uint16_t)(T / internal_constants::Al));
 }
 
-uint64_t ParameterChecker::_minAllowedDecodingBlockSize(uint64_t F, uint16_t T)
+uint64_t parameter_checker::_minAllowedDecodingBlockSize(uint64_t F, uint16_t T)
 {
     int Kt = internal_functions::get_total_symbols(F, T);
 
@@ -289,7 +289,7 @@ uint64_t ParameterChecker::_minAllowedDecodingBlockSize(uint64_t F, uint16_t T)
                                       internal_functions::top_interleaver_length(T));
 }
 
-uint64_t ParameterChecker::_maxAllowedDataLength(uint16_t T, uint64_t WS)
+uint64_t parameter_checker::_maxAllowedDataLength(uint16_t T, uint64_t WS)
 {
     long boundFromT = _maxAllowedDataLength(T);
 
@@ -300,34 +300,34 @@ uint64_t ParameterChecker::_maxAllowedDataLength(uint16_t T, uint64_t WS)
     return std::min(boundFromT, boundFromWS);
 }
 
-bool ParameterChecker::_areDataLengthAndSymbolSizeOutOfBounds(uint64_t F,
+bool parameter_checker::_areDataLengthAndSymbolSizeOutOfBounds(uint64_t F,
         uint16_t T)
 {
     return internal_functions::get_possible_total_symbols(F,
             T) > internal_constants::Kt_max;
 }
 
-bool ParameterChecker::_areDataLengthAndPayloadLengthOutOfBounds(uint64_t F,
+bool parameter_checker::_areDataLengthAndPayloadLengthOutOfBounds(uint64_t F,
         uint16_t P)
 {
     return _areDataLengthAndSymbolSizeOutOfBounds(F, P);
 }
 
-void ParameterChecker::_checkDataLengthOutOfBounds(uint64_t F)
+void parameter_checker::_checkDataLengthOutOfBounds(uint64_t F)
 {
     if (isDataLengthOutOfBounds(F)) {
         throw std::invalid_argument("source data length is out of bounds");
     }
 }
 
-void ParameterChecker::_checkSymbolSizeOutOfBounds(uint16_t T)
+void parameter_checker::_checkSymbolSizeOutOfBounds(uint16_t T)
 {
     if (isSymbolSizeOutOfBounds(T)) {
         throw std::invalid_argument("symbol size is out of bounds");
     }
 }
 
-void ParameterChecker::_checkDataLengthAndSymbolSizeOutOfBounds(uint64_t F,
+void parameter_checker::_checkDataLengthAndSymbolSizeOutOfBounds(uint64_t F,
         uint16_t T)
 {
     if (_areDataLengthAndSymbolSizeOutOfBounds(F, T)) {
@@ -335,21 +335,21 @@ void ParameterChecker::_checkDataLengthAndSymbolSizeOutOfBounds(uint64_t F,
     }
 }
 
-void ParameterChecker::_checkNumSourceBlocksOutOfBounds(uint8_t Z)
+void parameter_checker::_checkNumSourceBlocksOutOfBounds(uint8_t Z)
 {
     if (isNumSourceBlocksOutOfBounds(Z)) {
         throw std::invalid_argument("number of source blocks is out of bounds");
     }
 }
 
-void ParameterChecker::_checkPayloadLengthOutOfBounds(uint16_t P)
+void parameter_checker::_checkPayloadLengthOutOfBounds(uint16_t P)
 {
     if (isPayloadLengthOutOfBounds(P)) {
         throw std::invalid_argument("payload length is out of bounds");
     }
 }
 
-void ParameterChecker::_checkDataLengthAndPayloadLengthOutOfBounds(uint64_t F,
+void parameter_checker::_checkDataLengthAndPayloadLengthOutOfBounds(uint64_t F,
         uint16_t P)
 {
     if (_areDataLengthAndPayloadLengthOutOfBounds(F, P)) {
@@ -357,14 +357,14 @@ void ParameterChecker::_checkDataLengthAndPayloadLengthOutOfBounds(uint64_t F,
     }
 }
 
-void ParameterChecker::_checkDecodingBlockSizeOutOfBounds(uint64_t WS)
+void parameter_checker::_checkDecodingBlockSizeOutOfBounds(uint64_t WS)
 {
     if (WS < minDecodingBlockSize()) {
         throw std::invalid_argument("maximum decoding block size is out of bounds");
     }
 }
 
-void ParameterChecker::_checkNumSourceSymbolsPerBlockOutOfBounds(uint16_t K)
+void parameter_checker::_checkNumSourceSymbolsPerBlockOutOfBounds(uint16_t K)
 {
     if (isNumSourceSymbolsPerBlockOutOfBounds(K)) {
         throw std::invalid_argument("number of source symbols per block is out of bounds");

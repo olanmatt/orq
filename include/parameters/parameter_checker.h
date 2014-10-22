@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-#ifndef INCLUDE_PARAMETERS_PARAMETERCHECKER_H_
-#define INCLUDE_PARAMETERS_PARAMETERCHECKER_H_
+#ifndef INCLUDE_PARAMETERS_PARAMETER_CHECKER_H_
+#define INCLUDE_PARAMETERS_PARAMETER_CHECKER_H_
 
 #include <parameters/internal_constants.h>
 #include <parameters/internal_functions.h>
 #include <util/extra_math.h>
 #include <algorithm>
 
-class ParameterChecker
+class parameter_checker
 {
 public:
     static bool isDataLengthOutOfBounds(uint64_t dataLen);
@@ -77,4 +77,4 @@ private:
     static void _checkNumSourceSymbolsPerBlockOutOfBounds(uint16_t K);
 };
 
-#endif  // INCLUDE_PARAMETERS_PARAMETERCHECKER_H_
+#endif  // INCLUDE_PARAMETERS_PARAMETER_CHECKER_H_

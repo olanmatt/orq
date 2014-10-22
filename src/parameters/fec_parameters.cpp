@@ -44,7 +44,7 @@ fec_parameters::new_parameters(uint64_t data_length,
     uint16_t N = interleaver_length;
     uint8_t Al = internal_constants::Al;
 
-    if (ParameterChecker::areValidFECParameters(F, T, Z, N)) {
+    if (parameter_checker::areValidFECParameters(F, T, Z, N)) {
         return new_local_instance(F, T, Z, N, Al);
     } else {
         // TODO(olanmatt): Add more exception specificity.
@@ -62,7 +62,7 @@ fec_parameters::derive_parameters(uint64_t data_length,
     uint64_t WS = max_db_mem;
     uint8_t Al = internal_constants::Al;
 
-    if (ParameterChecker::areValidDeriverParameters(F, P, WS)) {
+    if (parameter_checker::areValidDeriverParameters(F, P, WS)) {
         uint16_t T = P;
 
         uint16_t Kt = internal_functions::get_total_symbols(F, T);
@@ -116,7 +116,8 @@ fec_parameters::new_local_instance(uint64_t F,
                                    uint8_t Al)
 {
     uint64_t common_fec_oti = parameter_io::build_common_fec_oti(F, T);
-    uint32_t scheme_spec_fec_oti = parameter_io::build_scheme_spec_fec_oti(Z, N, Al);
+    uint32_t scheme_spec_fec_oti = parameter_io::build_scheme_spec_fec_oti(Z, N,
+                                   Al);
     return fec_parameters(common_fec_oti, scheme_spec_fec_oti);
 }
 

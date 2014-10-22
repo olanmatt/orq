@@ -27,7 +27,7 @@
 
 #include <parameters/internal_constants.h>
 #include <parameters/internal_functions.h>
-#include <parameters/ParameterChecker.h>
+#include <parameters/parameter_checker.h>
 #include <parameters/parameter_io.h>
 #include <util/octet_ops.h>
 
