@@ -1,7 +1,6 @@
 --style=linux
 --suffix=none
 --indent=spaces=4
---recursive
 --formatted
 --pad-oper
 --pad-header

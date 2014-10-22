@@ -31,9 +31,11 @@ TESTTARGET := bin/test
 
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
+HEADERS := $(shell find $(SRCDIR) -type f -name "*.h")
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 TESTSOURCES := $(shell find $(TESTDIR) -type f -name "*.$(SRCEXT)")
 TESTOBJECTS := $(patsubst $(TESTDIR)/%,$(BUILDDIR)/$(TESTDIR)/%,$(TESTSOURCES:.$(SRCEXT)=.o))
+HEADERS := $(shell find $(INCDIR) -type f -name "*.h" -a -not -name "catch.h")
 CFLAGS := -g -Wall -pedantic -std=c++0x
 LIB :=
 INC := -I $(INCDIR)
@@ -59,12 +61,19 @@ $(BUILDDIR)/$(TESTDIR)/%.o: $(TESTDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
 	$(GXX) $(CFLAGS) $(INC) -c -o $@ $<
 
-style:
-	astyle --options=.astylerc "$(SRCDIR)/*.cpp" "$(INCDIR)/*.h" "$(TESTDIR)/*.cpp"
-	cpplint --filter=,-whitespace/line_length,-whitespace/braces,-runtime/int,-build/include_what_you_use,-readability/casting,-whitespace/labels `find $(SRCDIR) $(TESTDIR) $(INCDIR) -type f -name "*.cpp" -o -name "*.h" -a -not -name "catch.h"`
 
-# make clean
-.PHONY: clean
+.PHONY: clean style astyle cpplint
+
+style: astyle cpplint
+
+astyle:
+	@astyle --options=.astylerc $(ASTYLE_FLAGS) $(SOURCES) $(HEADERS) $(TESTSOURCES)
+
+cpplint:
+	@cpplint \
+		--filter=-whitespace/indent,-whitespace/line_length,-whitespace/braces,-runtime/int,-readability/casting,-whitespace/labels\
+		$(SOURCES) $(HEADERS) $(TESTSOURCES)
+
 clean:
 	@echo " Cleaning...";
 	$(RM) -r $(BUILDDIR) $(TARGET) $(TESTTARGET)
