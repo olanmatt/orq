@@ -70,9 +70,12 @@ astyle:
 	@astyle --options=.astylerc $(ASTYLE_FLAGS) $(SOURCES) $(HEADERS) $(TESTSOURCES)
 
 cpplint:
-	@cpplint  $(CPPLINT_EXTRA)\
+	@cpplint  $(CPPLINT_EXTRA) \
 		--filter=-whitespace/indent,-whitespace/line_length,-whitespace/braces,-runtime/int,-whitespace/labels\
-		$(SOURCES) $(HEADERS) $(TESTSOURCES)
+		$(SOURCES) $(HEADERS) $(TESTSOURCES) 2>&1 | \
+		awk '!/^Done processing .*(cpp|h)/ { print $$0 }; \
+			/Total errors / { gsub ("^[[:alpha:] ]+: ", ""); err=$$0} \
+			END { exit err; }'
 
 clean:
 	@echo " Cleaning...";
