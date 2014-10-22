@@ -23,6 +23,7 @@
  */
 
 #include <row.h>
+#include <set>
 
 row::row(int i, int r, int d, bool hdpc)
 {

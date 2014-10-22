@@ -23,6 +23,7 @@
  */
 
 #include <parameters/ParameterChecker.h>
+#include <algorithm>
 
 bool ParameterChecker::isDataLengthOutOfBounds(uint64_t dataLen)
 {

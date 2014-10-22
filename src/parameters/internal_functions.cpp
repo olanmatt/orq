@@ -23,6 +23,7 @@
  */
 
 #include <parameters/internal_functions.h>
+#include <algorithm>
 
 uint64_t internal_functions::get_possible_total_symbols(uint64_t F, uint16_t T)
 {
