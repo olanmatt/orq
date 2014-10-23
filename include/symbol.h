@@ -23,19 +23,19 @@
  * SOFTWARE.
  */
 
-#ifndef SYMBOL_H
-#define SYMBOL_H
+#ifndef INCLUDE_SYMBOL_H_
+#define INCLUDE_SYMBOL_H_
 
 
-namespace Symbol {
-	enum TYPE {
+namespace Symbol
+{
+    enum TYPE {
+        /* Value indicating a source symbol. */
+        SOURCE,
 
-		/* Value indicating a source symbol. */
-		SOURCE,
+        /* Value indicating a repair symbol. */
+        REPAIR,
+    };
+}  // namespace Symbol
 
-		/* Value indicating a repair symbol. */
-		REPAIR,
-	};
-}
-
-#endif
+#endif  // INCLUDE_SYMBOL_H_

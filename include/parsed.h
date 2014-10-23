@@ -22,30 +22,30 @@
  * SOFTWARE.
  */
 
-#ifndef PARSED_H
-#define PARSED_H
+#ifndef INCLUDE_PARSED_H_
+#define INCLUDE_PARSED_H_
 
 #include <string>
 #include <stdexcept>
 
 template <typename V>
-class Parsed {
+class Parsed
+{
+public:
+    static Parsed<V> &of(V value);
+    static Parsed<V> &invalid(std::string failureReason);
 
-	public:
-	static Parsed<V>& of(V value);
-	static Parsed<V>& invalid(std::string failureReason);
+    virtual bool is_valid() = 0;
+    virtual V value() = 0;
+    virtual std::string failure_reason() = 0;
 
-	virtual bool is_valid() =0;
-	virtual V value() =0;
-	virtual std::string failure_reason() =0;
+protected:
+    Parsed() { }
 
-	protected:
-	Parsed() { };
+private:
+    class ParsedValue;
 
-	private:
-	class ParsedValue;
-
-	class InvalidValue;
+    class InvalidValue;
 };
 
 /* I get link error when using any of these functions unless they're fully
@@ -53,45 +53,75 @@ class Parsed {
  * can find a better solution */
 
 template <typename V>
-Parsed<V>& Parsed<V>::of(V value) {
-	return *(new ParsedValue(value));
+Parsed<V> &Parsed<V>::of(V value)
+{
+    return *(new ParsedValue(value));
 }
 
 template <typename V>
-Parsed<V>& Parsed<V>::invalid(std::string reason) {
-	return *(new InvalidValue(reason));
+Parsed<V> &Parsed<V>::invalid(std::string reason)
+{
+    return *(new InvalidValue(reason));
 }
 
 template <typename V>
-class Parsed<V>::ParsedValue : public Parsed<V> {
+class Parsed<V>::ParsedValue : public Parsed<V>
+{
+public:
+    ParsedValue(const V &value) : Parsed()
+    {
+        value_ = value;
+    }
+    ~ParsedValue(void)
+    {
+        delete value_;
+    }
 
-	public:
-	ParsedValue(const V& value) : Parsed() { value_ = value; };
-	~ParsedValue(void) { delete value_; }
+    bool is_valid()
+    {
+        return true;
+    }
+    V value()
+    {
+        return this->value_;
+    }
+    std::string failure_reason()
+    {
+        return "";
+    }
 
-	bool is_valid() { return true; }
-	V value() { return this->value_; }
-	std::string failure_reason() { return ""; }
-
-	private:
-	V value_;
-
+private:
+    V value_;
 };
 
 template <typename V>
-class Parsed<V>::InvalidValue : public Parsed<V> {
+class Parsed<V>::InvalidValue : public Parsed<V>
+{
+public:
+    InvalidValue(const std::string &reason) : Parsed()
+    {
+        reason_ = reason;
+    }
+    ~InvalidValue(void)
+    {
+        delete reason_;
+    }
 
-	public:
-	InvalidValue(const std::string& reason) : Parsed() { reason_ = reason; }
-	~InvalidValue(void) { delete reason_; }
+    bool is_valid(void)
+    {
+        return false;
+    }
+    V value(void)
+    {
+        throw failure_reason();
+    }
+    std::string failure_reason(void)
+    {
+        return this->reason_;
+    }
 
-	bool is_valid(void) { return false; }
-	V value(void) { throw failure_reason(); }
-	std::string failure_reason(void) { return this->reason_; }
-
-	private:
-	std::string reason_;
-
+private:
+    std::string reason_;
 };
 
-#endif
+#endif  // INCLUDE_PARSED_H_
