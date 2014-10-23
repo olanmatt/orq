@@ -22,5 +22,21 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
-#include <catch.h>
+#ifndef INCLUDE_UTIL_DEG_H_
+#define INCLUDE_UTIL_DEG_H_
+
+#include <cstdint>
+#include <algorithm>
+#include <stdexcept>
+
+class deg
+{
+public:
+    static int generate(unsigned int v, int W);
+
+private:
+    static const unsigned int m_table1[];
+    deg() { }  // Otherwise default constructor is generated
+};
+
+#endif  // INCLUDE_UTIL_DEG_H_

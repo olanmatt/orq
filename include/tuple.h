@@ -22,5 +22,27 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
-#include <catch.h>
+#ifndef INCLUDE_TUPLE_H_
+#define INCLUDE_TUPLE_H_
+
+#include <matrix_utilities.h>
+#include <util/deg.h>
+#include <util/rand.h>
+#include <util/systematic_indices.h>
+
+class tuple
+{
+public:
+    tuple(int k_prime, long x);
+    long D();
+    long A();
+    long B();
+    long D1();
+    long A1();
+    long B1();
+
+private:
+    long m_d, m_a, m_b, m_d1, m_a1, m_b1;
+};
+
+#endif  // INCLUDE_TUPLE_H_

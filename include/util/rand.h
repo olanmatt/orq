@@ -22,5 +22,22 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
-#include <catch.h>
+#ifndef INCLUDE_UTIL_RAND_H_
+#define INCLUDE_UTIL_RAND_H_
+
+#include <cstdint>
+#include <stdexcept>
+
+class rand
+{
+public:
+    static int generate(uint32_t y, uint8_t i, uint32_t m);
+
+private:
+    static const uint32_t m_V0[];
+    static const uint32_t m_V1[];
+    static const uint32_t m_V2[];
+    static const uint32_t m_V3[];
+};
+
+#endif  // INCLUDE_UTIL_RAND_H_

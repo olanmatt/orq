@@ -22,5 +22,25 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
-#include <catch.h>
+#ifndef INCLUDE_UTIL_SYSTEMATIC_INDICES_H_
+#define INCLUDE_UTIL_SYSTEMATIC_INDICES_H_
+
+#include <stdexcept>
+
+class systematic_indices
+{
+public:
+    static unsigned int get_k_index(unsigned int k_prime);
+    static unsigned int K(unsigned int k_index);
+    static unsigned int J(unsigned int k_index);
+    static unsigned int S(unsigned int k_index);
+    static unsigned int H(unsigned int k_index);
+    static unsigned int W(unsigned int k_index);
+    static int ceil(unsigned int k_prime);
+    static int floor(unsigned int k_prime);
+
+private:
+    static const unsigned int m_table2[][5];
+};
+
+#endif  // INCLUDE_UTIL_SYSTEMATIC_INDICES_H_

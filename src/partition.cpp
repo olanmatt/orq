@@ -22,5 +22,34 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
-#include <catch.h>
+#include <partition.h>
+
+// 4.4.1.2 Source Block and Sub-Block Partitioning
+partition::partition(unsigned int I, unsigned int J)
+{
+    m_IL = (I + J - 1) / J;  // ceil(I / J)
+    m_IS = I / J;  // floor(I / J)
+    m_JL = I - (m_IS * J);
+    m_JS = J - m_JL;
+}
+
+// TODO(pbhandari): Convert these to constant member variables.
+int partition::IL()
+{
+    return m_IL;
+}
+
+int partition::IS()
+{
+    return m_IS;
+}
+
+int partition::JL()
+{
+    return m_JL;
+}
+
+int partition::JS()
+{
+    return m_JS;
+}

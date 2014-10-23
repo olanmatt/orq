@@ -22,5 +22,51 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
-#include <catch.h>
+#include <util/deg.h>
+#include <algorithm>
+
+// 5.3.5.2 Degree Generator
+const unsigned int deg::m_table1[] = {
+    0,
+    5243,
+    529531,
+    704294,
+    791675,
+    844104,
+    879057,
+    904023,
+    922747,
+    937311,
+    948962,
+    958494,
+    966438,
+    973160,
+    978921,
+    983914,
+    988283,
+    992138,
+    995565,
+    998631,
+    1001391,
+    1003887,
+    1006157,
+    1008229,
+    1010129,
+    1011876,
+    1013490,
+    1014983,
+    1016370,
+    1017662,
+    1048576
+};
+
+int deg::generate(unsigned int v, int W)
+{
+    for (int i = 0; i < 31; i++) {
+        if (v < m_table1[i]) {
+            return (std::min(i, W - 2));
+        }
+    }
+
+    throw std::runtime_error("Inconsistent table state");
+}

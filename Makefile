@@ -24,26 +24,27 @@ CC ?= gcc
 CXX ?= g++
 SRCDIR := src
 TESTDIR := test
+INCDIR := include
 BUILDDIR := build
 TARGET := bin/orq
 TESTTARGET := bin/test
 
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
+HEADERS := $(shell find $(SRCDIR) -type f -name "*.h")
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 TESTSOURCES := $(shell find $(TESTDIR) -type f -name "*.$(SRCEXT)")
 TESTOBJECTS := $(patsubst $(TESTDIR)/%,$(BUILDDIR)/$(TESTDIR)/%,$(TESTSOURCES:.$(SRCEXT)=.o))
-CFLAGS := -g -Wall -pedantic -std=c1x
-CXXFLAGS := -g -Wall -pedantic -std=c++0x
-LDFLAGS :=
-INC := -I include
-
-all: $(TARGET)
+HEADERS := $(shell find $(INCDIR) -type f -name "*.h" -a -not -name "catch.h")
+CFLAGS := -g -Wall -pedantic -std=c++0x
+CXXFLAGS := $(CFLAGS)
+LIB :=
+INC := -I $(INCDIR)
 
 # make
 $(TARGET): $(OBJECTS)
 	@echo ""; echo "Linking..."
-	$(CXX) $^ -o $(TARGET) $(LDFLAGS)
+	$(CXX) $^ -o $(TARGET) $(LIB)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
@@ -55,25 +56,28 @@ test: $(TARGET) $(TESTTARGET)
 
 $(TESTTARGET): $(TESTOBJECTS)
 	@echo ""; echo "Linking..."
-	$(CXX) $^ $(filter-out $(BUILDDIR)/orq.o,$(OBJECTS)) -o $(TESTTARGET) $(LDFLAGS)
+	$(CXX) $^ $(filter-out $(BUILDDIR)/orq.o,$(OBJECTS)) -o $(TESTTARGET) $(LIB)
 
 $(BUILDDIR)/$(TESTDIR)/%.o: $(TESTDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
 
-gcov:
-ifeq ($(CXX),g++)
-gcov: CXXFLAGS += -g -O0 --coverage
-gcov: LDFLAGS += -lgcov
-gcov: clean test
-else ifeq ($(CC),gcc)
-gcov: CFLAGS += -g -O0 --coverage
-gcov: LDFLAGS += -lgcov
-gcov: clean test
-endif
 
-# make clean
-.PHONY: clean
+.PHONY: clean style astyle cpplint
+
+style: astyle cpplint
+
+astyle:
+	@astyle --options=.astylerc $(ASTYLE_FLAGS) $(SOURCES) $(HEADERS) $(TESTSOURCES)
+
+cpplint:
+	@cpplint  $(CPPLINT_EXTRA) \
+		--filter=-whitespace/indent,-whitespace/line_length,-whitespace/braces,-runtime/int,-whitespace/labels\
+		$(SOURCES) $(HEADERS) $(TESTSOURCES) 2>&1 | \
+		awk '!/^Done processing .*(cpp|h)/ { print $$0 }; \
+			/Total errors / { gsub ("^[[:alpha:] ]+: ", ""); err=$$0} \
+			END { exit err; }'
+
 clean:
 	@echo " Cleaning...";
 	$(RM) -r $(BUILDDIR) $(TARGET) $(TESTTARGET)

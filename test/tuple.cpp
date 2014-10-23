@@ -22,5 +22,17 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
 #include <catch.h>
+#include <tuple.h>
+
+TEST_CASE("Tuple can be created, and values are valid", "[tuple]")
+{
+    tuple t = tuple(1337, 5);
+
+    REQUIRE(t.D() == 6);
+    REQUIRE(t.A() == 1340);
+    REQUIRE(t.B() == 371);
+    REQUIRE(t.D1() == 2);
+    REQUIRE(t.A1() == 31);
+    REQUIRE(t.B1() == 44);
+}

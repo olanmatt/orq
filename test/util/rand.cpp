@@ -22,5 +22,10 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
 #include <catch.h>
+#include <util/rand.h>
+
+TEST_CASE("Rand can be called and values are consistant", "[rand]")
+{
+    REQUIRE(rand::generate(12345, 128, 54321) == 44030);
+}

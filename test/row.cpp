@@ -22,5 +22,13 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
 #include <catch.h>
+#include <row.h>
+
+TEST_CASE("Row can be created, and equated", "[row]")
+{
+    row r1 = row(1, 2, 3, true);
+    row r2 = row(1, 2, 3, true);
+
+    REQUIRE(r1 == r2);
+}

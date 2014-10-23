@@ -22,5 +22,14 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
-#include <catch.h>
+#ifndef INCLUDE_MATRIX_UTILITIES_H_
+#define INCLUDE_MATRIX_UTILITIES_H_
+
+class matrix_utilities
+{
+public:
+    static long ceil_prime(long p);
+    static bool is_prime(long n);
+};
+
+#endif  // INCLUDE_MATRIX_UTILITIES_H_

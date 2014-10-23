@@ -22,5 +22,28 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
-#include <catch.h>
+#include <row.h>
+#include <set>
+
+row::row(int i, int r, int d, bool hdpc)
+{
+    m_position = i;
+    m_non_zeros = r;
+    m_original_degree = d;
+    m_nodes = std::set<int>();
+    m_is_hdpc = hdpc;
+}
+
+row::row(int i, int r, int d, bool hdpc, std::set<int> e)
+{
+    m_position = i;
+    m_non_zeros = r;
+    m_original_degree = d;
+    m_nodes = e;
+    m_is_hdpc = hdpc;
+}
+
+bool row::operator==(const row &other)
+{
+    return other.m_position == this->m_position;
+}

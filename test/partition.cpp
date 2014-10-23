@@ -22,5 +22,15 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
 #include <catch.h>
+#include <partition.h>
+
+TEST_CASE("Partition can be created, and values are valid", "[partition]")
+{
+    partition p = partition(1337, 5);
+
+    REQUIRE(p.IL() == 268);
+    REQUIRE(p.IS() == 267);
+    REQUIRE(p.JL() == 2);
+    REQUIRE(p.JS() == 3);
+}

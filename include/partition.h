@@ -22,5 +22,23 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
-#include <catch.h>
+#ifndef INCLUDE_PARTITION_H_
+#define INCLUDE_PARTITION_H_
+
+class partition
+{
+public:
+    partition(unsigned int I, unsigned int J);
+    int IL();
+    int IS();
+    int JL();
+    int JS();
+
+private:
+    int m_IL;
+    int m_IS;
+    int m_JL;
+    int m_JS;
+};
+
+#endif  // INCLUDE_PARTITION_H_

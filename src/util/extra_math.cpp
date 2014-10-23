@@ -22,5 +22,9 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
-#include <catch.h>
+#include <util/extra_math.h>
+
+int extra_math::ceil_div(int num, int den)
+{
+    return (num + (den - 1L)) / den;
+}

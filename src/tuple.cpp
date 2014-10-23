@@ -22,5 +22,69 @@
  * SOFTWARE.
  */
 
-#define CATCH_CONFIG_MAIN
-#include <catch.h>
+#include <tuple.h>
+
+// 5.3.3.2 Source Symbol Tuples
+tuple::tuple(int k_prime, long x)
+{
+    int Ki = systematic_indices::get_k_index(k_prime);
+    int S = systematic_indices::S(Ki);
+    int H = systematic_indices::H(Ki);
+    int W = systematic_indices::W(Ki);
+    int L = k_prime + S + H;
+    int J = systematic_indices::J(Ki);
+    int P = L - W;
+    long P1 = matrix_utilities::ceil_prime(P);
+
+    long A = 53591 + J * 997;
+    if (A % 2 == 0) {
+        A++;
+    }
+
+    long B = 10267 * (J + 1);
+
+    long y = (B + x * A) % 4294967296L;  // 2^^32
+
+    long v = rand::generate(y, 0, 1048576L);  // 2^^20
+
+    m_d = deg::generate(v, W);
+    m_a = 1 + rand::generate(y, 1, W - 1);
+    m_b = rand::generate(y, 2, W);
+    if (m_d < 4) {
+        m_d1 = 2 + rand::generate(x, 3, 2L);
+    } else {
+        m_d1 = 2;
+    }
+    m_a1 = 1 + rand::generate(x, 4, P1 - 1);
+    m_b1 = rand::generate(x, 5, P1);
+}
+
+long tuple::D()
+{
+    return m_d;
+}
+
+long tuple::A()
+{
+    return m_a;
+}
+
+long tuple::B()
+{
+    return m_b;
+}
+
+long tuple::D1()
+{
+    return m_d1;
+}
+
+long tuple::A1()
+{
+    return m_a1;
+}
+
+long tuple::B1()
+{
+    return m_b1;
+}
