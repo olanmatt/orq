@@ -88,12 +88,12 @@ const int octet_ops::m_OCT_LOG[] = {
 };
 
 // 5.7.2 Arithmetic Operations on Octets
-uint8_t octet_ops::getExp(int i)
+uint8_t octet_ops::get_exp(int i)
 {
     return m_OCT_EXP[i];
 }
 
-uint8_t octet_ops::getLog(int i)
+uint8_t octet_ops::get_log(int i)
 {
     return m_OCT_LOG[i - 1];
 }
@@ -113,7 +113,7 @@ uint8_t octet_ops::product(uint8_t u, uint8_t v)
     if (u == 0 || v == 0) {
         return 0;
     }
-    return (uint8_t)getExp(getLog(u) + getLog(v));
+    return (uint8_t)get_exp(get_log(u) + get_log(v));
 }
 
 uint8_t octet_ops::division(uint8_t u, uint8_t v)
@@ -124,17 +124,17 @@ uint8_t octet_ops::division(uint8_t u, uint8_t v)
     if (u == 0) {
         return 0;
     }
-    return (uint8_t)getExp((getLog(u) - getLog(v)) + 255);
+    return (uint8_t)get_exp((get_log(u) - get_log(v)) + 255);
 }
 
-uint8_t octet_ops::alphaPower(int i)
+uint8_t octet_ops::alpha_power(int i)
 {
-    return getExp(i);
+    return get_exp(i);
 }
 
 // 5.7.5 Operations on Symbols
 // TODO(pbhandari): Convert uint8_t arrays to vectors.
-void octet_ops::betaProduct(uint8_t beta, uint8_t *U)
+void octet_ops::beta_product(uint8_t beta, uint8_t *U)
 {
     // TODO(pbhandari): Check that U != null and length of U > 0.
     if (beta == 1) {
@@ -147,7 +147,7 @@ void octet_ops::betaProduct(uint8_t beta, uint8_t *U)
 }
 
 // TODO(pbhandari): Convert uint8_t arrays to vectors.
-void octet_ops::betaDivision(uint8_t *U, uint8_t beta)
+void octet_ops::beta_division(uint8_t *U, uint8_t beta)
 {
     // TODO(pbhandari): Check that U != null and length of U > 0.
     if (beta == 1) {
@@ -159,7 +159,7 @@ void octet_ops::betaDivision(uint8_t *U, uint8_t beta)
 }
 
 // TODO(pbhandari): Convert uint8_t arrays to vectors.
-void octet_ops::betaProduct(uint8_t beta, uint8_t U[], int pos, int length)
+void octet_ops::beta_product(uint8_t beta, uint8_t U[], int pos, int length)
 {
     // TODO(pbhandari): Check that U != null and length of U > 0.
     if (beta == 1) {
@@ -171,7 +171,7 @@ void octet_ops::betaProduct(uint8_t beta, uint8_t U[], int pos, int length)
 }
 
 // TODO(pbhandari): Convert uint8_t arrays to vectors.
-void octet_ops::betaDivision(uint8_t U[], uint8_t beta, int pos, int length)
+void octet_ops::beta_division(uint8_t U[], uint8_t beta, int pos, int length)
 {
     // TODO(pbhandari): Check that U != null and length of U > 0.
     if (beta == 1) {

@@ -31,17 +31,17 @@
 class octet_ops
 {
 public:
-    static uint8_t getExp(int i);
-    static uint8_t getLog(int i);
+    static uint8_t get_exp(int i);
+    static uint8_t get_log(int i);
     static uint8_t addition(uint8_t u, uint8_t v);
     static uint8_t subtraction(uint8_t u, uint8_t v);
     static uint8_t product(uint8_t u, uint8_t v);
     static uint8_t division(uint8_t u, uint8_t v);
-    static uint8_t alphaPower(int i);
-    static void betaProduct(uint8_t beta, uint8_t U[]);
-    static void betaDivision(uint8_t U[], uint8_t beta);
-    static void betaProduct(uint8_t beta, uint8_t U[], int pos, int length);
-    static void betaDivision(uint8_t U[], uint8_t beta, int pos, int length);
+    static uint8_t alpha_power(int i);
+    static void beta_product(uint8_t beta, uint8_t U[]);
+    static void beta_division(uint8_t U[], uint8_t beta);
+    static void beta_product(uint8_t beta, uint8_t U[], int pos, int length);
+    static void beta_division(uint8_t U[], uint8_t beta, int pos, int length);
 
 private:
     static const int m_OCT_EXP[];
