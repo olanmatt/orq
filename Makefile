@@ -36,15 +36,15 @@ OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 TESTSOURCES := $(shell find $(TESTDIR) -type f -name "*.$(SRCEXT)")
 TESTOBJECTS := $(patsubst $(TESTDIR)/%,$(BUILDDIR)/$(TESTDIR)/%,$(TESTSOURCES:.$(SRCEXT)=.o))
 HEADERS := $(shell find $(INCDIR) -type f -name "*.h" -a -not -name "catch.h")
-CFLAGS := -g -Wall -pedantic -std=c++0x
-CXXFLAGS := $(CFLAGS)
-LIB :=
+CFLAGS := -g -Wall -pedantic -std=c1x
+CXXFLAGS := -g -Wall -pedantic -std=c++0x
+LDFLAGS :=
 INC := -I $(INCDIR)
 
 # make
 $(TARGET): $(OBJECTS)
 	@echo ""; echo "Linking..."
-	$(CXX) $^ -o $(TARGET) $(LIB)
+	$(CXX) $^ -o $(TARGET) $(LDFLAGS)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
@@ -56,12 +56,22 @@ test: $(TARGET) $(TESTTARGET)
 
 $(TESTTARGET): $(TESTOBJECTS)
 	@echo ""; echo "Linking..."
-	$(CXX) $^ $(filter-out $(BUILDDIR)/orq.o,$(OBJECTS)) -o $(TESTTARGET) $(LIB)
+	$(CXX) $^ $(filter-out $(BUILDDIR)/orq.o,$(OBJECTS)) -o $(TESTTARGET) $(LDFLAGS)
 
 $(BUILDDIR)/$(TESTDIR)/%.o: $(TESTDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
 
+gcov:
+ifeq ($(CXX),g++)
+gcov: CXXFLAGS += -g -O0 --coverage
+gcov: LDFLAGS += -lgcov
+gcov: clean test
+else ifeq ($(CC),gcc)
+gcov: CFLAGS += -g -O0 --coverage
+gcov: LDFLAGS += -lgcov
+gcov: clean test
+endif
 
 .PHONY: clean style astyle cpplint
 
