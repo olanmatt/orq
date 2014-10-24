@@ -37,3 +37,9 @@ TEST_CASE("fec_parameters can be created, encoded into OTIs, then restored",
     REQUIRE(f.symbol_alignment() == 1);
     REQUIRE(f.total_symbols() == 64);
 }
+
+TEST_CASE("Test cases for values that do not satisfy proper parameter values",
+	  "[fec_parameters]")
+{
+    REQUIRE_THROWS(fec_parameters::new_parameters(0,0,0));
+}
