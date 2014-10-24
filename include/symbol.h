@@ -1,4 +1,3 @@
-
 /*
  * The MIT License (MIT)
  *
@@ -27,15 +26,12 @@
 #define INCLUDE_SYMBOL_H_
 
 
-namespace Symbol
-{
-    enum TYPE {
-        /* Value indicating a source symbol. */
-        SOURCE,
+enum symbol {
+    /* Value indicating a source symbol. */
+    SOURCE,
 
-        /* Value indicating a repair symbol. */
-        REPAIR,
-    };
-}  // namespace Symbol
+    /* Value indicating a repair symbol. */
+    REPAIR,
+};
 
 #endif  // INCLUDE_SYMBOL_H_
