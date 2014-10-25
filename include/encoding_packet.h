@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Matt Olan, Prajjwal Bhandari
+ * Copyright (c) 2014 Matt Olan, Prajjwal Bhandari.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -66,7 +66,7 @@ public:
     }
     std::vector<uint8_t> as_buffer();
 
-    int get_fec_payload_id();
+    uint32_t get_fec_payload_id();
     int get_number_of_symbols();
     std::vector<uint8_t> get_symbols();
     int get_symbols_length();
@@ -88,8 +88,7 @@ public:
 
     virtual ~encoding_packet(void)
     {
-        // TODO(pbhandari): delete the vector if needed
-        /* delete m_symbols; */
+        delete m_symbols;
     }
 protected:
     encoding_packet(int sbn, int esi, std::vector<uint8_t> symbols, int num_symbols)
@@ -99,9 +98,9 @@ protected:
     { }
 
 private:
-    const int m_fec_payload_id;
+    const uint32_t m_fec_payload_id;
     const std::vector<uint8_t> m_symbols;
-    const int m_num_symbols;
+    const uint64_t m_num_symbols;
 };
 
 
