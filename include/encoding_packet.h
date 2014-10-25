@@ -56,61 +56,50 @@ public:
         throw "Why would you use this function when I tell you not to";
     }
 
-    int source_block_number();
-    int encoding_symbol_id();
-    uint32_t fec_payload_id();
-    uint64_t number_of_symbols();
-    virtual symbol symbol_type() = 0;
+    int source_block_number()
+    {
+        throw "Look in fec_parameters";
+    }
+    int encoding_symbol_id()
+    {
+        throw "Look in fec_parameters";
+    }
+    std::vector<uint8_t> as_buffer();
+
+    uint32_t get_fec_payload_id();
+    int get_number_of_symbols();
+    std::vector<uint8_t> get_symbols();
+    int get_symbols_length();
+    symbol get_type();
+
+    int fec_payload_id();
+    int number_of_symbols();
+
     std::vector<uint8_t> symbols();
     uint64_t symbols_length();
     // SerializablePacket as_serializable();
     std::vector<uint8_t> as_array();
     void write_to(std::vector<uint8_t> array);
     void write_to(std::vector<uint8_t> array, int offset);
-    std::vector<uint8_t> as_buffer();
-    // void write_to(ByteBuffer buffer);
-    // void write_to(DataOutput out) throws IOException;
-    // void write_to(WritableByteChannel ch) throws IOException;
+    /* virtual void writeTo(DataOutput out) throws IOException; */
+    /* virtual void writeTo(WritableByteChannel ch) throws IOException; */
 
-    virtual ~encoding_packet(void)
-    {
-        delete m_symbols;
-    }
-protected:
-    encoding_packet(int sbn, int esi, std::vector<uint8_t> symbols, int num_symbols)
+    encoding_packet(int sbn, int esi, std::vector<uint8_t> symbols,
+                    int num_symbols, symbol type)
         : m_fec_payload_id(parameter_io::build_fec_payload_id(sbn, esi)),
           m_symbols(symbols),
-          m_num_symbols(num_symbols)
+          m_num_symbols(num_symbols),
+          m_type(type)
     { }
+
+    // TODO(pbhandari): delete the vector if needed
+    ~encoding_packet(void) { /* NO-OP */ };
 
 private:
     const uint32_t m_fec_payload_id;
     const std::vector<uint8_t> m_symbols;
-    const uint64_t m_num_symbols;
-};
-
-class source_packet : public encoding_packet
-{
-    source_packet(int sbn, int esi, std::vector<uint8_t> symbols, int num_symbols)
-        : encoding_packet(sbn, esi, symbols, num_symbols)
-    { }
-
-    symbol symbol_type()
-    {
-        return symbol::SOURCE;
-    }
-};
-
-class repair_packet : public encoding_packet
-{
-    repair_packet(int sbn, int esi, std::vector<uint8_t> symbols, int num_symbols)
-        : encoding_packet(sbn, esi, symbols, num_symbols)
-    { }
-
-    symbol symbol_type()
-    {
-        return symbol::REPAIR;
-    }
+    const int m_num_symbols;
+    const symbol m_type;
 };
 
 #endif  // INCLUDE_ENCODING_PACKET_H_
