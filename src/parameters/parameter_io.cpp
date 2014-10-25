@@ -67,7 +67,7 @@ uint8_t parameter_io::extract_symbol_alignment(uint32_t schemeSpecFecOTI)
 
 int parameter_io::source_block_number_shift()
 {
-    return internal_constants::ESI_num_bytes * sizeof(uint8_t) * 8;
+    return 3 * sizeof(uint8_t) * 8;  // shift by length of ESI
 }
 
 uint8_t parameter_io::extract_source_block_number(uint32_t fecPayloadID)
