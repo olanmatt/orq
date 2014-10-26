@@ -37,7 +37,7 @@ class array_source_block_encoder
 {
 public:
     // requires valid arguments
-    static array_source_block_encoder new_encoder(array_data_encoder& data_encoder,
+    static array_source_block_encoder new_encoder(array_data_encoder &data_encoder,
             std::vector< std::vector<uint8_t> > array, int array_offset,
             fec_parameters fec_params, int source_block_num, int K)
     {

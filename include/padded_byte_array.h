@@ -75,10 +75,10 @@ public:
 
     std::vector<uint8_t> get_bytes(std::vector<uint8_t> dst);
     std::vector<uint8_t> get_bytes(std::vector<uint8_t> dst, int off,
-                                         int len);
+                                   int len);
     std::vector<uint8_t> get_bytes(int index, std::vector<uint8_t> dst);
     std::vector<uint8_t> get_bytes(int index, std::vector<uint8_t> dst,
-                                         int off, int len);
+                                   int off, int len);
 
     void put_bytes(std::vector<uint8_t> src);
     void put_bytes(std::vector<uint8_t> src, int off, int len);

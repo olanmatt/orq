@@ -56,35 +56,21 @@ public:
         throw "Why would you use this function when I tell you not to";
     }
 
-    int source_block_number()
-    {
-        throw "Look in fec_parameters";
-    }
-    int encoding_symbol_id()
-    {
-        throw "Look in fec_parameters";
-    }
-    std::vector<uint8_t> as_buffer();
-
-    uint32_t get_fec_payload_id();
-    int get_number_of_symbols();
-    std::vector<uint8_t> get_symbols();
-    int get_symbols_length();
-
-    int fec_payload_id();
-    int number_of_symbols();
-
+    int source_block_number();
+    int encoding_symbol_id();
+    uint32_t fec_payload_id();
+    uint64_t number_of_symbols();
+    virtual symbol symbol_type() = 0;
     std::vector<uint8_t> symbols();
-    int symbols_length();
-
+    uint64_t symbols_length();
+    // SerializablePacket as_serializable();
     std::vector<uint8_t> as_array();
-
     void write_to(std::vector<uint8_t> array);
     void write_to(std::vector<uint8_t> array, int offset);
-    /* virtual void writeTo(DataOutput out) throws IOException; */
-    /* virtual void writeTo(WritableByteChannel ch) throws IOException; */
-
-    virtual symbol symbol_type() = 0;
+    std::vector<uint8_t> as_buffer();
+    // void write_to(ByteBuffer buffer);
+    // void write_to(DataOutput out) throws IOException;
+    // void write_to(WritableByteChannel ch) throws IOException;
 
     virtual ~encoding_packet(void)
     {
@@ -102,8 +88,6 @@ private:
     const std::vector<uint8_t> m_symbols;
     const uint64_t m_num_symbols;
 };
-
-
 
 class source_packet : public encoding_packet
 {
