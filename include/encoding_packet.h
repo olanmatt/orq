@@ -37,13 +37,13 @@ public:
     static void new_source_packet(int sbn, int esi,
                                   std::vector<uint8_t> symbols, int num_symbols)
     {
-        throw "Use a constructor";
+        throw "Use a constructor, with type symbol::SOURCE";
     }
 
     static void new_repair_packet(int sbn, int esi,
                                   std::vector<uint8_t> symbols, int num_symbols)
     {
-        throw "Use a constructor";
+        throw "Use a constructor, with type symbol::REPAIR";
     }
 
     static void parse_packet(int do_not_use_this_function)
@@ -56,33 +56,22 @@ public:
         throw "Why would you use this function when I tell you not to";
     }
 
-    int source_block_number()
-    {
-        throw "Look in fec_parameters";
-    }
-    int encoding_symbol_id()
-    {
-        throw "Look in fec_parameters";
-    }
-    std::vector<uint8_t> as_buffer();
-
-    uint32_t get_fec_payload_id();
-    int get_number_of_symbols();
-    std::vector<uint8_t> get_symbols();
-    int get_symbols_length();
-    symbol get_type();
-
-    int fec_payload_id();
-    int number_of_symbols();
-
+    int source_block_number();
+    int encoding_symbol_id();
+    uint32_t fec_payload_id();
+    uint64_t number_of_symbols();
     std::vector<uint8_t> symbols();
     uint64_t symbols_length();
+    symbol symbol_type();
+
     // SerializablePacket as_serializable();
     std::vector<uint8_t> as_array();
+    std::vector<uint8_t> as_buffer();
+
     void write_to(std::vector<uint8_t> array);
     void write_to(std::vector<uint8_t> array, int offset);
-    /* virtual void writeTo(DataOutput out) throws IOException; */
-    /* virtual void writeTo(WritableByteChannel ch) throws IOException; */
+    // void write_to(DataOutput out) throws IOException;
+    // void write_to(WritableByteChannel ch) throws IOException;
 
     encoding_packet(int sbn, int esi, std::vector<uint8_t> symbols,
                     int num_symbols, symbol type)
@@ -93,13 +82,30 @@ public:
     { }
 
     // TODO(pbhandari): delete the vector if needed
-    ~encoding_packet(void) { /* NO-OP */ };
+    ~encoding_packet()
+    {
+        /* NO-OP */
+    };
 
 private:
     const uint32_t m_fec_payload_id;
     const std::vector<uint8_t> m_symbols;
-    const int m_num_symbols;
+    const uint64_t m_num_symbols;
     const symbol m_type;
+};
+
+class source_packet : public encoding_packet
+{
+    source_packet(int sbn, int esi, std::vector<uint8_t> symbols, int num_symbols)
+        : encoding_packet(sbn, esi, symbols, num_symbols, symbol::SOURCE)
+    { }
+};
+
+class repair_packet : public encoding_packet
+{
+    repair_packet(int sbn, int esi, std::vector<uint8_t> symbols, int num_symbols)
+        : encoding_packet(sbn, esi, symbols, num_symbols, symbol::REPAIR)
+    { }
 };
 
 #endif  // INCLUDE_ENCODING_PACKET_H_

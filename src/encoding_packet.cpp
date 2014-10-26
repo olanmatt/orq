@@ -58,3 +58,8 @@ uint64_t encoding_packet::symbols_length()
 {
     return m_symbols.size();
 }
+
+symbol encoding_packet::symbol_type()
+{
+    return m_type;
+}
