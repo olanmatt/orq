@@ -30,11 +30,6 @@
 #include <cstdint>
 #include <vector>
 
-encoding_packet::~encoding_packet()
-{
-    // TODO(pbhandari): de-allocate memory for vector if necessary
-}
-
 int
 encoding_packet::source_block_number() const
 {

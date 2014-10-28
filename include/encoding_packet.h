@@ -81,8 +81,6 @@ public:
           m_type(type)
     { }
 
-    ~encoding_packet();
-
 private:
     const uint32_t m_fec_payload_id;
     const std::vector<uint8_t> m_symbols;
