@@ -22,13 +22,55 @@
  * SOFTWARE.
  */
 
-#ifndef INCLUDE_UTIL_ARRAY_UTILS_H_
-#define INCLUDE_UTIL_ARRAY_UTILS_H_
-
+#include <util/array_utils.h>
 #include <string>
 #include <vector>
+#include <stdexcept>
+#include <cstdint>
 
 template<typename T>
-std::vector<uint8_t> to_byte_array(const T &elem);
+std::vector<uint8_t> to_byte_array(const T &elem)
+{
+    throw new std::invalid_argument("Method not defined for given type");
+}
 
-#endif  // INCLUDE_UTIL_ARRAY_UTILS_H_
+template<>
+std::vector<uint8_t> to_byte_array(const uint8_t &elem)
+{
+    return std::vector<uint8_t> {elem};
+}
+
+template<>
+std::vector<uint8_t> to_byte_array(const uint16_t &elem)
+{
+    return std::vector<uint8_t> { (uint8_t)(elem >> 8), (uint8_t)(elem)};
+}
+
+template<>
+std::vector<uint8_t> to_byte_array(const uint32_t &elem)
+{
+    std::vector<uint8_t> vec {};
+    for (int i = 4; i > 0; --i) {
+        vec.push_back(static_cast<uint8_t>(elem >> (8 * i)));
+    }
+
+    return vec;
+}
+
+template<>
+std::vector<uint8_t> to_byte_array(const uint64_t &elem)
+{
+    std::vector<uint8_t> vec {};
+    for (int i = 8; i > 0; --i) {
+        vec.push_back(static_cast<uint8_t>(elem >> (8 * i)));
+    }
+
+    return vec;
+}
+
+template<>
+std::vector<uint8_t> to_byte_array(const std::vector<uint8_t> &elem)
+{
+    std::vector<uint8_t> vec = elem;  // copy the vector
+    return vec;
+}
