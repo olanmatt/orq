@@ -32,14 +32,16 @@ class array_data_encoder;
 #include <parameters/fec_parameters.h>
 #include <memory>
 #include <vector>
+#include <iterator>
 
 class array_source_block_encoder
 {
 public:
     // requires valid arguments
-    static array_source_block_encoder new_encoder(array_data_encoder &data_encoder,
-            std::vector< std::vector<uint8_t> > array, int array_offset,
-            fec_parameters fec_params, int source_block_num, int K)
+    static array_source_block_encoder
+    new_encoder(const array_data_encoder &data_encoder,
+                std::vector< std::vector<uint8_t> > array, int array_offset,
+                fec_parameters fec_params, int source_block_num, int K)
     {
         throw "Use the constructor";
     }
@@ -63,6 +65,7 @@ public:
 
     /* iterable_builder new_iterable_builder() { return new iter_builder(this); } */
 
+    // TODO(pbhandari): Use std::iterator
     std::vector<encoding_packet> source_packets_iterable();
     std::vector<encoding_packet> repair_packets_iterable(int num_packets);
 
