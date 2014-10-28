@@ -42,15 +42,15 @@ public:
         throw "Use source_symbol(int, padded_byte_array)";
     }
 
-    virtual std::vector<uint8_t> data() = 0;
-    virtual std::vector<uint8_t> transport_data() = 0;
-    virtual int transport_size() = 0;
+    virtual std::vector<uint8_t> data() const = 0;
+    virtual const std::vector<uint8_t> transport_data() const = 0;
+    virtual int transport_size() const = 0;
 
-    int esi(void);
-    int get_isi(int source_symbols_per_block);
+    uint32_t esi(void) const;
+    uint32_t get_isi(int source_symbols_per_block) const;
 
     explicit encoding_symbol(int esi): m_esi(esi) { }
-    virtual ~encoding_symbol(void);
+    virtual ~encoding_symbol(void) { }
 
 private:
     const int m_esi;
@@ -60,16 +60,16 @@ private:
 class source_symbol : public encoding_symbol
 {
 public:
-    std::vector<uint8_t> data(void);  // Arrays.copyOf(m_data, m_data.length);
-    std::vector<uint8_t> transport_data(void);  // m_transport_buffer as read-only
-    int transport_size(void);  // m_transport_buffer.remaining();
+    std::vector<uint8_t> data(void) const;
+    const std::vector<uint8_t> transport_data(void) const;
+    int transport_size(void) const;
 
     source_symbol(int esi, padded_byte_array data_array);
     ~source_symbol(void);
 
 private:
-    static std::vector<uint8_t> prepare_transport_buffer(padded_byte_array
-            data_array);
+    static std::vector<uint8_t>
+    prepare_transport_buffer(padded_byte_array data_array);
 
     const padded_byte_array m_data;
     const std::vector<uint8_t> m_transport_buffer;
@@ -79,13 +79,16 @@ private:
 class repair_symbol : public encoding_symbol
 {
 public:
-    std::vector<uint8_t> data(void);
-    std::vector<uint8_t> transport_data(void);
-    int transport_size(void);
+    std::vector<uint8_t> data(void) const;
+    const std::vector<uint8_t> transport_data(void) const;
+    int transport_size(void) const;
 
     repair_symbol(int esi, std::vector<uint8_t> data_array);
+    ~repair_symbol(void);
+
 private:
-    static std::vector<uint8_t> prepare_transport_buffer(std::vector<uint8_t> data);
+    static std::vector<uint8_t>
+    prepare_transport_buffer(std::vector<uint8_t> data);
 
     const std::vector<uint8_t> m_data;
     const std::vector<uint8_t> m_transport_buffer;
