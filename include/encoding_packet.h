@@ -56,22 +56,22 @@ public:
         throw "Why would you use this function when I tell you not to";
     }
 
-    int source_block_number();
-    int encoding_symbol_id();
-    uint32_t fec_payload_id();
-    uint64_t number_of_symbols();
-    std::vector<uint8_t> symbols();
-    uint64_t symbols_length();
-    symbol symbol_type();
+    int source_block_number() const;
+    int encoding_symbol_id() const;
+    uint32_t fec_payload_id() const;
+    uint64_t number_of_symbols() const;
+    uint64_t symbols_length() const;
+    std::vector<uint8_t> symbols() const;
+    symbol symbol_type() const;
 
-    // SerializablePacket as_serializable();
-    std::vector<uint8_t> as_array();
-    std::vector<uint8_t> as_buffer();
+    // NOTE:
+    // Favour payload over as_array or as_buffer, as the name is clearer
+    // and the other two simply call this method anyway.
+    std::vector<uint8_t> payload() const;
+    std::vector<uint8_t> as_array() const;
+    std::vector<uint8_t> as_buffer() const;
 
-    void write_to(std::vector<uint8_t> array);
-    void write_to(std::vector<uint8_t> array, int offset);
-    // void write_to(DataOutput out) throws IOException;
-    // void write_to(WritableByteChannel ch) throws IOException;
+    void write_to(std::vector<uint8_t> *array, unsigned int offset = 0) const;
 
     encoding_packet(int sbn, int esi, std::vector<uint8_t> symbols,
                     int num_symbols, symbol type)
@@ -81,16 +81,12 @@ public:
           m_type(type)
     { }
 
-    // TODO(pbhandari): delete the vector if needed
-    ~encoding_packet()
-    {
-        /* NO-OP */
-    };
+    ~encoding_packet();
 
 private:
     const uint32_t m_fec_payload_id;
     const std::vector<uint8_t> m_symbols;
-    const uint64_t m_num_symbols;
+    const uint64_t m_num_symbols;  // FIXME(pbhandari): I don't even .... WTF?
     const symbol m_type;
 };
 

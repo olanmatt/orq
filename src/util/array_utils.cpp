@@ -28,12 +28,6 @@
 #include <stdexcept>
 #include <cstdint>
 
-template<typename T>
-std::vector<uint8_t> to_byte_array(const T &elem)
-{
-    throw new std::invalid_argument("Method not defined for given type");
-}
-
 template<>
 std::vector<uint8_t> to_byte_array(const uint8_t &elem)
 {
