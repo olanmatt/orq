@@ -30,13 +30,13 @@
 #include <cstdint>
 #include <vector>
 
-int
+uint8_t
 encoding_packet::source_block_number() const
 {
     return parameter_io::extract_source_block_number(m_fec_payload_id);
 }
 
-int
+uint32_t
 encoding_packet::encoding_symbol_id() const
 {
     return parameter_io::extract_encoding_symbol_id(m_fec_payload_id);

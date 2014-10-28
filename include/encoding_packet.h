@@ -56,8 +56,8 @@ public:
         throw "Why would you use this function when I tell you not to";
     }
 
-    int source_block_number() const;
-    int encoding_symbol_id() const;
+    uint8_t source_block_number() const;
+    uint32_t encoding_symbol_id() const;
     uint32_t fec_payload_id() const;
     uint64_t number_of_symbols() const;
     uint64_t symbols_length() const;
