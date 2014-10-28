@@ -23,10 +23,10 @@
  */
 
 #include <util/array_utils.h>
+#include <cstdint>
 #include <string>
 #include <vector>
 #include <stdexcept>
-#include <cstdint>
 
 template<>
 std::vector<uint8_t> to_byte_array(const uint8_t &elem)

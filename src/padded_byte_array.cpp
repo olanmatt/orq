@@ -23,27 +23,30 @@
  */
 
 #include <padded_byte_array.h>
+#include <algorithm>
+#include <vector>
 
-padded_byte_array::padded_byte_array(std::vector<uint8_t> array, int off, int len, int paddedLen)
+padded_byte_array::padded_byte_array(std::vector<uint8_t> array, int off,
+                                     int len, int paddedLen)
     : m_array(array),
       m_array_offset(off),
       m_array_length(std::min(len, paddedLen)),
       m_padded_length(paddedLen)
 {
-
     check_array_bounds(off, len, m_array.size());
     if (paddedLen < 0) {
         throw "Negative padded length";
     }
 
     if (get_length() == get_paddingless_length()) {
-        std::vector<uint8_t> m_padding (0);
+        std::vector<uint8_t> m_padding(0);
     } else {
-        std::vector<uint8_t> m_padding (get_length() - get_paddingless_length());
+        std::vector<uint8_t> m_padding(get_length() - get_paddingless_length());
     }
 }
 
-uint8_t padded_byte_array::safe_get(int index) {
+uint8_t padded_byte_array::safe_get(int index)
+{
     if (index >= m_array_length) {
         return m_padding[index - m_array_length];
     } else {
@@ -51,7 +54,8 @@ uint8_t padded_byte_array::safe_get(int index) {
     }
 }
 
-void padded_byte_array::safe_set(int index, uint8_t value) {
+void padded_byte_array::safe_set(int index, uint8_t value)
+{
     if (index >= m_array_length) {
         m_padding[index - m_array_length] = value;
     } else {
@@ -59,29 +63,38 @@ void padded_byte_array::safe_set(int index, uint8_t value) {
     }
 }
 
-uint8_t padded_byte_array::get(int index) {
+uint8_t padded_byte_array::get(int index)
+{
     check_index_range(index, get_length());
     return safe_get(index);
 }
 
-void padded_byte_array::set(int index, uint8_t value) {
+void padded_byte_array::set(int index, uint8_t value)
+{
     check_index_range(index, get_length());
     safe_set(index, value);
 }
 
-std::vector<uint8_t> padded_byte_array::get_bytes(std::vector<uint8_t> dst) {
+std::vector<uint8_t> padded_byte_array::get_bytes(std::vector<uint8_t> dst)
+{
     return get_bytes(0, dst, 0, dst.size());
 }
 
-std::vector<uint8_t> padded_byte_array::get_bytes(std::vector<uint8_t> dst, int off, int len) {
+std::vector<uint8_t> padded_byte_array::get_bytes(std::vector<uint8_t> dst,
+        int off, int len)
+{
     return get_bytes(0, dst, off, len);
 }
 
-std::vector<uint8_t> padded_byte_array::get_bytes(int index, std::vector<uint8_t> dst) {
+std::vector<uint8_t> padded_byte_array::get_bytes(int index,
+        std::vector<uint8_t> dst)
+{
     return get_bytes(index, dst, 0, dst.size());
 }
 
-std::vector<uint8_t> padded_byte_array::get_bytes(int index, std::vector<uint8_t> dst, int off, int len) {
+std::vector<uint8_t> padded_byte_array::get_bytes(int index,
+        std::vector<uint8_t> dst, int off, int len)
+{
     check_index_and_array(index, get_length(), dst, off, len);
 
     int end = off + len;
@@ -92,19 +105,24 @@ std::vector<uint8_t> padded_byte_array::get_bytes(int index, std::vector<uint8_t
     return dst;
 }
 
-void padded_byte_array::put_bytes(std::vector<uint8_t> src) {
+void padded_byte_array::put_bytes(std::vector<uint8_t> src)
+{
     put_bytes(0, src, 0, src.size());
 }
 
-void padded_byte_array::put_bytes(std::vector<uint8_t> src, int off, int len) {
+void padded_byte_array::put_bytes(std::vector<uint8_t> src, int off, int len)
+{
     put_bytes(0, src, off, len);
 }
 
-void padded_byte_array::put_bytes(int index, std::vector<uint8_t> src) {
+void padded_byte_array::put_bytes(int index, std::vector<uint8_t> src)
+{
     put_bytes(index, src, 0, src.size());
 }
 
-void padded_byte_array::put_bytes(int index, std::vector<uint8_t> src, int off, int len) {
+void padded_byte_array::put_bytes(int index, std::vector<uint8_t> src, int off,
+                                  int len)
+{
     check_index_and_array(index, get_length(), src, off, len);
 
     int end = off + len;
@@ -113,7 +131,9 @@ void padded_byte_array::put_bytes(int index, std::vector<uint8_t> src, int off, 
     }
 }
 
-void padded_byte_array::check_index_and_array(int index, int length, std::vector<uint8_t> dst, int off, int len) {
+void padded_byte_array::check_index_and_array(int index, int length,
+        std::vector<uint8_t> dst, int off, int len)
+{
     check_index_range(index, length);
     check_array_bounds(off, len, dst.size());
 
@@ -123,13 +143,15 @@ void padded_byte_array::check_index_and_array(int index, int length, std::vector
     }
 }
 
-void padded_byte_array::check_index_range(int index, int length) {
+void padded_byte_array::check_index_range(int index, int length)
+{
     if (index < 0 || index >= length) {
         throw "Index out of bounds";
     }
 }
 
-void padded_byte_array::check_array_bounds(int off, int len, int arrayFence) {
+void padded_byte_array::check_array_bounds(int off, int len, int arrayFence)
+{
     if ((off | len | (off + len) | (arrayFence - (off + len))) < 0) {
         throw "Index out of bounds exception";
     }
