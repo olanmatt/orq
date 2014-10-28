@@ -49,28 +49,27 @@ public:
     padded_byte_array(std::vector<uint8_t> array, int off, int len,
                       int paddedLen);
 
-    std::vector<uint8_t> get_array()
+    std::vector<uint8_t> get_array() const
     {
         return m_array;
     }
 
-    int get_array_offset()
+    int get_array_offset() const
     {
         return m_array_offset;
     }
 
-    int get_paddingless_length()
+    int get_paddingless_length() const
     {
         return m_array_length;
     }
 
-    int get_length()
+    int get_length() const
     {
         return m_padded_length;
     }
 
     uint8_t get(int index);
-
     void set(int index, uint8_t value);
 
     std::vector<uint8_t> get_bytes(std::vector<uint8_t> dst);
@@ -90,15 +89,14 @@ private:
                                       std::vector<uint8_t> dst, int off, int len);
 
     uint8_t safe_get(int index);
-
     void safe_set(int index, uint8_t value);
 
-    const std::vector<uint8_t> m_array;
+    std::vector<uint8_t> m_array;
     const int m_array_offset;
     const int m_array_length;
 
     const int m_padded_length;  // must always be > m_array_length
-    const std::vector<uint8_t> m_padding;
+    std::vector<uint8_t> m_padding;
 };
 
 #endif  // INCLUDE_PADDED_BYTE_ARRAY_H_
