@@ -32,7 +32,7 @@
 
 encoding_packet::~encoding_packet()
 {
-    // TODO(pbhandari): de-allocate memory for vector if necessary
+    delete &m_symbols;
 }
 
 int
