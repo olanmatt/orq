@@ -26,8 +26,8 @@
 
 int parameter_io::data_length_shift()
 {
-    return (1 + sizeof(unsigned short)) * sizeof(uint8_t) *
-           8;  // shift by (1 + 2) octets
+    // shift by (1 + 2) octets
+    return (1 + sizeof(unsigned short)) * sizeof(uint8_t) * 8;
 }
 
 uint64_t parameter_io::extract_data_length(uint64_t commonFecOTI)
@@ -94,8 +94,9 @@ uint64_t parameter_io::canonicalize_common_fec_oti(uint64_t commonFecOTI)
 uint32_t parameter_io::build_scheme_spec_fec_oti(uint8_t numSrcBs,
         uint16_t interLen, uint8_t sAlign)
 {
-    return (numSrcBs << num_source_blocks_shift()) | (interLen <<
-            interleaver_length_shift()) | sAlign;
+    return (numSrcBs << num_source_blocks_shift()) |
+           (interLen << interleaver_length_shift()) |
+           sAlign;
 }
 
 uint32_t parameter_io::build_fec_payload_id(uint8_t sbn, uint32_t esi)
