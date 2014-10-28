@@ -31,8 +31,10 @@ padded_byte_array::padded_byte_array(std::vector<uint8_t> array, int off, int le
       m_padded_length(paddedLen)
 {
 
-    // ArrayUtils.checkArrayBounds(off, len, array.length);
-    // if (paddedLen < 0) throw new IllegalArgumentException("negative padded length");
+    check_array_bounds(off, len, m_array.size());
+    if (paddedLen < 0) {
+        throw "Negative padded length";
+    }
 
     if (get_length() == get_paddingless_length()) {
         std::vector<uint8_t> m_padding (0);
@@ -58,12 +60,12 @@ void padded_byte_array::safe_set(int index, uint8_t value) {
 }
 
 uint8_t padded_byte_array::get(int index) {
-    // ArrayUtils.checkIndexRange(index, get_length());
+    check_index_range(index, get_length());
     return safe_get(index);
 }
 
 void padded_byte_array::set(int index, uint8_t value) {
-    // ArrayUtils.checkIndexRange(index, get_length());
+    check_index_range(index, get_length());
     safe_set(index, value);
 }
 
@@ -112,11 +114,23 @@ void padded_byte_array::put_bytes(int index, std::vector<uint8_t> src, int off, 
 }
 
 void padded_byte_array::check_index_and_array(int index, int length, std::vector<uint8_t> dst, int off, int len) {
-    // ArrayUtils.checkIndexRange(index, length);
-    // ArrayUtils.checkArrayBounds(off, len, dst.size());
+    check_index_range(index, length);
+    check_array_bounds(off, len, dst.size());
 
     int remaining = length - index;
     if (len > remaining) {
-        throw "Buffer Overflow Exception";
+        throw "Buffer overflow";
+    }
+}
+
+void padded_byte_array::check_index_range(int index, int length) {
+    if (index < 0 || index >= length) {
+        throw "Index out of bounds";
+    }
+}
+
+void padded_byte_array::check_array_bounds(int off, int len, int arrayFence) {
+    if ((off | len | (off + len) | (arrayFence - (off + len))) < 0) {
+        throw "Index out of bounds exception";
     }
 }

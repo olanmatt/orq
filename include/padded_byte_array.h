@@ -87,6 +87,8 @@ public:
 private:
     static void check_index_and_array(int index, int length,
                                       std::vector<uint8_t> dst, int off, int len);
+    static void check_index_range(int index, int length);
+    static void check_array_bounds(int off, int len, int arrayFence);
 
     uint8_t safe_get(int index);
     void safe_set(int index, uint8_t value);
