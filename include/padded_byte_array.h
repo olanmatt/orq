@@ -49,36 +49,20 @@ public:
     padded_byte_array(std::vector<uint8_t> array, int off, int len,
                       int paddedLen);
 
-    std::vector<uint8_t> get_array() const
-    {
-        return m_array;
-    }
+    std::vector<uint8_t> get_array() const;
+    int get_array_offset() const;
+    int get_paddingless_length() const;
+    int get_length() const;
+    int get_index() const;
 
-    int get_array_offset() const
-    {
-        return m_array_offset;
-    }
-
-    int get_paddingless_length() const
-    {
-        return m_array_length;
-    }
-
-    int get_length() const
-    {
-        return m_padded_length;
-    }
-
-    uint8_t get(int index);
+    uint8_t get(int index) const;
     void set(int index, uint8_t value);
-
-    std::vector<uint8_t> get_bytes(std::vector<uint8_t> dst);
+    std::vector<uint8_t> get_bytes(std::vector<uint8_t> dst) const;
     std::vector<uint8_t> get_bytes(std::vector<uint8_t> dst, int off,
-                                   int len);
-    std::vector<uint8_t> get_bytes(int index, std::vector<uint8_t> dst);
+                                   int len) const;
+    std::vector<uint8_t> get_bytes(int index, std::vector<uint8_t> dst) const;
     std::vector<uint8_t> get_bytes(int index, std::vector<uint8_t> dst,
-                                   int off, int len);
-
+                                   int off, int len) const;
     void put_bytes(std::vector<uint8_t> src);
     void put_bytes(std::vector<uint8_t> src, int off, int len);
     void put_bytes(int index, std::vector<uint8_t> src);
@@ -89,16 +73,16 @@ private:
                                       std::vector<uint8_t> dst, int off, int len);
     static void check_index_range(int index, int length);
     static void check_array_bounds(int off, int len, int arrayFence);
-
-    uint8_t safe_get(int index);
+    uint8_t safe_get(int index) const;
     void safe_set(int index, uint8_t value);
 
     std::vector<uint8_t> m_array;
+    std::vector<uint8_t> m_padding;
+    int m_index;
+
     const int m_array_offset;
     const int m_array_length;
-
     const int m_padded_length;  // must always be > m_array_length
-    std::vector<uint8_t> m_padding;
 };
 
 #endif  // INCLUDE_PADDED_BYTE_ARRAY_H_

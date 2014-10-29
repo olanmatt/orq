@@ -38,14 +38,36 @@ padded_byte_array::padded_byte_array(std::vector<uint8_t> array, int off,
         throw "Negative padded length";
     }
 
-    if (get_length() == get_paddingless_length()) {
-        std::vector<uint8_t> m_padding(0);
-    } else {
-        std::vector<uint8_t> m_padding(get_length() - get_paddingless_length());
-    }
+    m_padding = std::vector<uint8_t>(get_length() - get_paddingless_length());
 }
 
-uint8_t padded_byte_array::safe_get(int index)
+std::vector<uint8_t> padded_byte_array::get_array() const
+{
+    return m_array;
+}
+
+int padded_byte_array::get_array_offset() const
+{
+    return m_array_offset;
+}
+
+int padded_byte_array::get_paddingless_length() const
+{
+    return m_array_length;
+}
+
+int padded_byte_array::get_length() const
+{
+    return m_padded_length;
+}
+
+int padded_byte_array::get_index() const
+{
+    return m_index;
+}
+
+
+uint8_t padded_byte_array::safe_get(int index) const
 {
     if (index >= m_array_length) {
         return m_padding[index - m_array_length];
@@ -63,7 +85,7 @@ void padded_byte_array::safe_set(int index, uint8_t value)
     }
 }
 
-uint8_t padded_byte_array::get(int index)
+uint8_t padded_byte_array::get(int index) const
 {
     check_index_range(index, get_length());
     return safe_get(index);
@@ -75,25 +97,25 @@ void padded_byte_array::set(int index, uint8_t value)
     safe_set(index, value);
 }
 
-std::vector<uint8_t> padded_byte_array::get_bytes(std::vector<uint8_t> dst)
+std::vector<uint8_t> padded_byte_array::get_bytes(std::vector<uint8_t> dst) const
 {
     return get_bytes(0, dst, 0, dst.size());
 }
 
 std::vector<uint8_t> padded_byte_array::get_bytes(std::vector<uint8_t> dst,
-        int off, int len)
+        int off, int len) const
 {
     return get_bytes(0, dst, off, len);
 }
 
 std::vector<uint8_t> padded_byte_array::get_bytes(int index,
-        std::vector<uint8_t> dst)
+        std::vector<uint8_t> dst) const
 {
     return get_bytes(index, dst, 0, dst.size());
 }
 
 std::vector<uint8_t> padded_byte_array::get_bytes(int index,
-        std::vector<uint8_t> dst, int off, int len)
+        std::vector<uint8_t> dst, int off, int len) const
 {
     check_index_and_array(index, get_length(), dst, off, len);
 

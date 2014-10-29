@@ -66,7 +66,15 @@ int source_symbol::transport_size(void) const
 /* static */ std::vector<uint8_t>
 source_symbol::prepare_transport_buffer(padded_byte_array data_array)
 {
-    return std::vector<uint8_t> {};  // TODO(olanmatt):
+    if (data_array.get_paddingless_length() == data_array.get_length()) {
+        // need to return a slice of the wrapped buffer,
+        // otherwise the buffer position will be equal to data.arrayOffset()...
+        // return ByteBuffer.wrap(data_array.get_array(), data_array.get_array_offset(), data_array.get_length()).slice();
+    } else {
+        std::vector<uint8_t> paddedCopy = data_array.get_bytes(std::vector<uint8_t> (data_array.get_length()));
+        // return ByteBuffer.wrap(paddedCopy);
+    }
+    return std::vector<uint8_t>();
 }
 
 
@@ -100,5 +108,6 @@ int repair_symbol::transport_size(void) const
 /* static */ std::vector<uint8_t>
 repair_symbol::prepare_transport_buffer(std::vector<uint8_t> data)
 {
-    return std::vector<uint8_t> {};  // TODO(olanmatt):
+    // return ByteBuffer.wrap(data);
+    return data;
 }
