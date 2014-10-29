@@ -20,47 +20,55 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-CC ?= gcc
-CXX ?= g++
+
 SRCDIR := src
 TESTDIR := test
 INCDIR := include
 BUILDDIR := build
-TARGET := bin/orq
-TESTTARGET := bin/test
+LIBDIR := lib
+
+CC ?= gcc
+CXX ?= g++
+CFLAGS := -g -Wall -pedantic -std=c1x -I$(INCDIR)
+CXXFLAGS := -g -Wall -pedantic -std=c++0x -I$(INCDIR)
+LDFLAGS :=
+
+PROG := orq
+VERSION := 1
+LIBNAME := lib$(PROG).so
 
 SRCEXT := cpp
+
+TARGET := $(LIBNAME).$(VERSION)
 SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
-HEADERS := $(shell find $(SRCDIR) -type f -name "*.h")
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+HEADERS := $(shell find $(INCDIR) -type f -name "*.h" -a -not -name "catch.h")
+
+TESTTARGET := bin/test
 TESTSOURCES := $(shell find $(TESTDIR) -type f -name "*.$(SRCEXT)")
 TESTOBJECTS := $(patsubst $(TESTDIR)/%,$(BUILDDIR)/$(TESTDIR)/%,$(TESTSOURCES:.$(SRCEXT)=.o))
-HEADERS := $(shell find $(INCDIR) -type f -name "*.h" -a -not -name "catch.h")
-CFLAGS := -g -Wall -pedantic -std=c1x
-CXXFLAGS := -g -Wall -pedantic -std=c++0x
-LDFLAGS :=
-INC := -I $(INCDIR)
 
 # make
 $(TARGET): $(OBJECTS)
 	@echo ""; echo "Linking..."
-	$(CXX) $^ -o $(TARGET) $(LDFLAGS)
+	$(CXX) -shared -Wl,-soname,$(TARGET) -o $(LIBDIR)/$(TARGET) $(LDFLAGS) $(OBJECTS)
+	@[ -e $(LIBDIR)/$(LIBNAME) ] || ln -s $(TARGET) $(LIBDIR)/$(LIBNAME)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -fPIC -c -o $@ $<
 
 # make test
 test: $(TARGET) $(TESTTARGET)
-	$(TESTTARGET)
+	LD_LIBRARY_PATH=$(LIBDIR) $(TESTTARGET)
 
 $(TESTTARGET): $(TESTOBJECTS)
 	@echo ""; echo "Linking..."
-	$(CXX) $^ $(filter-out $(BUILDDIR)/orq.o,$(OBJECTS)) -o $(TESTTARGET) $(LDFLAGS)
+	$(CXX) $^ -o $(TESTTARGET) $(LDFLAGS) -L$(LIBDIR) -l$(PROG)
 
 $(BUILDDIR)/$(TESTDIR)/%.o: $(TESTDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 gcov:
 ifeq ($(CXX),g++)
@@ -90,5 +98,5 @@ cpplint:
 
 clean:
 	@echo " Cleaning...";
-	$(RM) -r $(BUILDDIR) $(TARGET) $(TESTTARGET)
+	$(RM) -r $(BUILDDIR) $(TARGET) $(LIBDIR)/$(LIBNAME) $(TESTTARGET)
 
