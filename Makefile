@@ -78,12 +78,12 @@ $(BUILDDIR)/$(TESTDIR)/%.o: $(TESTDIR)/%.$(SRCEXT)
 
 gcov:
 ifeq ($(CXX),g++)
-# gcov: CXXFLAGS += -g -O0 --coverage
-# gcov: LDFLAGS += -lgcov
-gcov: clean test
+gcov: CXXFLAGS += -g -O0 --coverage
+gcov: LDFLAGS += --coverage -lgcov
+gcov: clean all test
 else ifeq ($(CC),gcc)
-# gcov: CFLAGS += -g -O0 --coverage
-# gcov: LDFLAGS += -lgcov
+gcov: CFLAGS += -g -O0 --coverage
+gcov: LDFLAGS += --coverage -lgcov
 gcov: clean test
 endif
 
