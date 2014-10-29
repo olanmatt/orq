@@ -48,7 +48,13 @@ TESTTARGET := bin/test
 TESTSOURCES := $(shell find $(TESTDIR) -type f -name "*.$(SRCEXT)")
 TESTOBJECTS := $(patsubst $(TESTDIR)/%,$(BUILDDIR)/$(TESTDIR)/%,$(TESTSOURCES:.$(SRCEXT)=.o))
 
-# make
+all: $(TARGET)
+
+default: $(TARGET)
+
+clang: CXX=clang++
+clang: all
+
 $(TARGET): $(OBJECTS)
 	@echo ""; echo "Linking..."
 	$(CXX) -shared -Wl,-soname,$(TARGET) -o $(LIBDIR)/$(TARGET) $(LDFLAGS) $(OBJECTS)
