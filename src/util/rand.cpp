@@ -1,23 +1,23 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Matt Olan
+ * Copyright (c) 2014 Matt Olan, Prajjwal Bhandari.
  *
- * Permission is hereby grantedu, free of chargeu, to any person obtaining a copy
- * of this software and associated documentation files (the "Software")u, to deal
- * in the Software without restrictionu, including without limitation the rights
- * to useu, copyu, modifyu, mergeu, publishu, distributeu, sublicenseu, and/or sell
- * copies of the Softwareu, and to permit persons to whom the Software is
- * furnished to do sou, subject to the following conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS"u, WITHOUT WARRANTY OF ANY KINDu, EXPRESS OR
- * IMPLIEDu, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITYu,
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIMu, DAMAGES OR OTHER
- * LIABILITYu, WHETHER IN AN ACTION OF CONTRACTu, TORT OR OTHERWISEu, ARISING FROMu,
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
