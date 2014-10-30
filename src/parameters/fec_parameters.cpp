@@ -129,37 +129,37 @@ fec_parameters::fec_parameters(uint64_t common_fec_oti,
 }
 
 uint64_t
-fec_parameters::data_length(void)
+fec_parameters::data_length(void) const
 {
     return parameter_io::extract_data_length(common_fec_oti_);
 }
 
 uint16_t
-fec_parameters::symbol_size(void)
+fec_parameters::symbol_size(void) const
 {
     return parameter_io::extract_symbol_size(common_fec_oti_);
 }
 
 uint8_t
-fec_parameters::num_source_blocks(void)
+fec_parameters::num_source_blocks(void) const
 {
     return parameter_io::extract_num_source_blocks(scheme_spec_fec_oti_);
 }
 
 uint16_t
-fec_parameters::interleaver_length(void)
+fec_parameters::interleaver_length(void) const
 {
     return parameter_io::extract_interleaver_length(scheme_spec_fec_oti_);
 }
 
 uint8_t
-fec_parameters::symbol_alignment(void)
+fec_parameters::symbol_alignment(void) const
 {
     return parameter_io::extract_symbol_alignment(scheme_spec_fec_oti_);
 }
 
 uint16_t
-fec_parameters::total_symbols(void)
+fec_parameters::total_symbols(void) const
 {
     return internal_functions::get_total_symbols(data_length(), symbol_size());
 }
