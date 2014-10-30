@@ -53,11 +53,10 @@ namespace internal_constants
     static const uint16_t Z_min = 1;  // minimum number of source blocks
     static const uint16_t Z_max = 256;  // maximum number of source blocks
 
-    static const uint32_t Kt_max = K_max
-                                   *Z_max;   // maximum total number of symbols
+    static const uint32_t Kt_max = K_max * Z_max;  // max total number of symbols
 
     static const uint64_t F_min = 1;  // minimum transfer length
-    static const uint64_t F_max = Kt_max *T_max;   // minimum transfer length
+    static const uint64_t F_max = ((uint64_t)Kt_max) * T_max;  // max transfer length
 
     // third octet is reserved bits
     static const uint64_t common_oti_reserved_inverse_mask = 0xFFFFFFFFFF00FFFFLLU;
