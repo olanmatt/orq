@@ -39,19 +39,21 @@ class array_data_encoder
     }
 
 
-    fec_parameters get_fec_parameters(void);
+    fec_parameters get_fec_parameters(void) const;
 
-    array_source_block_encoder get_source_block(int sbn);
+    array_source_block_encoder get_source_block(int sbn) const;
 
-    std::vector<array_source_block_encoder> get_source_block_iterable(void);
+    std::vector<array_source_block_encoder> get_source_block_iterable(void) const;
 
-    std::vector<uint8_t> get_data(void);
+    std::vector<uint8_t> get_data_array(void) const;
 
-    int get_data_offset(void);
+    int get_data_offset(void) const;
 
-    int symbol_size(void);
+    int symbol_size(void) const;
 
-    int number_of_source_blocks(void);
+    uint64_t data_length() const;
+
+    int number_of_source_blocks(void) const;
 
     array_data_encoder(std::vector<uint8_t> array, int offset,
                        fec_parameters fecParams)
@@ -60,7 +62,7 @@ class array_data_encoder
     { }
 
 private:
-    std::vector<array_source_block_encoder> get_source_block_encoders();
+    static std::vector<array_source_block_encoder> get_source_block_encoders(void);
 
     const std::vector<uint8_t> m_array;
     const int m_offset;
