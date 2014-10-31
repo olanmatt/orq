@@ -68,7 +68,7 @@ TEST_CASE("Parsed::invalid returns an 'invalid' Parsed Object", "[Parsed]")
         SECTION("exception message should be the same as it's failure reason") {
             try {
                 p.value();
-            } catch (std::string exception) {
+            } catch(std::string exception) {
                 REQUIRE(p.failure_reason() == exception);
             }
         }

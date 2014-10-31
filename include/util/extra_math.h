@@ -25,10 +25,12 @@
 #ifndef INCLUDE_UTIL_EXTRA_MATH_H_
 #define INCLUDE_UTIL_EXTRA_MATH_H_
 
+#include <cstdint>
+
 class extra_math
 {
 public:
-    static int ceil_div(int num, int den);
+    static uint64_t ceil_div(uint64_t num, uint64_t den);
 };
 
 #endif  // INCLUDE_UTIL_EXTRA_MATH_H_
