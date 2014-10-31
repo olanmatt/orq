@@ -33,8 +33,7 @@ uint64_t internal_functions::get_possible_total_symbols(uint64_t F, uint16_t T)
 uint64_t
 internal_functions::get_total_symbols(uint64_t F, uint16_t T)
 {
-    return (uint64_t)extra_math::ceil_div(F,
-                                          T);  // downcast never overflows since F and T are bounded
+    return (uint64_t)extra_math::ceil_div(F, T);
 }
 
 uint16_t

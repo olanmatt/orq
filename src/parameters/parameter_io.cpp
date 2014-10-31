@@ -45,9 +45,9 @@ int parameter_io::num_source_blocks_shift()
     return (sizeof(uint16_t) + 1) * sizeof(uint8_t) * 8;  // shift by (2 + 1) octets
 }
 
-uint8_t parameter_io::extract_num_source_blocks(uint32_t schemeSpecFecOTI)
+uint16_t parameter_io::extract_num_source_blocks(uint32_t schemeSpecFecOTI)
 {
-    return (uint8_t)(schemeSpecFecOTI >> num_source_blocks_shift());
+    return (uint16_t)((uint8_t)(schemeSpecFecOTI >> num_source_blocks_shift()) + 1);
 }
 
 int parameter_io::interleaver_length_shift()
@@ -91,10 +91,10 @@ uint64_t parameter_io::canonicalize_common_fec_oti(uint64_t commonFecOTI)
     return commonFecOTI & internal_constants::common_oti_reserved_inverse_mask;
 }
 
-uint32_t parameter_io::build_scheme_spec_fec_oti(uint8_t numSrcBs,
+uint32_t parameter_io::build_scheme_spec_fec_oti(uint16_t numSrcBs,
         uint16_t interLen, uint8_t sAlign)
 {
-    return (numSrcBs << num_source_blocks_shift()) |
+    return ((uint8_t)(numSrcBs - 1) << num_source_blocks_shift()) |
            (interLen << interleaver_length_shift()) |
            sAlign;
 }

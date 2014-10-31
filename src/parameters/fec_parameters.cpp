@@ -65,10 +65,10 @@ fec_parameters::derive_parameters(uint64_t data_length,
     if (parameter_checker::are_valid_deriver_parameters(F, P, WS)) {
         uint16_t T = P;
 
-        uint16_t Kt = internal_functions::get_total_symbols(F, T);
+        uint32_t Kt = internal_functions::get_total_symbols(F, T);
         uint16_t topN = internal_functions::top_interleaver_length(T);
 
-        uint8_t Z = derive_Z(Kt, WS, T, Al, topN);
+        uint16_t Z = derive_Z(Kt, WS, T, Al, topN);
         uint16_t N = derive_N(Kt, Z, WS, T, Al, topN);
 
         return new_local_instance(F, T, Z, N, Al);
@@ -78,8 +78,8 @@ fec_parameters::derive_parameters(uint64_t data_length,
     }
 }
 
-uint8_t
-fec_parameters::derive_Z(uint16_t Kt,
+uint16_t
+fec_parameters::derive_Z(uint32_t Kt,
                          uint64_t WS,
                          uint16_t T,
                          uint8_t Al,
@@ -89,9 +89,9 @@ fec_parameters::derive_Z(uint16_t Kt,
     return extra_math::ceil_div(Kt, Kl);  // Z = ceil(Kt/KL(N_max))
 }
 
-int
-fec_parameters::derive_N(uint16_t Kt,
-                         uint8_t Z,
+uint16_t
+fec_parameters::derive_N(uint32_t Kt,
+                         uint16_t Z,
                          uint64_t WS,
                          uint16_t T,
                          uint8_t Al,
@@ -111,7 +111,7 @@ fec_parameters::derive_N(uint16_t Kt,
 fec_parameters
 fec_parameters::new_local_instance(uint64_t F,
                                    uint16_t T,
-                                   uint8_t Z,
+                                   uint16_t Z,
                                    uint16_t N,
                                    uint8_t Al)
 {
@@ -140,7 +140,7 @@ fec_parameters::symbol_size(void) const
     return parameter_io::extract_symbol_size(common_fec_oti_);
 }
 
-uint8_t
+uint16_t
 fec_parameters::num_source_blocks(void) const
 {
     return parameter_io::extract_num_source_blocks(scheme_spec_fec_oti_);
