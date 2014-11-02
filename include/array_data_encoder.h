@@ -31,6 +31,7 @@
 
 class array_data_encoder
 {
+public:
     static array_data_encoder new_encoder(std::vector<uint8_t> data,
                                           int offset,
                                           fec_parameters fec_params)
