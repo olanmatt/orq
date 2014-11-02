@@ -30,6 +30,7 @@ class array_data_encoder;
 #include <encoding_symbol.h>
 #include <encoding_packet.h>
 #include <parameters/fec_parameters.h>
+#include <parameters/internal_constants.h>
 #include <memory>
 #include <vector>
 #include <iterator>
@@ -46,58 +47,36 @@ public:
         throw "Use the constructor";
     }
 
-    static std::vector<encoding_symbol> prepare_source_symbols(
-        std::vector<uint8_t> array, int array_offset, fec_parameters fec_params, int K);
+    static std::vector< std::shared_ptr<encoding_symbol> >
+    prepare_source_symbols(std::vector<uint8_t> array, int array_offset,
+                           fec_parameters fec_params, int K);
 
-    array_data_encoder get_data_encoder(void);
+    array_data_encoder get_data_encoder(void) const;
 
-    int get_source_block_number(void);
+    int get_source_block_number(void) const;
 
-    int get_number_source_symbols(void);
+    int get_number_source_symbols(void) const;
 
-    encoding_packet get_encoding_packet(int esi);
+    encoding_packet get_encoding_packet(int esi) const;
 
-    encoding_packet source_packet(int esi);
-    encoding_packet source_packet(int esi, int num_symbols);
+    encoding_packet source_packet(int esi) const;
+    encoding_packet source_packet(int esi, int num_symbols) const;
 
-    encoding_packet repair_packet(int esi);
-    encoding_packet repair_packet(int esi, int num_symbols);
+    encoding_packet repair_packet(int esi) const;
+    encoding_packet repair_packet(int esi, int num_symbols) const;
 
-    /* iterable_builder new_iterable_builder() { return new iter_builder(this); } */
-
-    // TODO(pbhandari): Use std::iterator
-    std::vector<encoding_packet> source_packets_iterable();
-    std::vector<encoding_packet> repair_packets_iterable(int num_packets);
-
-    array_source_block_encoder(array_data_encoder data_encoder,
-                               std::vector<encoding_symbol> source_symbols,
+    array_source_block_encoder(std::shared_ptr<array_data_encoder> data_encoder,
+                               std::vector< std::shared_ptr<encoding_symbol> > source_symbols,
                                int source_block_number, int K);
 
 private:
-    void check_generic_encoding_symbol_esi(int esi);
-
     // requires valid ESI
-    void check_source_symbol_esi(int esi);
-
-    // requires valid ESI
-    void check_num_source_symbols(int esi, int num_symbols);
-
-    // requires valid ESI
-    void check_repair_symbol_esi(int esi);
-
-    // requires valid ESI
-    void check_num_repair_symbols(int esi, int num_symbols);
-
-    // requires valid ESI
-    source_symbol get_source_symbol(int esi);
-
-    // requires valid ESI
-    repair_symbol get_repair_symbol(int esi);
+    repair_symbol get_repair_symbol(int esi) const;
 
     // use only this method for access to the intermediate symbols
-    std::vector< std::vector<uint8_t> > get_intermediate_symbols();
+    std::vector< std::vector<uint8_t> > get_intermediate_symbols() const;
 
-    fec_parameters get_fec_parameters();
+    fec_parameters get_fec_parameters() const;
 
     int m_source_block_number;
     int m_K;
@@ -105,69 +84,6 @@ private:
     std::shared_ptr<array_data_encoder> m_data_encoder;
     std::vector< std::shared_ptr<encoding_symbol> > m_source_symbols;
     std::vector< std::vector<uint8_t> > m_intermediate_symbols;
-
-    class encoding_packet_iterator;
-    class iter_builder;
-};
-
-
-class array_source_block_encoder::encoding_packet_iterator
-{
-public:
-    bool hasNext()
-    {
-        return m_next_esi < m_fence;
-    }
-
-    void remove()
-    {
-        throw "Unsupported Operation";
-    }
-
-    encoding_packet next();
-
-    encoding_packet_iterator(array_source_block_encoder encoder,
-                             int starting_esi, int ending_esi)
-        : m_encoder(encoder), m_fence(ending_esi + 1), m_next_esi(starting_esi)
-    {
-        if (ending_esi < starting_esi) {
-            throw "starting_esi > ending_esi";
-        }
-    }
-
-private:
-    const array_source_block_encoder m_encoder;
-    const int m_fence;
-    int m_next_esi;
-};
-
-class array_source_block_encoder::iter_builder
-{
-public:
-    iter_builder start_at(int esi);
-    iter_builder start_at_initial_source_symbol();
-    iter_builder start_at_initial_repair_symbol();
-
-    iter_builder end_at(int esi);
-    iter_builder end_at_final_source_symbol();
-
-    std::vector<encoding_packet> build();
-
-    explicit iter_builder(array_source_block_encoder encoder)
-        : m_encoder(encoder), m_starting_esi(0),
-          m_ending_esi(internal_constants::ESI_max)
-    { }
-
-private:
-    // requires valid ESI
-    void set_starting_esi(int esi);
-
-    // requires valid ESI
-    void set_ending_esi(int esi);
-
-    const array_source_block_encoder m_encoder;
-    int m_starting_esi;
-    int m_ending_esi;
 };
 
 #endif  // INCLUDE_ARRAY_SOURCE_BLOCK_ENCODER_H_
