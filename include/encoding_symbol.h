@@ -64,7 +64,10 @@ public:
     const std::vector<uint8_t> transport_data(void) const;
     int transport_size(void) const;
 
-    source_symbol(int esi, padded_byte_array data_array);
+    source_symbol(int esi, padded_byte_array data)
+        : encoding_symbol(esi), m_data(data),
+          m_transport_buffer(prepare_transport_buffer(data))
+    { }
     ~source_symbol(void);
 
 private:
@@ -83,7 +86,10 @@ public:
     const std::vector<uint8_t> transport_data(void) const;
     int transport_size(void) const;
 
-    repair_symbol(int esi, std::vector<uint8_t> data_array);
+    repair_symbol(int esi, std::vector<uint8_t> data)
+        : encoding_symbol(esi), m_data(data),
+          m_transport_buffer(prepare_transport_buffer(data))
+    { }
     ~repair_symbol(void);
 
 private:
