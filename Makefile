@@ -56,6 +56,9 @@ endif
 ifeq ($(UNAME),Darwin)
 LIBFLAGS = -shared -Wl,-install_name,$(TARGET)
 endif
+ifeq ($(UNAME),FreeBSD)
+LIBFLAGS = -shared -Wl,-rpath,$(TARGET)
+endif
 
 all: $(TARGET)
 
