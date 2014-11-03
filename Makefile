@@ -93,7 +93,8 @@ ifeq ($(CXX),g++)
 gcov: CXXFLAGS += -g -O0 --coverage
 gcov: LDFLAGS += --coverage -lgcov
 gcov: clean all test
-else ifeq ($(CC),gcc)
+endif
+ifeq ($(CC),gcc)
 gcov: CFLAGS += -g -O0 --coverage
 gcov: LDFLAGS += --coverage -lgcov
 gcov: clean test
