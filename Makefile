@@ -48,6 +48,15 @@ TESTTARGET := bin/test
 TESTSOURCES := $(shell find $(TESTDIR) -type f -name "*.$(SRCEXT)")
 TESTOBJECTS := $(patsubst $(TESTDIR)/%,$(BUILDDIR)/$(TESTDIR)/%,$(TESTSOURCES:.$(SRCEXT)=.o))
 
+UNAME=$(shell uname -s)
+
+ifeq ($(UNAME),Linux)
+LIBFLAGS = -shared -Wl,-soname,$(TARGET)
+endif
+ifeq ($(UNAME),Darwin)
+LIBFLAGS = -shared -Wl,-install_name,$(TARGET)
+endif
+
 all: $(TARGET)
 
 default: $(TARGET)
@@ -57,7 +66,7 @@ clang: all
 
 $(TARGET): $(OBJECTS)
 	@echo ""; echo "Linking..."
-	$(CXX) -shared -Wl,-soname,$(TARGET) -o $(LIBDIR)/$(TARGET) $(LDFLAGS) $(OBJECTS)
+	$(CXX) $(LIBFLAGS) -o $(LIBDIR)/$(TARGET) $(LDFLAGS) $(OBJECTS)
 	@[ -e $(LIBDIR)/$(LIBNAME) ] || ln -s $(TARGET) $(LIBDIR)/$(LIBNAME)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
