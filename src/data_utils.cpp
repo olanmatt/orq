@@ -34,7 +34,8 @@
 
 template<typename U, typename V>
 /* static */ std::vector<U>
-data_utils::partition_data(std::shared_ptr<V> data, fec_parameters params, int start_offset)
+data_utils::partition_data(std::shared_ptr<V> data, fec_parameters params,
+                           int start_offset)
 {
     const uint16_t Kt = params.total_symbols();
     const uint16_t Z = params.num_source_blocks();
@@ -75,12 +76,14 @@ data_utils::get_K(fec_parameters params, uint8_t source_block_number)
 
 template<>
 /* static */ array_source_block_encoder
-data_utils::get(std::shared_ptr<array_data_encoder> data, int off, int sbn, int K)
+data_utils::get(std::shared_ptr<array_data_encoder> data, int off, int sbn,
+                int K)
 {
     std::vector< std::shared_ptr<encoding_symbol> >
     es = array_source_block_encoder::prepare_source_symbols(data->get_data_array(),
-                                                            off, data->get_fec_parameters(), K);
+            off, data->get_fec_parameters(), K);
 
+    // XXX: possiblity for infinite recursion.
     return array_source_block_encoder(data, es, sbn, K);
 }
 

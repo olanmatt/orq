@@ -33,9 +33,11 @@
 
 class data_utils
 {
+public:
     template<typename U, typename V>
     static std::vector<U>
-    partition_data(std::shared_ptr<V> data, fec_parameters params, int start_offset = 0);
+    partition_data(std::shared_ptr<V> data, fec_parameters params,
+                   int start_offset = 0);
 
     static uint16_t
     get_K(fec_parameters params, uint8_t source_block_number);
