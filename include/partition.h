@@ -29,12 +29,13 @@ class partition
 {
 public:
     partition(unsigned int I, unsigned int J);
-    int IL();
-    int IS();
-    int JL();
-    int JS();
+    int IL() const;
+    int IS() const;
+    int JL() const;
+    int JS() const;
 
 private:
+    // TODO(pbhandari): const these things
     int m_IL;
     int m_IS;
     int m_JL;

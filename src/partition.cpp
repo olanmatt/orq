@@ -34,22 +34,22 @@ partition::partition(unsigned int I, unsigned int J)
 }
 
 // TODO(pbhandari): Convert these to constant member variables.
-int partition::IL()
+int partition::IL() const
 {
     return m_IL;
 }
 
-int partition::IS()
+int partition::IS() const
 {
     return m_IS;
 }
 
-int partition::JL()
+int partition::JL() const
 {
     return m_JL;
 }
 
-int partition::JS()
+int partition::JS() const
 {
     return m_JS;
 }
