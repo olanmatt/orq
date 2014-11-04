@@ -22,9 +22,12 @@
  * SOFTWARE.
  */
 
+#include <data_utils.h>
 #include <array_data_encoder.h>
 #include <array_source_block_encoder.h>
+#include <partition.h>
 #include <parameters/fec_parameters.h>
+#include <memory>
 #include <vector>
 
 fec_parameters
@@ -79,6 +82,37 @@ array_data_encoder::number_of_source_blocks(void) const
 std::vector<array_source_block_encoder>
 array_data_encoder::get_source_block_encoders(void)
 {
-    // TODO(pbhandari): actually make this work
-    return std::vector<array_source_block_encoder> {};
+    const uint16_t Kt = m_fec_params.total_symbols();
+    const uint16_t Z = m_fec_params.num_source_blocks();
+    const uint16_t T = m_fec_params.symbol_size();
+
+    const partition kz = partition(Kt, Z);
+    const int k_IL = kz.IL();
+    const int k_IS = kz.IS();
+    const int k_JL = kz.JL();
+
+    std::vector<array_source_block_encoder> source_blocks;
+
+    int sbn = 0;
+    int offset = m_offset;
+
+    for ( ; sbn < k_JL; sbn++, offset += k_IL * T) {
+        source_blocks.push_back(get_encoder(offset, sbn, k_IL));
+    }
+
+    for ( ; sbn < Z; sbn++, offset += k_IS * T) {
+        source_blocks.push_back(get_encoder(offset, sbn, k_IS));
+    }
+
+    return source_blocks;
+}
+
+array_source_block_encoder
+array_data_encoder::get_encoder(int offset, int source_block_num, int K)
+{
+    auto symbol = array_source_block_encoder::prepare_source_symbols(
+                                            m_array, offset, m_fec_params, K);
+
+    return array_source_block_encoder(std::shared_ptr<array_data_encoder>(this),
+                                      symbol, source_block_num, K);
 }

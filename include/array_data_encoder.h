@@ -63,7 +63,8 @@ public:
     { }
 
 private:
-    static std::vector<array_source_block_encoder> get_source_block_encoders(void);
+    std::vector<array_source_block_encoder> get_source_block_encoders(void);
+    array_source_block_encoder get_encoder(int offset, int source_block_num, int K);
 
     const std::vector<uint8_t> m_array;
     const int m_offset;

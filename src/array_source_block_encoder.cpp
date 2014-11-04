@@ -61,8 +61,8 @@ array_source_block_encoder::prepare_source_symbols(std::vector<uint8_t> array,
         int symbol_len = std::min(T, array_size - symbol_offset);
         padded_byte_array symbol_data(array, symbol_offset, symbol_len, T);
 
-        symbol.push_back(std::shared_ptr<encoding_symbol>(new source_symbol(esi,
-                         symbol_data)));
+        symbol.push_back(std::shared_ptr<encoding_symbol>(
+                                new source_symbol(esi, symbol_data)));
     }
 
     return symbol;
@@ -193,12 +193,12 @@ array_source_block_encoder::get_intermediate_symbols() const
     auto S = systematic_indices::S(Ki);
     auto H = systematic_indices::H(Ki);
 
+    // generate LxL Constraint Matrix
+    auto constraint_matrix = linear_system::generate_constraint_matrix(m_Kprime);
+
     // TODO(pbhandari): L and T used to preallocate size of D
     /* auto L = m_Kprime + S + H; */
     /* auto T = get_fec_parameters().symbol_size(); */
-
-    // generate LxL Constraint Matrix
-    auto constraint_matrix = linear_system::generate_constraint_matrix(m_Kprime);
 
     // allocate and initialize vector D
     std::vector< std::vector<uint8_t> > D;
