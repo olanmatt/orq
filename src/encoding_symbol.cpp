@@ -28,12 +28,16 @@
 #include <cstdint>
 #include <vector>
 
-uint32_t encoding_symbol::esi(void) const
+using std::vector;
+
+uint32_t
+encoding_symbol::esi(void) const
 {
     return m_esi;
 }
 
-uint32_t encoding_symbol::get_isi(int K) const
+uint32_t
+encoding_symbol::get_isi(int K) const
 {
     return systematic_indices::ceil(K) - K + esi();
 }
@@ -46,35 +50,38 @@ source_symbol::~source_symbol(void)
 {
     /* NO-OP */
 }
-std::vector<uint8_t> source_symbol::data(void) const
+vector<uint8_t>
+source_symbol::data(void) const
 {
     // copy m_data into new vector and return that
-    std::vector<uint8_t> data = m_data.get_array();
+    vector<uint8_t> data = m_data.get_array();
     return data;
 }
-const std::vector<uint8_t> source_symbol::transport_data(void) const
+const vector<uint8_t>
+source_symbol::transport_data(void) const
 {
     return m_transport_buffer;
 }
 
-int source_symbol::transport_size(void) const
+int
+source_symbol::transport_size(void) const
 {
     // m_transport_buffer.remaining();
     return 0;  // TODO(olanmatt):
 }
 
-/* static */ std::vector<uint8_t>
-source_symbol::prepare_transport_buffer(padded_byte_array data_array)
+/* static */ vector<uint8_t>
+source_symbol::prepare_transport_buffer(padded_byte_array data)
 {
-    if (data_array.get_paddingless_length() == data_array.get_length()) {
+    if (data.get_paddingless_length() == data.get_length()) {
         // need to return a slice of the wrapped buffer,
         // otherwise the buffer position will be equal to data.arrayOffset()...
-        // return ByteBuffer.wrap(data_array.get_array(), data_array.get_array_offset(), data_array.get_length()).slice();
+        // return ByteBuffer.wrap(data.get_array(), data.get_array_offset(), data.get_length()).slice();
     } else {
-        std::vector<uint8_t> paddedCopy = data_array.get_bytes(std::vector<uint8_t> (data_array.get_length()));
+        vector<uint8_t> padded = data.get_bytes(vector<uint8_t> (data.get_length()));
         // return ByteBuffer.wrap(paddedCopy);
     }
-    return std::vector<uint8_t>();
+    return vector<uint8_t>();
 }
 
 
@@ -88,25 +95,28 @@ repair_symbol::~repair_symbol(void)
     /* NO-OP */
 }
 
-std::vector<uint8_t> repair_symbol::data(void) const
+vector<uint8_t>
+repair_symbol::data(void) const
 {
-    std::vector<uint8_t> data = m_data;
+    vector<uint8_t> data = m_data;
     return data;
 }
 
-const std::vector<uint8_t> repair_symbol::transport_data(void) const
+const vector<uint8_t>
+repair_symbol::transport_data(void) const
 {
     return m_transport_buffer;
 }
 
-int repair_symbol::transport_size(void) const
+int
+repair_symbol::transport_size(void) const
 {
     // m_transport_buffer.remaining();
     return 0;  // TODO(olanmatt):
 }
 
-/* static */ std::vector<uint8_t>
-repair_symbol::prepare_transport_buffer(std::vector<uint8_t> data)
+/* static */ vector<uint8_t>
+repair_symbol::prepare_transport_buffer(vector<uint8_t> data)
 {
     // return ByteBuffer.wrap(data);
     return data;

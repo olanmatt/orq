@@ -57,6 +57,8 @@ public:
 
     uint8_t get(int index) const;
     void set(int index, uint8_t value);
+
+    // TODO(pbhandari): Use default arguments
     std::vector<uint8_t> get_bytes(std::vector<uint8_t> dst) const;
     std::vector<uint8_t> get_bytes(std::vector<uint8_t> dst, int off,
                                    int len) const;
@@ -69,12 +71,14 @@ public:
     void put_bytes(int index, std::vector<uint8_t> src, int off, int len);
 
 private:
+    uint8_t safe_get(int index) const;
+    void safe_set(int index, uint8_t value);
+
     static void check_index_and_array(int index, int length,
                                       std::vector<uint8_t> dst, int off, int len);
     static void check_index_range(int index, int length);
     static void check_array_bounds(int off, int len, int arrayFence);
-    uint8_t safe_get(int index) const;
-    void safe_set(int index, uint8_t value);
+
 
     std::vector<uint8_t> m_array;
     std::vector<uint8_t> m_padding;
