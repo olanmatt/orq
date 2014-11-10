@@ -37,7 +37,7 @@ array_data_encoder::get_fec_parameters(void) const
 }
 
 array_source_block_encoder
-array_data_encoder::get_source_block(int sbn) const
+array_data_encoder::get_source_block(uint16_t sbn) const
 {
     return m_src_block_encoders[sbn];
 
@@ -67,13 +67,13 @@ array_data_encoder::data_length(void) const
     return m_fec_params.data_length();
 }
 
-int
+uint16_t
 array_data_encoder::symbol_size(void) const
 {
     return m_fec_params.symbol_size();
 }
 
-int
+uint8_t
 array_data_encoder::number_of_source_blocks(void) const
 {
     return m_fec_params.num_source_blocks();
@@ -108,10 +108,10 @@ array_data_encoder::get_source_block_encoders(void)
 }
 
 array_source_block_encoder
-array_data_encoder::get_encoder(int offset, int source_block_num, int K)
+array_data_encoder::get_encoder(int offset, uint16_t source_block_num, uint16_t K)
 {
     auto symbol = array_source_block_encoder::prepare_source_symbols(
-                                            m_array, offset, m_fec_params, K);
+                      m_array, offset, m_fec_params, K);
 
     return array_source_block_encoder(std::shared_ptr<array_data_encoder>(this),
                                       symbol, source_block_num, K);

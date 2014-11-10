@@ -40,7 +40,8 @@
 array_source_block_encoder::array_source_block_encoder(
     std::shared_ptr<array_data_encoder> data_encoder,
     std::vector< std::shared_ptr<encoding_symbol> > source_symbols,
-    int source_block_number, int K)
+    uint8_t source_block_number, uint16_t K)
+
     : m_source_block_number(source_block_number), m_K(K),
       m_Kprime(systematic_indices::ceil(K)),
       m_data_encoder(data_encoder), m_source_symbols(source_symbols)
@@ -48,21 +49,20 @@ array_source_block_encoder::array_source_block_encoder(
 
 /*static*/ std::vector< std::shared_ptr<encoding_symbol> >
 array_source_block_encoder::prepare_source_symbols(std::vector<uint8_t> array,
-        int array_offset,
-        fec_parameters fec_params, int K)
+        int array_offset, fec_parameters fec_params, uint16_t K)
 {
-    const int T = fec_params.symbol_size();
-    const int array_size = array.size();
+    uint16_t T = fec_params.symbol_size();
+    int array_size = array.size();
     int symbol_offset = array_offset;
 
     std::vector< std::shared_ptr<encoding_symbol> > symbol;
 
     for (int esi = 0; esi < K; esi++, symbol_offset += T) {
-        int symbol_len = std::min(T, array_size - symbol_offset);
+        uint16_t symbol_len = std::min((int)T, array_size - symbol_offset);
         padded_byte_array symbol_data(array, symbol_offset, symbol_len, T);
 
         symbol.push_back(std::shared_ptr<encoding_symbol>(
-                                new source_symbol(esi, symbol_data)));
+                             new source_symbol(esi, symbol_data)));
     }
 
     return symbol;
@@ -74,24 +74,24 @@ array_source_block_encoder::get_data_encoder(void) const
     return *m_data_encoder;
 }
 
-int
+uint8_t
 array_source_block_encoder::get_source_block_number(void) const
 {
     return m_source_block_number;
 }
 
-int
+uint16_t
 array_source_block_encoder::get_number_source_symbols(void) const
 {
     return m_K;
 }
 
 encoding_packet
-array_source_block_encoder::get_encoding_packet(int esi) const
+array_source_block_encoder::get_encoding_packet(uint32_t esi) const
 {
     symbol smb = esi < m_K ? symbol::SOURCE : symbol::REPAIR;
 
-    if (esi < 0 || esi >= internal_constants::ESI_max) {
+    if (esi >= internal_constants::ESI_max) {
         throw std::invalid_argument("invalid encoding symbol id");
     }
 
@@ -100,9 +100,9 @@ array_source_block_encoder::get_encoding_packet(int esi) const
 }
 
 encoding_packet
-array_source_block_encoder::source_packet(int esi) const
+array_source_block_encoder::source_packet(uint32_t esi) const
 {
-    if (esi < 0 || esi >= m_K) {
+    if (esi >= m_K) {
         throw std::invalid_argument("invalid encoding symbol id");
     }
     return encoding_packet(m_source_block_number, esi,
@@ -111,9 +111,10 @@ array_source_block_encoder::source_packet(int esi) const
 }
 
 encoding_packet
-array_source_block_encoder::source_packet(int esi, int num_symbols) const
+array_source_block_encoder::source_packet(uint32_t esi,
+        uint16_t num_symbols) const
 {
-    if (esi < 0 || esi >= m_K) {
+    if (esi >= m_K) {
         throw std::invalid_argument("invalid encoding symbol id");
     }
 
@@ -136,7 +137,7 @@ array_source_block_encoder::source_packet(int esi, int num_symbols) const
 }
 
 encoding_packet
-array_source_block_encoder::repair_packet(int esi) const
+array_source_block_encoder::repair_packet(uint32_t esi) const
 {
     if (esi < m_K || esi > internal_constants::ESI_max) {
         throw std::invalid_argument("invalid repair symbol esi");
@@ -147,9 +148,10 @@ array_source_block_encoder::repair_packet(int esi) const
                            symbol::REPAIR);
 }
 encoding_packet
-array_source_block_encoder::repair_packet(int esi, int num_symbols) const
+array_source_block_encoder::repair_packet(uint32_t esi,
+        uint16_t num_symbols) const
 {
-    if (esi < m_K || esi > internal_constants::ESI_max) {
+    if (esi > internal_constants::ESI_max) {
         throw std::invalid_argument("invalid repair symbol esi");
     }
 
@@ -174,7 +176,7 @@ array_source_block_encoder::repair_packet(int esi, int num_symbols) const
 
 // requires valid ESI
 repair_symbol
-array_source_block_encoder::get_repair_symbol(int esi) const
+array_source_block_encoder::get_repair_symbol(uint32_t esi) const
 {
     const tuple tpl(m_Kprime, esi + (m_Kprime - m_K));
 
@@ -201,8 +203,8 @@ array_source_block_encoder::get_intermediate_symbols() const
     /* auto T = get_fec_parameters().symbol_size(); */
 
     // allocate and initialize vector D
-    std::vector< std::vector<uint8_t> > D;
-    for (int row = S + H, index = 0; row < m_K + S + H; row++, index++) {
+    std::vector< std::vector<uint8_t> > D (m_Kprime + S + H);
+    for (uint32_t row = S + H, index = 0; row < m_K + S + H; row++, index++) {
         D[row] = m_source_symbols[index]->data();
     }
 

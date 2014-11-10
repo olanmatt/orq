@@ -49,38 +49,38 @@ public:
 
     static std::vector< std::shared_ptr<encoding_symbol> >
     prepare_source_symbols(std::vector<uint8_t> array, int array_offset,
-                           fec_parameters fec_params, int K);
+                           fec_parameters fec_params, uint16_t K);
 
     array_data_encoder get_data_encoder(void) const;
 
-    int get_source_block_number(void) const;
+    uint8_t get_source_block_number(void) const;
 
-    int get_number_source_symbols(void) const;
+    uint16_t get_number_source_symbols(void) const;
 
-    encoding_packet get_encoding_packet(int esi) const;
+    encoding_packet get_encoding_packet(uint32_t esi) const;
 
-    encoding_packet source_packet(int esi) const;
-    encoding_packet source_packet(int esi, int num_symbols) const;
+    encoding_packet source_packet(uint32_t esi) const;
+    encoding_packet source_packet(uint32_t esi, uint16_t num_symbols) const;
 
-    encoding_packet repair_packet(int esi) const;
-    encoding_packet repair_packet(int esi, int num_symbols) const;
+    encoding_packet repair_packet(uint32_t esi) const;
+    encoding_packet repair_packet(uint32_t esi, uint16_t num_symbols) const;
 
     array_source_block_encoder(std::shared_ptr<array_data_encoder> data_encoder,
                                std::vector< std::shared_ptr<encoding_symbol> > source_symbols,
-                               int source_block_number, int K);
+                               uint8_t source_block_number, uint16_t K);
 
 private:
     // requires valid ESI
-    repair_symbol get_repair_symbol(int esi) const;
+    repair_symbol get_repair_symbol(uint32_t esi) const;
 
     // use only this method for access to the intermediate symbols
     std::vector< std::vector<uint8_t> > get_intermediate_symbols() const;
 
     fec_parameters get_fec_parameters() const;
 
-    int m_source_block_number;
-    int m_K;
-    int m_Kprime;
+    uint8_t m_source_block_number;
+    uint16_t m_K;
+    uint16_t m_Kprime;
     std::shared_ptr<array_data_encoder> m_data_encoder;
     std::vector< std::shared_ptr<encoding_symbol> > m_source_symbols;
     std::vector< std::vector<uint8_t> > m_intermediate_symbols;
