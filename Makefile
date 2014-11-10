@@ -50,14 +50,12 @@ TESTOBJECTS := $(patsubst $(TESTDIR)/%,$(BUILDDIR)/$(TESTDIR)/%,$(TESTSOURCES:.$
 
 UNAME=$(shell uname -s)
 
-ifeq ($(UNAME),Linux)
 LIBFLAGS = -shared -Wl,-soname,$(TARGET)
-endif
+TEST_LIB_PATH=LD_LIBRARY_PATH=$(LIBDIR)
+
 ifeq ($(UNAME),Darwin)
 LIBFLAGS = -shared -Wl,-install_name,$(TARGET)
-endif
-ifeq ($(UNAME),FreeBSD)
-LIBFLAGS = -shared -Wl,-rpath,$(TARGET)
+TEST_LIB_PATH=DYNLIB_LIBRARY_PATH=$(LIBDIR)
 endif
 
 all: $(TARGET)
@@ -78,7 +76,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 
 # make test
 test: $(TARGET) $(TESTTARGET)
-	LD_LIBRARY_PATH=$(LIBDIR) $(TESTTARGET)
+	$(TEST_LIB_PATH) $(TESTTARGET)
 
 $(TESTTARGET): $(TESTOBJECTS)
 	@echo ""; echo "Linking..."
