@@ -58,7 +58,8 @@ array_source_block_encoder::prepare_source_symbols(std::vector<uint8_t> array,
     std::vector< std::shared_ptr<encoding_symbol> > symbol;
 
     for (int esi = 0; esi < K; esi++, symbol_offset += T) {
-        uint16_t symbol_len = std::min((int)T, array_size - symbol_offset);
+        uint16_t symbol_len = std::min(static_cast<int>(T),
+                                       array_size - symbol_offset);
         padded_byte_array symbol_data(array, symbol_offset, symbol_len, T);
 
         symbol.push_back(std::shared_ptr<encoding_symbol>(
@@ -203,7 +204,7 @@ array_source_block_encoder::get_intermediate_symbols() const
     /* auto T = get_fec_parameters().symbol_size(); */
 
     // allocate and initialize vector D
-    std::vector< std::vector<uint8_t> > D (m_Kprime + S + H);
+    std::vector< std::vector<uint8_t> > D(m_Kprime + S + H);
     for (uint32_t row = S + H, index = 0; row < m_K + S + H; row++, index++) {
         D[row] = m_source_symbols[index]->data();
     }

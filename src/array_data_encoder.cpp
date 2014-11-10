@@ -40,7 +40,6 @@ array_source_block_encoder
 array_data_encoder::get_source_block(uint16_t sbn) const
 {
     return m_src_block_encoders[sbn];
-
 }
 
 std::vector<array_source_block_encoder>
