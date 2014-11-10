@@ -45,12 +45,12 @@ public:
     static fec_parameters new_local_instance(uint64_t F, uint16_t T, uint16_t Z,
             uint16_t N, uint8_t Al);
 
-    uint64_t data_length();
-    uint16_t symbol_size();
-    uint16_t num_source_blocks();
-    uint16_t interleaver_length();
-    uint8_t symbol_alignment();
-    uint16_t total_symbols();
+    uint64_t data_length() const;
+    uint16_t symbol_size() const;
+    uint16_t num_source_blocks() const;
+    uint16_t interleaver_length() const;
+    uint8_t symbol_alignment() const;
+    uint16_t total_symbols() const;
 
 private:
     static uint16_t derive_Z(uint32_t Kt, uint64_t WS, uint16_t T, uint8_t Al,

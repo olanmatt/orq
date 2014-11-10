@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Matt Olan
+ * Copyright (c) 2014 Matt Olan, Prajjwal Bhandari.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,24 +22,20 @@
  * SOFTWARE.
  */
 
-#ifndef INCLUDE_PARTITION_H_
-#define INCLUDE_PARTITION_H_
+#ifndef INCLUDE_DATA_UTILS_H_
+#define INCLUDE_DATA_UTILS_H_
 
-class partition
+/* import java.nio.channels.ReadableByteChannel; */
+#include <array_source_block_encoder.h>
+#include <parameters/fec_parameters.h>
+#include <memory>
+#include <vector>
+
+class data_utils
 {
 public:
-    partition(unsigned int I, unsigned int J);
-    int IL() const;
-    int IS() const;
-    int JL() const;
-    int JS() const;
-
-private:
-    // TODO(pbhandari): const these things
-    int m_IL;
-    int m_IS;
-    int m_JL;
-    int m_JS;
+    static uint16_t
+    get_K(fec_parameters params, uint8_t source_block_number);
 };
 
-#endif  // INCLUDE_PARTITION_H_
+#endif  // INCLUDE_DATA_UTILS_H_

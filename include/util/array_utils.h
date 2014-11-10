@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Matt Olan
+ * Copyright (c) 2014 Matt Olan, Prajjwal Bhandari.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,24 +22,13 @@
  * SOFTWARE.
  */
 
-#ifndef INCLUDE_PARTITION_H_
-#define INCLUDE_PARTITION_H_
+#ifndef INCLUDE_UTIL_ARRAY_UTILS_H_
+#define INCLUDE_UTIL_ARRAY_UTILS_H_
 
-class partition
-{
-public:
-    partition(unsigned int I, unsigned int J);
-    int IL() const;
-    int IS() const;
-    int JL() const;
-    int JS() const;
+#include <string>
+#include <vector>
 
-private:
-    // TODO(pbhandari): const these things
-    int m_IL;
-    int m_IS;
-    int m_JL;
-    int m_JS;
-};
+template<typename T>
+std::vector<uint8_t> to_byte_array(const T &elem);
 
-#endif  // INCLUDE_PARTITION_H_
+#endif  // INCLUDE_UTIL_ARRAY_UTILS_H_

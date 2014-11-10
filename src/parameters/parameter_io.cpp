@@ -26,8 +26,8 @@
 
 int parameter_io::data_length_shift()
 {
-    return (1 + sizeof(unsigned short)) * sizeof(uint8_t) *
-           8;  // shift by (1 + 2) octets
+    // shift by (1 + 2) octets
+    return (1 + sizeof(unsigned short)) * sizeof(uint8_t) * 8;
 }
 
 uint64_t parameter_io::extract_data_length(uint64_t commonFecOTI)
@@ -67,7 +67,7 @@ uint8_t parameter_io::extract_symbol_alignment(uint32_t schemeSpecFecOTI)
 
 int parameter_io::source_block_number_shift()
 {
-    return 3 * sizeof(uint8_t) * 8;
+    return 3 * sizeof(uint8_t) * 8;  // shift by length of ESI
 }
 
 uint8_t parameter_io::extract_source_block_number(uint32_t fecPayloadID)
