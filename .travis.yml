@@ -22,13 +22,7 @@
 
 language: cpp
 
-before_install:
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt-get update -qq
-
 install:
-  - sudo apt-get install -qq gcc-4.8 g++-4.8
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
   - sudo pip install cpp-coveralls
 
 compiler:
@@ -51,6 +45,5 @@ after_success:
   - if [ x"$MAKE_FLAGS" = x"gcov" ]; then coveralls --exclude lib --exclude tests --gcov-options '\-lp'; fi
 
 cache:
-  apt: true
   directories:
     - $HOME/virtualenv/python2.7/lib/python2.7/site-packages
