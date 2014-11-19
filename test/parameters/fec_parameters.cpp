@@ -27,7 +27,7 @@
 #include <parameters/internal_constants.h>
 
 TEST_CASE("fec_parameters can be created, encoded into OTIs, then restored",
-	"[fec_parameters]")
+          "[fec_parameters]")
 {
     fec_parameters f = fec_parameters::new_parameters(1024, 16, 64);
 
@@ -40,18 +40,19 @@ TEST_CASE("fec_parameters can be created, encoded into OTIs, then restored",
 }
 
 TEST_CASE("Test cases for values that do not satisfy proper parameter values "
-	"for new_parameters",
-	"[fec_parameters]")
+          "for new_parameters",
+          "[fec_parameters]")
 {
-    REQUIRE_THROWS(fec_parameters::new_parameters(0,0,0));
+    REQUIRE_THROWS(fec_parameters::new_parameters(0, 0, 0));
 }
 
 
 TEST_CASE("Test case for the lower limits of 'derive_parameters' function for "
-	"valid numerical inputs that pass through if statement" ,
-	"[fec_parameters]")
+          "valid numerical inputs that pass through if statement" ,
+          "[fec_parameters]")
 {
-    fec_parameters f = fec_parameters::derive_parameters(1, internal_constants::Al, 10);
+    fec_parameters f = fec_parameters::derive_parameters(1, internal_constants::Al,
+                       10);
 
     REQUIRE(f.data_length() == 1);
     REQUIRE(f.symbol_size() == 1);
@@ -61,10 +62,11 @@ TEST_CASE("Test case for the lower limits of 'derive_parameters' function for "
 
 
 TEST_CASE("Test case for the upper limits of 'derive_parameters' function for "
-	"valid numerical inputs that pass througuh if statement" ,
-	"[fec_parameters]")
+          "valid numerical inputs that pass througuh if statement" ,
+          "[fec_parameters]")
 {
-    fec_parameters f = fec_parameters::derive_parameters(946270874880LLU, 65535, 3696370605LU);
+    fec_parameters f = fec_parameters::derive_parameters(946270874880LLU, 65535,
+                       3696370605LU);
     REQUIRE(f.data_length() == 946270874880LLU);
     REQUIRE(f.symbol_size() == 65535);
     REQUIRE(f.num_source_blocks() == 256);
@@ -72,16 +74,17 @@ TEST_CASE("Test case for the upper limits of 'derive_parameters' function for "
 }
 
 TEST_CASE("Test case for the upper limits of 'derive_parameters' function for "
-	"valid numeasdfrical inputs that pass througuh if statement" ,
-	"[fec_parameters]")
+          "valid numeasdfrical inputs that pass througuh if statement" ,
+          "[fec_parameters]")
 {
     fec_parameters f = fec_parameters::derive_parameters(1024000LU, 5120, 512000);
     REQUIRE(f.num_source_blocks() == 3);
 }
 
-TEST_CASE("Test cases for values that do not satisfy proper parameter values "
-	"for derive_parameters",
-	"[fec_parameters]")
+TEST_CASE("Test case for values that do not satisfy proper parameter values "
+          "for derive_parameters",
+          "[fec_parameters]")
 {
-    REQUIRE_THROWS(fec_parameters::new_parameters(0,internal_constants::Al-1, 0));
+    REQUIRE_THROWS(fec_parameters::new_parameters(0, internal_constants::Al - 1,
+                   0));
 }
