@@ -23,6 +23,7 @@
  */
 
 #include <util/array_utils.h>
+
 #include <cstdint>
 #include <string>
 #include <vector>

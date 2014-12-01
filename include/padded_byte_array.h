@@ -27,6 +27,7 @@
 #define INCLUDE_PADDED_BYTE_ARRAY_H_
 
 #include <util/array_utils.h>
+
 #include <cstdint>
 #include <vector>
 

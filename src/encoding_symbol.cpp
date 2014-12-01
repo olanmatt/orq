@@ -25,6 +25,7 @@
 #include <encoding_symbol.h>
 #include <padded_byte_array.h>
 #include <util/systematic_indices.h>
+
 #include <cstdint>
 #include <vector>
 

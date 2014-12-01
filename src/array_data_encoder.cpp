@@ -27,6 +27,7 @@
 #include <array_source_block_encoder.h>
 #include <partition.h>
 #include <parameters/fec_parameters.h>
+
 #include <memory>
 #include <vector>
 
@@ -107,7 +108,8 @@ array_data_encoder::get_source_block_encoders(void)
 }
 
 array_source_block_encoder
-array_data_encoder::get_encoder(int offset, uint16_t source_block_num, uint16_t K)
+array_data_encoder::get_encoder(int offset, uint16_t source_block_num,
+                                uint16_t K)
 {
     auto symbol = array_source_block_encoder::prepare_source_symbols(
                       m_array, offset, m_fec_params, K);

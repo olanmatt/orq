@@ -28,6 +28,7 @@
 #include <parameters/internal_constants.h>
 #include <parameters/internal_functions.h>
 #include <util/extra_math.h>
+
 #include <algorithm>
 
 class parameter_checker

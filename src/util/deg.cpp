@@ -23,6 +23,7 @@
  */
 
 #include <util/deg.h>
+
 #include <algorithm>
 
 // 5.3.5.2 Degree Generator

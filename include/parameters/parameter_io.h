@@ -26,6 +26,7 @@
 #define INCLUDE_PARAMETERS_PARAMETER_IO_H_
 
 #include <parameters/internal_constants.h>
+
 #include <cstdint>
 
 class parameter_io

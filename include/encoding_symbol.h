@@ -26,6 +26,7 @@
 #define INCLUDE_ENCODING_SYMBOL_H_
 
 #include <padded_byte_array.h>
+
 #include <cstdint>
 #include <vector>
 

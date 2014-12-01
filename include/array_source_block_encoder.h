@@ -31,6 +31,7 @@ class array_data_encoder;
 #include <encoding_packet.h>
 #include <parameters/fec_parameters.h>
 #include <parameters/internal_constants.h>
+
 #include <memory>
 #include <vector>
 #include <iterator>

@@ -23,6 +23,7 @@
  */
 
 #include <padded_byte_array.h>
+
 #include <algorithm>
 #include <vector>
 

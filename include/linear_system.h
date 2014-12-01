@@ -26,6 +26,7 @@
 #define INCLUDE_LINEAR_SYSTEM_H_
 
 #include <tuple.h>
+
 #include <vector>
 #include <cstdint>
 

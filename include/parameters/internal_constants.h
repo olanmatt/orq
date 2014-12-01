@@ -51,17 +51,17 @@ namespace internal_constants
     const std::uint16_t K_min = 1;
     const std::uint16_t K_max = 56403;
 
-    const std::uint32_t Kt_max = K_max *Z_max;  // max total number of symbols
+    const std::uint32_t Kt_max = K_max * Z_max;  // max total number of symbols
     // the first K' value in the systematic indices table
     const std::uint16_t K_prime_min = 10;
 
     // symbol size
     const std::uint16_t T_min = Al;
-    const std::uint16_t T_max = (65535 / Al) *Al;
+    const std::uint16_t T_max = (65535 / Al) * Al;
 
     // Transfer length
     const std::uint64_t F_min = 1;
-    const std::uint64_t F_max = ((uint64_t)Kt_max) *T_max;
+    const std::uint64_t F_max = ((uint64_t)Kt_max) * T_max;
 
     // third octet is reserved bits
     const std::uint64_t common_oti_reserved_inverse_mask = 0xFFFFFFFFFF00FFFFLLU;
