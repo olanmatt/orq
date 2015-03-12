@@ -114,6 +114,5 @@ array_data_encoder::get_encoder(int offset, uint16_t source_block_num,
     auto symbol = array_source_block_encoder::prepare_source_symbols(
                       m_array, offset, m_fec_params, K);
 
-    return array_source_block_encoder(std::shared_ptr<array_data_encoder>(this),
-                                      symbol, source_block_num, K);
+    return array_source_block_encoder(m_fec_params, symbol, source_block_num, K);
 }

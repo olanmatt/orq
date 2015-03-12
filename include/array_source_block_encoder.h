@@ -52,8 +52,6 @@ public:
     prepare_source_symbols(std::vector<uint8_t> array, int array_offset,
                            fec_parameters fec_params, uint16_t K);
 
-    array_data_encoder get_data_encoder(void) const;
-
     uint8_t get_source_block_number(void) const;
 
     uint16_t get_number_source_symbols(void) const;
@@ -66,7 +64,7 @@ public:
     encoding_packet repair_packet(uint32_t esi) const;
     encoding_packet repair_packet(uint32_t esi, uint16_t num_symbols) const;
 
-    array_source_block_encoder(std::shared_ptr<array_data_encoder> data_encoder,
+    array_source_block_encoder(fec_parameters fec_params,
                                std::vector< std::shared_ptr<encoding_symbol> > source_symbols,
                                uint8_t source_block_number, uint16_t K);
 
@@ -77,12 +75,10 @@ private:
     // use only this method for access to the intermediate symbols
     std::vector< std::vector<uint8_t> > get_intermediate_symbols() const;
 
-    fec_parameters get_fec_parameters() const;
-
     uint8_t m_source_block_number;
     uint16_t m_K;
     uint16_t m_Kprime;
-    std::shared_ptr<array_data_encoder> m_data_encoder;
+    fec_parameters m_fec_params;
     std::vector< std::shared_ptr<encoding_symbol> > m_source_symbols;
     std::vector< std::vector<uint8_t> > m_intermediate_symbols;
 };

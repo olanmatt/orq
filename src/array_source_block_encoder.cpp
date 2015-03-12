@@ -39,13 +39,13 @@
 
 // TODO(pbhandari): create a constructor that doesn't take in pointers
 array_source_block_encoder::array_source_block_encoder(
-    std::shared_ptr<array_data_encoder> data_encoder,
+    fec_parameters fec_params,
     std::vector< std::shared_ptr<encoding_symbol> > source_symbols,
     uint8_t source_block_number, uint16_t K)
 
     : m_source_block_number(source_block_number), m_K(K),
       m_Kprime(systematic_indices::ceil(K)),
-      m_data_encoder(data_encoder), m_source_symbols(source_symbols)
+      m_fec_params(fec_params), m_source_symbols(source_symbols)
 { }
 
 /*static*/ std::vector< std::shared_ptr<encoding_symbol> >
@@ -68,12 +68,6 @@ array_source_block_encoder::prepare_source_symbols(std::vector<uint8_t> array,
     }
 
     return symbol;
-}
-
-array_data_encoder
-array_source_block_encoder::get_data_encoder(void) const
-{
-    return *m_data_encoder;
 }
 
 uint8_t
@@ -184,7 +178,7 @@ array_source_block_encoder::get_repair_symbol(uint32_t esi) const
 
     std::vector<uint8_t> enc_data =
         linear_system::enc(m_Kprime, get_intermediate_symbols(), tpl,
-                           get_fec_parameters().symbol_size());
+                           m_fec_params.symbol_size());
 
     return repair_symbol(esi, enc_data);
 }
@@ -212,10 +206,4 @@ array_source_block_encoder::get_intermediate_symbols() const
 
     // solve system of equations
     return linear_system::P_inactivation_decoding(constraint_matrix, D, m_Kprime);
-}
-
-fec_parameters
-array_source_block_encoder::get_fec_parameters() const
-{
-    return m_data_encoder->get_fec_parameters();
 }
